@@ -1,0 +1,19 @@
+.navigation-container{
+    display: flex;
+    width: 250px;
+    justify-content: space-between;
+}
+
+.navigation-item{
+    text-align: center;
+}
+
+.navigation-item p{
+    margin: 0;
+    color: #F9AF56;
+}
+
+.navigation-img{
+    width: 20px;
+    height: 20px;
+}
