@@ -1,0 +1,17 @@
+.each-slide{
+    height: 350px;
+    width: 100%;
+}
+.each-slide > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: 100%, 350px;
+  height: 100%;
+  background-repeat: no-repeat;
+}
+
+.slide{
+    width: 800px;
+}
+
