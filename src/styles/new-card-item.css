@@ -1,0 +1,10 @@
+.new-card{
+    width: 19%;
+    height: 100%;
+    background: darkkhaki;
+}
+
+.new-card:hover{
+    border: 1px solid #B2B2B2;
+    box-shadow:2px 2px 2px #B2B2B2;
+}
