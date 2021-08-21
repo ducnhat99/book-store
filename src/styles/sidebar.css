@@ -1,4 +1,10 @@
+@font-face {
+  font-family: Roboto;
+  src: url(../font/Roboto-Regular.ttf);
+}
+
 .sidebar-table{
+    font-family: Roboto;
     width: 300px;
     border: 1px solid #FCDAB0;
 }
