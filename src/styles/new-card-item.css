@@ -1,10 +1,44 @@
 .new-card{
     width: 19%;
     height: 100%;
-    background: darkkhaki;
+    border: 1px solid #F2F4F5;
 }
 
 .new-card:hover{
     border: 1px solid #B2B2B2;
     box-shadow:2px 2px 2px #B2B2B2;
+}
+
+.new-card-content{
+    width: 100%;
+    height: 100%;
+    padding:10px
+}
+
+.new-card-images{
+    width: 100%;
+    height: 180px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.new-card-images img{
+    height: 100%;
+    width: 60%;
+}
+
+.new-card-title{
+    width: 100%;
+    height: 72px;
+}
+
+.new-card-item-price{
+    width: 100%;
+    height: 40px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #F7941E;
 }
