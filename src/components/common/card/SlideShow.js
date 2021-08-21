@@ -18,18 +18,13 @@ const SlideShow = () => {
     return (
         <div>
             <Slide easing="ease" className="slide">
-                <div className="each-slide">
-                    <div style={{ 'backgroundImage': `url(${slideImages[0]})` }}>
+                {slideImages.map((item) => {
+                    return <div className="each-slide">
+                        <div style={{ 'backgroundImage': `url(${item})` }}>
+                        </div>
                     </div>
-                </div>
-                <div className="each-slide">
-                    <div style={{ 'backgroundImage': `url(${slideImages[1]})` }}>
-                    </div>
-                </div>
-                <div className="each-slide">
-                    <div style={{ 'backgroundImage': `url(${slideImages[2]})` }}>
-                    </div>
-                </div>
+                })}
+
             </Slide>
         </div>
     )
