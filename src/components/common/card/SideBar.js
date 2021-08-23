@@ -1,4 +1,3 @@
-import '../../../styles/sidebar.css'
 
 const SideBar = () => {
     const category = [
@@ -15,7 +14,7 @@ const SideBar = () => {
         'Khoa học ký thuật'
     ]
     return (
-        <div>
+        <div className="sidebar">
             <table className="sidebar-table">
                 <tr className="sidebar-table-header">
                     <th>Danh mục</th>

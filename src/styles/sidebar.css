@@ -1,24 +1,26 @@
-@font-face {
-  font-family: Roboto;
-  src: url(../font/Roboto-Regular.ttf);
+
+.sidebar{
+    background: #fff;
+    width: 25%;
 }
 
 .sidebar-table{
-    font-family: Roboto;
-    width: 300px;
-    border: 1px solid #FCDAB0;
+    width: 100%;
 }
 
 .sidebar-table-header{
     background: #F7941E;
     color: #fff;
     height: 40px;
+    font-size: 16px;
 }
 
 .sidebar-table td{
-    border-bottom: 1px solid #FCDAB0;
-    text-align: center;
+    text-align: left;
+    padding-left: 30px;
     height: 40px;
+    font-size: 16px;
+    border-bottom: 1px solid #F0F0F0;
 }
 
 .sidebar-table td:hover{

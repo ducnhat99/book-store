@@ -1,7 +1,6 @@
 import bell from '../../../images/bell.svg'
 import cart from '../../../images/cart.svg'
 import login from '../../../images/login.svg'
-import '../../../styles/navigation.css'
 
 const Navigation = () => {
     return (
