@@ -1,0 +1,40 @@
+.register{
+  width: 400px;
+  height: auto;
+  background-color: rgb(238, 236, 236);
+  border-radius: 5px;
+  border: 0.1px solid black;
+}
+.register__btn {
+  width: 45%;
+  margin: 5px 0 0 10px;
+
+}
+.register__btn__head{
+  width: 400px;
+  height: auto;
+  margin: 0 0 0 5px;
+}
+.register__input{
+  width: 100%;
+  margin: 20px 0 0 0;
+}
+.register__input label {
+  margin: 0px 0 0 20px;
+}
+
+.register__input__main{
+  width: 90%;
+  margin: 5px 0 0 20px;
+}
+.register__btn__main{
+  width: 50%;
+  margin: 25px 0 0 100px ;
+  justify-content: space-between;
+}
+.register__btn__all{
+  width: 100%;
+  margin: 0px 0 10px 0px ;
+ 
+  
+}
