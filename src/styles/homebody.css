@@ -1,0 +1,10 @@
+.homebody-menu{
+    display: flex;
+    height: 481px;
+    margin-bottom: 20px;
+}
+
+.homebody-new-card{
+    width: 100%;
+}
+

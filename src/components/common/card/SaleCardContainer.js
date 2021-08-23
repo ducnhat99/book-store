@@ -1,14 +1,12 @@
 import { Button } from 'antd';
 import 'antd/dist/antd.css';
-import '../../../styles/card-container.css';
-import '../../../styles/sale-card-container.css';
 import SaleCardItem from '../card/SaleCardItem'
 
 const SaleCardContainer = () => {
     return (
         <div className="card-container">
             <div className="sale-card-header">
-                <h2>Flash Sale</h2>
+                <h2>SÁCH GIẢM GIÁ</h2>
             </div>
             <div className="card-main">
                 <div className="card-item">

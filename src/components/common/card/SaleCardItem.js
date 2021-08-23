@@ -1,4 +1,5 @@
-import '../../../styles/new-card-item.css'
+import { Rate } from 'antd';
+
 import images from '../../../images/book-orange.jpg'
 const SaleCardItem = () => {
     return (
@@ -12,6 +13,9 @@ const SaleCardItem = () => {
                 </div>
                 <div className="new-card-item-price">
                     <p>75.000d</p>
+                </div>
+                <div>
+                    <Rate defaultValue={5} disabled={true} />
                 </div>
             </div>
         </div>

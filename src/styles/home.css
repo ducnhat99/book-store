@@ -1,0 +1,26 @@
+@import './header.css';
+@import './logo.css';
+@import './card-container.css';
+@import './navigation.css';
+@import './new-card-item.css';
+@import './sale-card-container.css';
+@import './search.css';
+@import './sidebar.css';
+@import './slideshow.css';
+@import './featured-card-container.css';
+@import './featured-card-item.css';
+
+@font-face {
+  font-family: Roboto;
+  src: url(../font/Roboto-Regular.ttf);
+}
+
+.container{
+    width: 1280px;
+    margin: 0 auto;
+}
+
+.home{
+    background: #F0F0F0;
+    font-family: 'Roboto';
+}

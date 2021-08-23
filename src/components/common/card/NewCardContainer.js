@@ -1,13 +1,12 @@
 import { Button } from 'antd';
 import 'antd/dist/antd.css';
-import '../../../styles/card-container.css';
 import NewCardItem from './NewCardItem'
 
 const NewCardContainer = () => {
     return (
         <div className="card-container">
             <div className="card-header">
-                <h2>New book</h2>
+                <h2>SÁCH MỚI</h2>
             </div>
             <div className="card-main">
                 <div className="card-item">

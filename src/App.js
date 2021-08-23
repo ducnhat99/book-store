@@ -1,12 +1,9 @@
-import NewCardContainer from './components/common/card/NewCardContainer';
-import SaleCardContainer from './components/common/card/SaleCardContainer';
-import Header from './components/layout/Header';
+import Home from './screen/Home'
 
 function App() {
   return (
     <>
-      <NewCardContainer />
-      <SaleCardContainer />
+      <Home />
     </>
   );
 }
