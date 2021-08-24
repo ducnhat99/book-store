@@ -1,6 +1,7 @@
 import { Button } from 'antd';
 import 'antd/dist/antd.css';
 import top from '../../../images/featured.jpg';
+import humble from '../../../images/humble.jpg'
 import FeaturedCardItem from './FeaturedCardItem';
 
 const FeaturedCardContainer = () => {
@@ -17,10 +18,10 @@ const FeaturedCardContainer = () => {
                 </div>
                 <div className="featured-main-item">
                     <div className="featured-main-list-item">
-                        <FeaturedCardItem />
-                        <FeaturedCardItem />
-                        <FeaturedCardItem />
-                        <FeaturedCardItem />
+                        <FeaturedCardItem images={humble} title="Sài Gòn - Những Mảnh Ghép Rời Ký Ức Sài Gòn Sài Gòn" price="50000d" realPrice="120000d" rateStar={5} />
+                        <FeaturedCardItem images={humble} title="Sài Gòn - Những Mảnh Ghép Rời Ký Ức Sài Gòn Sài Gòn" price="50000d" realPrice="120000d" rateStar={4} />
+                        <FeaturedCardItem images={humble} title="Sài Gòn - Những Mảnh Ghép Rời Ký Ức Sài Gòn Sài Gòn" price="50000d" realPrice="120000d" rateStar={3} />
+                        <FeaturedCardItem images={humble} title="Sài Gòn - Những Mảnh Ghép Rời Ký Ức Sài Gòn Sài Gòn" price="50000d" realPrice="120000d" rateStar={2} />
                     </div>
                     <div className="featured-load-more">
                         <Button type="default" className="btn-featured-load-more"> Xem thêm</Button>

@@ -6,6 +6,10 @@
     justify-content: flex-start;
 }
 
+.featured-item:hover{
+    box-shadow:1px 1px 5px #B2B2B2;
+}
+
 .featured-item-images-container{
     width: 45%;
     height: 100%;

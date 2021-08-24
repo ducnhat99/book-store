@@ -19,6 +19,12 @@
     height: 20px;
 }
 
+.modal__login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media screen and (max-width: 375px){
     .navigation-item p{
         display: none;
