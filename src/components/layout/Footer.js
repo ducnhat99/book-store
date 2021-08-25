@@ -1,13 +1,10 @@
 import React from 'react';
-
-import About from './AboutFooter';
-import Contact from './ContactFooter';
-import Infor from './InforFooter';
-import Shipping from './ship';
-import Slide from './SlideFooter';
-
+import About from '../common/card/AboutFooter';
+import Contact from '../common/card/ContactFooter';
+import Infor from '../common/card/InforFooter';
+import Shipping from '../common/card/ship';
+import Slide from '../common/card/SlideFooter';
 import 'antd/dist/antd.css';
-import '../../../styles/footer.css';
 
 function Footer() {
   return (

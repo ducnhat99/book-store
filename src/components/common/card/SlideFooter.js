@@ -2,8 +2,6 @@ import React from 'react';
 import { RightCircleOutlined, LeftCircleOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
-import '../../../styles/slide-footer.css';
-
 function Slide() {
   return (
     <div>

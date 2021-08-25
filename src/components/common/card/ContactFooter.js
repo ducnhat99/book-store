@@ -2,8 +2,6 @@ import React from 'react';
 import { PhoneOutlined, HomeOutlined, MailOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
-import '../../../styles/contact-footer.css';
-
 function Contact() {
   return (
     <div>

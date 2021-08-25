@@ -2,11 +2,6 @@ p, a ,h3{
   font-size: 15px;
   font-weight: 500;
 }
-.container{
-  width: 1228px;
-  height: auto;
-  border: 0.1px solid black;
-}
 
 .container__footer{
   width: 100%;
@@ -19,7 +14,7 @@ p, a ,h3{
 .footer__left{
   width: 30%;
   height: auto;
-  margin-left: 15px;
+  margin:0 15px;
   border-right: 0.1px solid grey ;
 }
 .footer__right{
