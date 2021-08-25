@@ -2,18 +2,9 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import '../../../styles/register.css';
 
-const Register = () => {
+const Register = (props) => {
   return (
     <form id="register" className="register">
-      <span className="register__btn__head">
-        <Button value="login" className="register__btn" type="primary" danger>
-          Đăng nhập
-        </Button>
-        <Button value="register" className="register__btn" type="primary" danger>
-          Đăng kí
-        </Button>
-      </span>
-
       <div className="register__input">
         <label>Số điện thoại</label>
         <Input placeholder="Nhập số điện thoại hoặc email" className="register__input__main" />
@@ -33,7 +24,7 @@ const Register = () => {
           Đăng kí
         </Button>
         <br />
-        <Button danger className="register__btn__main">
+        <Button danger className="register__btn__main" onClick={props.handleCancel}>
           Bỏ qua
         </Button>
       </div>

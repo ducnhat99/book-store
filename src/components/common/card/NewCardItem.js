@@ -1,7 +1,7 @@
 import { Rate } from 'antd';
 
-import images from '../../../images/7kyquanthegioi.jpg'
-const NewCardItem = () => {
+const NewCardItem = (props) => {
+    const { images, title, price, realPrice, rateStar } = props
     return (
         <div className="new-card">
             <div className="new-card-content">
@@ -9,13 +9,16 @@ const NewCardItem = () => {
                     <img src={images}></img>
                 </div>
                 <div className="new-card-title">
-                    <h3>Sài Gòn - Những Mảnh Ghép Rời Ký Ức Sài Gòn Sài Gòn</h3>
+                    <h3>{title}</h3>
                 </div>
                 <div className="new-card-item-price">
-                    <p>50000d</p>
+                    <p>{price}</p>
+                </div>
+                <div className="new-card-item-real-price">
+                    <p>{realPrice}</p>
                 </div>
                 <div>
-                    <Rate defaultValue={5} disabled={true} />
+                    <Rate defaultValue={rateStar} disabled={true} />
                 </div>
             </div>
         </div>

@@ -5,8 +5,7 @@
 }
 
 .new-card:hover{
-    border: 1px solid #B2B2B2;
-    box-shadow:2px 2px 2px #B2B2B2;
+    box-shadow:1px 1px 5px #B2B2B2;
 }
 
 .new-card-content{
@@ -41,4 +40,14 @@
     font-size: 18px;
     font-weight: bold;
     color: #C92127;
+}
+
+.new-card-item-real-price{
+    font-size: 15px;
+    color: #929292;
+    text-decoration: line-through;
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
 }

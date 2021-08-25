@@ -1,9 +1,14 @@
+import {
+  BrowserRouter,
+} from 'react-router-dom';
 import Home from './screen/Home'
 
 function App() {
   return (
     <>
-      <Home />
+      <BrowserRouter>
+        <Home />
+      </BrowserRouter>
     </>
   );
 }
