@@ -1,0 +1,50 @@
+
+
+.footer__contact{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+
+}
+.contact__text {
+  width: 80%;
+  height: auto;
+ margin-left: 40px;
+}
+.container__contact__info{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.contact__info{
+  width: 30%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+
+@media screen and (max-width: 1024px) {
+ 
+  .footer__contact{
+    width: 1023px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .contact__text {
+   margin-left: 40px;
+  }
+  .container__contact__info{
+    width: 80%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+  }
+}

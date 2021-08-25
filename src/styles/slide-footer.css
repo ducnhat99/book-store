@@ -1,0 +1,40 @@
+.footer__ip__x{
+  width: 1228px;
+  height: auto;
+  display: none;
+}
+
+@media screen and (max-width: 375px) {
+
+  
+  .footer__ip__x{
+    width: 374px;
+    display: block;
+    background-color: rgb(241, 241, 241);
+  }
+  .footer__slice{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .footer__slice ul{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 5px 0 0px;
+  }
+  .footer__slice ul li {
+    align-items: center;
+    width: 10%;
+    list-style: none;
+  }
+  .footer__slice ui li img{
+    width: 100%;
+    
+  }
+  .footer__last{
+    display: none;
+  }
+   
+}
