@@ -10,6 +10,12 @@
 @import './featured-card-container.css';
 @import './featured-card-item.css';
 @import './card-hover.css';
+@import './footer.css';
+@import './about-footer.css';
+@import './contact-footer.css';
+@import './infor-footer.css';
+@import './slide-footer.css';
+@import './/shipping.css';
 
 @font-face {
   font-family: Roboto;

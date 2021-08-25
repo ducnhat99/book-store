@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../../styles/infor-footer.css';
 import {
   FacebookOutlined,
   InstagramOutlined,
@@ -18,11 +17,11 @@ function Infor() {
 
         <div className="left__text">
           <p>
-            Lầu 5, 387-389 Hai Bà Trưng Quận 3 TP HCMCông Ty Cổ Phần Phát Hành Sách - 62 Lê Lợi,
+            Lầu 5, 387-389 Hai Bà Trưng Quận 3 TP HCM <br />Công Ty Cổ Phần Phát Hành Sách - 62 Lê Lợi,
             Quận 1, TP. HCM, Việt Nam
           </p>
           <p>
-            nhận đặt hàng trực tuyến và giao hàng tận nơi. KHÔNG hỗ trợ đặt mua và nhận hàng trực
+            Chúng tôi nhận đặt hàng trực tuyến và giao hàng tận nơi. KHÔNG hỗ trợ đặt mua và nhận hàng trực
             tiếp tại văn phòng cũng như tất cả Hệ Thống trên toàn quốc.
           </p>
         </div>
