@@ -18,10 +18,14 @@ const FeaturedCardContainer = () => {
                 </div>
                 <div className="featured-main-item">
                     <div className="featured-main-list-item">
-                        <FeaturedCardItem images={humble} title="Sài Gòn - Những Mảnh Ghép Rời Ký Ức Sài Gòn Sài Gòn" price="50000d" realPrice="120000d" rateStar={5} />
-                        <FeaturedCardItem images={humble} title="Sài Gòn - Những Mảnh Ghép Rời Ký Ức Sài Gòn Sài Gòn" price="50000d" realPrice="120000d" rateStar={4} />
-                        <FeaturedCardItem images={humble} title="Sài Gòn - Những Mảnh Ghép Rời Ký Ức Sài Gòn Sài Gòn" price="50000d" realPrice="120000d" rateStar={3} />
-                        <FeaturedCardItem images={humble} title="Sài Gòn - Những Mảnh Ghép Rời Ký Ức Sài Gòn Sài Gòn" price="50000d" realPrice="120000d" rateStar={2} />
+                        <FeaturedCardItem images={humble} title="Humble Inquiry: The Gentle Art Of Asking Instead Of Telling" author="Edgar H. Schein, Peter A. Schein" product="Tiểu thuyết" page={192} price="253.300d" realPrice="298.000d" rateStar={1} description="Humble Inquiry: The Gentle Art Of Asking Instead Of Telling
+This worldwide bestseller offers simple guidance for building the kind of open and trusting relationships vital for tackling global systemic challenges and developing adaptive, innovative organizations—over 200,000 copies sold and translated into seventeen languages!" />
+                        <FeaturedCardItem images={humble} title="Humble Inquiry: The Gentle Art Of Asking Instead Of Telling" author="Edgar H. Schein, Peter A. Schein" product="Tiểu thuyết" page={192} price="253.300d" realPrice="298.000d" rateStar={2} description="Humble Inquiry: The Gentle Art Of Asking Instead Of Telling
+This worldwide bestseller offers simple guidance for building the kind of open and trusting relationships vital for tackling global systemic challenges and developing adaptive, innovative organizations—over 200,000 copies sold and translated into seventeen languages!" />
+                        <FeaturedCardItem images={humble} title="Humble Inquiry: The Gentle Art Of Asking Instead Of Telling" author="Edgar H. Schein, Peter A. Schein" product="Tiểu thuyết" page={192} price="253.300d" realPrice="298.000d" rateStar={3} description="Humble Inquiry: The Gentle Art Of Asking Instead Of Telling
+This worldwide bestseller offers simple guidance for building the kind of open and trusting relationships vital for tackling global systemic challenges and developing adaptive, innovative organizations—over 200,000 copies sold and translated into seventeen languages!" />
+                        <FeaturedCardItem images={humble} title="Humble Inquiry: The Gentle Art Of Asking Instead Of Telling" author="Edgar H. Schein, Peter A. Schein" product="Tiểu thuyết" page={192} price="253.300d" realPrice="298.000d" rateStar={5} description="Humble Inquiry: The Gentle Art Of Asking Instead Of Telling
+This worldwide bestseller offers simple guidance for building the kind of open and trusting relationships vital for tackling global systemic challenges and developing adaptive, innovative organizations—over 200,000 copies sold and translated into seventeen languages!" />
                     </div>
                     <div className="featured-load-more">
                         <Button type="default" className="btn-featured-load-more"> Xem thêm</Button>
