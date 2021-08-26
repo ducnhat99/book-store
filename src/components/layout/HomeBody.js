@@ -7,7 +7,7 @@ import FeaturedCardContainer from '../common/card/FeaturedCardContainer'
 
 const HomeBody = () => {
     return (
-        <div>
+        <div className="home--body">
             <div className="container">
                 <div className="homebody-menu">
                     <SideBar />

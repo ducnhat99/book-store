@@ -17,5 +17,20 @@
   background-repeat: no-repeat;
 }
 
+@media screen and (max-width: 1024px){
+  .slide-show{
+    width: 96%;
+    margin: 0 auto;
+  }
+
+  .each-slide{
+    height: 381px;
+  }
+
+  .each-slide > div {
+    background-size: 100% 381px;
+  }
+}
+
 
 

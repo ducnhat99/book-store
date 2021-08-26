@@ -8,3 +8,15 @@
     width: 100%;
 }
 
+/* .home--body{
+    padding-top: 85px;
+} */
+@media screen and (max-width: 1024px){
+    .home--body{
+        max-width: 100%;
+    }
+
+    .homebody-menu{
+        height: 381px;
+    }
+}
