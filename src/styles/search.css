@@ -1,6 +1,15 @@
 .search-container{
      width: 100%;
      display: flex;
+     border: none;
+}
+
+.ant-input-search .ant-input:hover, .ant-input-search .ant-input:focus{
+     border:solid 2px #F7941E;
+}
+
+.ant-input:focus, .ant-input-focused{
+    box-shadow: none;
 }
 
 .ant-input-search-large .ant-input-search-button{

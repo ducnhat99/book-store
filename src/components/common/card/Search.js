@@ -5,7 +5,7 @@ const { Search } = Input;
 const SearchItem = () => {
     return (
         <>
-            <Space direction="vertical" className="search-container">
+            <Space direction="vertical" className="search-container" bordered={false}>
                 <Search size="large" placeholder="Tìm kiếm sản phẩm mong muốn" className="search" enterButton />
             </Space>
         </>

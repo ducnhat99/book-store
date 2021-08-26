@@ -4,9 +4,7 @@ import CardHover from './CardHover';
 const SaleCardItem = (props) => {
     const { images, title, price, realPrice, rateStar } = props
     const content = (
-        <div className="card__hover">
-            <CardHover {...props} />
-        </div>
+        <CardHover {...props} />
     );
     return (
         <Popover content={content} placement="rightTop">

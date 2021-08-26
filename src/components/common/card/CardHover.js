@@ -5,7 +5,6 @@ const CardHover = (props) => {
     console.log(props)
     return (
         <div className="card__hover">
-
             <div className="card__hover__title">
                 <h3>{props.title}</h3>
             </div>
