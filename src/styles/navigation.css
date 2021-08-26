@@ -25,6 +25,11 @@
     align-items: center;
 }
 
+.btn--more-notification{
+    margin-top: 10px;
+    text-align: center;
+}
+
 @media screen and (max-width: 375px){
     .navigation-item p{
         display: none;
