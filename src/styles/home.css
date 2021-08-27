@@ -42,6 +42,7 @@ p, h1, h2, h3, h4, h5, h6, a{
 @media screen and (max-width: 1024px) {
   .container{
     width: 1023px;
+    margin: 0 auto;
   }
 }
 @media screen and (max-width: 375px) {

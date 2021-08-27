@@ -72,3 +72,13 @@
     display: flex;
     align-items: center;
 }
+
+@media screen and (max-width: 1024px){
+    .featured-item-images-container{
+        display: flex;
+        align-items: center;
+    }
+    .featured-item-images{
+        height: 90%;
+    }
+}

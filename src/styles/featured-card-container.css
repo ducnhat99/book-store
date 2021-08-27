@@ -80,3 +80,12 @@
     border: 2px solid #C92127;
     color: #fff;
 }
+
+@media screen and (max-width: 1024px){
+    .top-featured{
+        width: 33%;
+    }
+    .featured-main-item{
+        width: 66%;
+    }
+}
