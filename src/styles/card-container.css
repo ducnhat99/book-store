@@ -20,7 +20,6 @@
 }
 
 .card-main{
-    height: 450px;
     width: 96%;
     margin: 0 auto;
 }
@@ -31,6 +30,7 @@
     display: flex;
     justify-content: space-between;
     padding: 10px 0 0 0;
+    flex-wrap: wrap;
 }
 
 .card-load-more{
@@ -58,3 +58,20 @@
     color: #fff;
     border: none;
 }
+
+@media screen and (max-width: 375px){
+    .card-main{
+        height: 720px;
+    }
+    .card-item{
+        height: 650px;
+    }
+    .card-load-more{
+        height: 50px;
+    }
+    .btn-card-load-more{
+        width: 180px;
+        height: 35px;
+    }
+}
+

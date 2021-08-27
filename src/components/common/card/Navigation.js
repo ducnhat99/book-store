@@ -34,6 +34,9 @@ const Navigation = () => {
         <>
             <CartNotification />
             <CartNotification />
+            <div className="btn--more-notification">
+                <Button>Xem tất cả</Button>
+            </div>
         </>
     );
     return (

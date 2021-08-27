@@ -89,3 +89,30 @@
         width: 66%;
     }
 }
+
+@media screen and (max-width: 375px){
+    .featured-container{
+        height: 900px;
+    }
+    .featured-main{
+        height: 835px;
+    }
+    .top-featured{
+        display: none;
+    }
+    .featured-main-item{
+        width: 98%;
+        margin: 0 1%;
+    }
+    .featured-load-more{
+        height: 6%;
+    }
+    .featured-main-list-item{
+        height: 94%;
+    }
+
+.btn-featured-load-more{
+    width: 140px;
+    height: 30px;
+}
+}
