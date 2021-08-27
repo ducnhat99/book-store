@@ -50,6 +50,9 @@ p{ }
     width: 100%;
     margin-left: 0;
   } */
+  .footer__left{
+    border-right: none;
+  }
   .footer__left__main{
     width: 1023px;
     margin-bottom: 20px;
