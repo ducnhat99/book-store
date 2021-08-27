@@ -17,16 +17,16 @@ function Infor() {
 
         <div className="left__text">
           <p>
-            Lầu 5, 387-389 Hai Bà Trưng Quận 3 TP HCM <br />Công Ty Cổ Phần Phát Hành Sách - 62 Lê Lợi,
-            Quận 1, TP. HCM, Việt Nam
+            Lầu 5, 387-389 Hai Bà Trưng Quận 3 TP HCM <br />
+            Công Ty Cổ Phần Phát Hành Sách - 62 Lê Lợi, Quận 1, TP. HCM, Việt Nam
           </p>
           <p>
-            Chúng tôi nhận đặt hàng trực tuyến và giao hàng tận nơi. KHÔNG hỗ trợ đặt mua và nhận hàng trực
-            tiếp tại văn phòng cũng như tất cả Hệ Thống trên toàn quốc.
+            Chúng tôi nhận đặt hàng trực tuyến và giao hàng tận nơi. KHÔNG hỗ trợ đặt mua và nhận
+            hàng trực tiếp tại văn phòng cũng như tất cả Hệ Thống trên toàn quốc.
           </p>
         </div>
 
-        <div>
+        <div className="icon__top">
           <img
             src="https://www.fahasa.com/media/wysiwyg/Logo-NCC/logo-bo-cong-thuong-da-thong-bao.png"
             style={{ width: '120px', height: '40px' }}
@@ -43,7 +43,7 @@ function Infor() {
           <TwitterOutlined />
         </div>
 
-        <div>
+        <div className="icon__bottom">
           <img
             src="https://www.fahasa.com/media/wysiwyg/Logo-NCC/android.png"
             style={{ maxWidth: '110px', marginTop: '5px' }}

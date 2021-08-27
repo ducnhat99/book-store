@@ -69,10 +69,6 @@ function About() {
             </li>
           </ul>
         </div>
-
-        <div className="footer__list__item_1">
-          <div className="list__item--hidden_1"></div>
-        </div>
       </div>
     </div>
   );
