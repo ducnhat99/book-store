@@ -1,16 +1,16 @@
 
-
 .footer__contact{
   width: 100%;
   height: auto;
   display: flex;
   flex-wrap: wrap;
+  margin-top: 10px;
 
 }
 .contact__text {
   width: 80%;
   height: auto;
- margin-left: 40px;
+  margin: 0 0 10px 40px;
 }
 .container__contact__info{
   width: 100%;
@@ -19,32 +19,37 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
 .contact__info{
   width: 30%;
   height: auto;
   display: flex;
   flex-wrap: wrap;
 }
+.contact__info p {
+  text-align: left;
+}
+
+
 
 
 
 @media screen and (max-width: 1024px) {
  
   .footer__contact{
-    width: 1023px;
+    width: 100%;
     height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    margin-top: 25px;
   }
+
   .contact__text {
-   margin-left: 40px;
+   margin: 0 0 5px 35px;
   }
   .container__contact__info{
-    width: 80%;
+    width: 90%;
     height: auto;
     display: flex;
-    flex-direction: column;
-    margin-left: 40px;
+    justify-content: none;
   }
+  
 }
