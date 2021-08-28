@@ -1,0 +1,45 @@
+.slide-show{
+  width: 74%;
+  margin-left: 1%;
+  height: 100%;
+}
+
+.slide{
+    width: 100%;
+}
+
+.each-slide{
+    height: 481px;
+}
+.each-slide > div {
+  background-size: 100% 481px;
+  height: 100%;
+  background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 1024px){
+  .slide-show{
+    width: 96%;
+    margin: 0 auto;
+  }
+
+  .each-slide{
+    height: 381px;
+  }
+
+  .each-slide > div {
+    background-size: 100% 381px;
+  }
+}
+
+@media screen and (max-width: 375px){
+  .each-slide{
+    height: 200px;
+  }
+  .each-slide > div {
+    background-size: 100% 200px;
+  }
+}
+
+
+

@@ -1,0 +1,50 @@
+.register{
+  width: 600px;
+  height: auto;
+  border-radius: 5px;
+  font-family: "Roboto";
+}
+.register__btn {
+  width: 45%;
+  margin: 5px 0 0 10px;
+
+}
+.register__btn__head{
+  width: 400px;
+  height: auto;
+  margin: 0 0 0 5px;
+}
+.register-container{
+  width: 100%;
+  display: flex;
+}
+.register__input{
+  width: 50%;
+  margin: 20px 0 0 0;
+}
+.register__input__address{
+  width: 100%;
+  margin: 20px 0 0 0;
+}
+.register__input__address label{
+  margin: 0px 0 0 20px;
+}
+.register__input label {
+  margin: 0px 0 0 20px;
+}
+
+.register__input__main{
+  width: 90%;
+  margin: 5px 0 0 20px;
+}
+.register__btn__main{
+  width: 50%;
+  margin: 25px 0 0 0;
+}
+.register__btn__all{
+  width: 100%;
+  text-align: center;
+  margin: 0px 0 10px 0px ;
+ 
+  
+}

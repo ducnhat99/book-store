@@ -1,0 +1,44 @@
+.login{
+  width: 400px;
+  height: auto;
+  border-radius: 5px;
+  padding-top: 20px;
+  font-family: "Roboto";
+}
+.login__btn__head{
+  width: 400px;
+  height: auto;
+  margin: 0 0 0 5px;
+}
+
+.login__btn {
+  width: 45%;
+  margin: 10px 0 0 10px;
+}
+.login__btn:hover{
+  background: #ff4d4f;
+  color:#fff
+}
+.login__input{
+  width: 100%;
+  margin: 20px 0 0 0px;
+}
+.login__input label {
+  margin: 0px 0 0 20px;
+}
+
+.login__input__main{
+  width: 90%;
+  margin: 5px 0 0 20px;
+}
+.login__btn__main{
+  width: 50%;
+  margin: 25px 0 0 100px ;
+  justify-content: space-between;
+}
+.login__btn__all{
+  width: 100%;
+  margin: 0px 0 10px 0px ;
+ 
+  
+}

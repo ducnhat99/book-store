@@ -1,0 +1,13 @@
+.sale-card-header{
+    width: 100%;
+    height: 50px;
+    background: #FCDDEF;
+    display: flex;
+    align-items: center;
+}
+
+.sale-card-header h2{
+    padding-left: 20px;
+    font-weight: bold;
+    margin: 0;
+}

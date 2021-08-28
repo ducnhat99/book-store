@@ -1,0 +1,34 @@
+
+.sidebar{
+    background: #fff;
+    width: 25%;
+}
+
+.sidebar-table{
+    width: 100%;
+}
+
+.sidebar-table-header{
+    background: #F7941E;
+    color: #fff;
+    height: 40px;
+    font-size: 16px;
+}
+
+.sidebar-table td{
+    text-align: left;
+    padding-left: 30px;
+    height: 40px;
+    font-size: 16px;
+    border-bottom: 1px solid #F0F0F0;
+}
+
+.sidebar-table td:hover{
+    background: #FCDAB0;
+}
+
+@media screen and (max-width: 1024px){
+    .sidebar{
+        display: none;
+    }
+}

@@ -1,0 +1,120 @@
+@font-face {
+  font-family: Roboto;
+  src: url(../font/Roboto-Regular.ttf);
+}
+
+.header{
+    width: 100%;
+    height: 70px;
+    background: #fff;
+    margin-bottom: 15px;
+    // position: fixed;
+    // z-index: 2;
+    // top: 0;
+
+    .container{
+    display: flex;
+    font-family: 'Roboto';
+    flex-wrap: wrap;
+
+    .header-logo{
+        width: 20%;
+        display: flex;
+        align-items: center;
+    }
+
+    .header-search{
+        width: 55%;
+        display: flex;
+        align-items: center;
+    }
+
+    .header-navigation{
+        width: 25%;
+        display: flex;
+        align-items: center;
+    }
+
+    .header-menu {
+        width: 5%;
+        display: none;
+    }
+
+    .header-menu img{
+        width: 25px;
+        height: 25px;
+    }
+}
+}
+
+@media screen and (max-width: 1024px){
+    .header{
+        max-width: 100%;
+
+        .container{
+            display: flex;
+            align-items: center;
+
+            .header-search{
+                width: 50%;
+                padding-left: 10px;
+                height: 50px;
+                order: 3;
+            }
+
+            .header-menu{
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                height: 50px;
+                order: 1;
+            }
+            .header-logo{
+                order: 2;
+            }
+            
+            .header-navigation{
+                order: 4;
+            }
+            
+        }
+    }
+}
+@media screen and (max-width: 375px){
+    .header{
+        max-width: 100%;
+        height:100px;
+        
+        .container{
+
+            .header-logo{
+                width: 100%;
+                height: 50px;
+                display: flex;
+                justify-content: center;
+                order: 1;
+            }
+            .header-search{
+                width: 60%;
+                padding-left: 10px;
+                height: 50px;
+                order: 3;
+            }
+            .header-navigation{
+                width: 30%;
+                height: 50px;
+                order: 4;
+            }
+
+            .header-menu{
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                height: 50px;
+                width: 10%;
+                order: 2;
+            }
+        }
+
+    }
+}
