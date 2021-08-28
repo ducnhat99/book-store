@@ -2,13 +2,14 @@ import { Rate, Popover } from 'antd';
 import CardHover from './CardHover';
 
 const NewCardItem = (props) => {
-    const { images, title, price, realPrice, rateStar } = props
+    const { index, images, title, price, realPrice, rateStar } = props
     const content = (
         <CardHover {...props} />
     );
+
     return (
-        <Popover content={content} placement="rightTop">
-            <div className="new-card">
+        <Popover content={content} placement="rightTop" >
+            <div className="new-card" >
                 <div className="new-card-content">
                     <div className="new-card-images">
                         <img src={images}></img>
@@ -27,7 +28,7 @@ const NewCardItem = (props) => {
                     </div>
                 </div>
             </div>
-        </Popover>
+        </Popover >
     )
 }
 

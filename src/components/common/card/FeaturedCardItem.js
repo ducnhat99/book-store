@@ -6,9 +6,10 @@ const FeaturedCardItem = (props) => {
     const content = (
         <CardHover {...props} />
     );
+
     return (
         <Popover content={content} placement="rightTop">
-            <div className="featured-item">
+            <div className="featured-item" >
                 <div className="featured-item-images-container">
                     <div className="featured-item-images">
                         <img src={images} alt="featured-book"></img>

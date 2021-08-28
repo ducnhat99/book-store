@@ -1,16 +1,21 @@
 import { Button } from 'antd';
+import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 import 'antd/dist/antd.css';
 import top from '../../../images/featured.jpg';
 import humble from '../../../images/humble.jpg'
 import FeaturedCardItem from './FeaturedCardItem';
 
 const FeaturedCardContainer = () => {
+    const scrollType = {
+        duration: 700,
+        delay: 1200,
+    };
     return (
         <div className="featured-container">
             <div className="featured-header">
                 <h2>SÁCH NỖI BẬT</h2>
             </div>
-            <div className="featured-main">
+            <div className="featured-main" onMouseEnter={() => scroll.scrollTo(1600, scrollType)}>
                 <div className="top-featured">
                     <div className="top-featured-images">
                         <img src={top} alt="top 1 featured" />

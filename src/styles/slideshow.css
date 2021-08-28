@@ -17,6 +17,14 @@
   background-repeat: no-repeat;
 }
 
+.react-slideshow-container .default-nav{
+  opacity: 0.1;
+}
+
+.react-slideshow-container .default-nav:hover{
+  opacity: 0.3;
+}
+
 @media screen and (max-width: 1024px){
   .slide-show{
     width: 96%;
