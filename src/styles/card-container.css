@@ -66,11 +66,12 @@
     .card-item{
         height: 650px;
     }
+
+    .card-load-more{
+        height: 50px;
+    }
     .btn-card-load-more{
         width: 180px;
         height: 35px;
-    }
-    .card-load-more{
-        height: 50px;
     }
 }

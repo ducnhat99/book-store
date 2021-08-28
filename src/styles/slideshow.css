@@ -33,9 +33,11 @@
 }
 
 @media screen and (max-width: 375px){
-  .each-slide{
+
+.each-slide{
     height: 200px;
   }
+
   .each-slide > div {
     background-size: 100% 200px;
   }

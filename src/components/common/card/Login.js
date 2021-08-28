@@ -40,6 +40,8 @@ const Login = (props) => {
         <div className="login__input">
           <label>Địa chỉ Email</label>
           <Input placeholder="Nhập địa chỉ email" className="login__input__main" />
+          <label>Số điện thoại/Email</label>
+          <Input placeholder="Nhập số điện thoại hoặc email" className="login__input__main" />
         </div>
         <div className="login__input">
           <label>Mật khẩu</label>

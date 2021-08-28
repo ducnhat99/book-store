@@ -1,4 +1,5 @@
 import { Form, Input, Button, Select, DatePicker, Space } from 'antd';
+
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import '../../../styles/register.css';
 
@@ -79,6 +80,7 @@ const Register = (props) => {
           </Select>
         </div> */}
       </div>
+
       <div className="register__btn__all">
         <Button type="primary" className="register__btn__main">
           Đăng kí
@@ -88,6 +90,7 @@ const Register = (props) => {
           Bỏ qua
         </Button>
       </div>
+
     </form>
   );
 };
