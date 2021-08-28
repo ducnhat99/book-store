@@ -19,7 +19,9 @@
     border-color: #F7941E;
     background: #F7941E;
 }
-
+.ant-btn-lg{
+    font-size: 24px;
+}
 .ant-btn-primary:hover{
     border-color: #FFA54F;
     background: #FFA54F;
