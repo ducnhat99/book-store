@@ -1,20 +1,14 @@
-
 .footer__left{
   width: 30%;
   height: auto;
   margin-left: 15px;
   border-right: 0.1px solid grey ;
-
 }
 .footer__left__main{
   width: 100%;
   width: 100%;
   height: auto;
 }
-/* .left__text p{
-  width: 100%;
-  height: auto;
-} */
 .left__text p{
 margin: 10px 0 10px 0;
 }
@@ -84,4 +78,3 @@ margin: 10px 0 10px 0;
    margin-right: 5px;
   }
 
-} 

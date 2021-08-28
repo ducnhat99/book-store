@@ -66,6 +66,7 @@
     .card-item{
         height: 650px;
     }
+
     .card-load-more{
         height: 50px;
     }
@@ -74,4 +75,3 @@
         height: 35px;
     }
 }
-
