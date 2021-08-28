@@ -20,3 +20,9 @@
         height: 381px;
     }
 }
+
+@media screen and (max-width: 375px){
+    .homebody-menu{
+        height: 200px;
+    }
+}

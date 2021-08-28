@@ -82,3 +82,10 @@
         height: 90%;
     }
 }
+
+@media screen and (max-width: 375px){
+    .featured-item{
+        width: 100%;
+        height: 196px;
+    }
+}
