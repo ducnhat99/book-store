@@ -1,9 +1,17 @@
 import React from 'react';
-import { Button, Rate } from 'antd';
+import { Button, Rate, Input } from 'antd';
 import '../../../styles/detail-book.css';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 
 const DetailBook = () => {
+  const [bookNumber, setBookNumber] = React.useState(1)
+  const handleSetBookNumber = (number) => {
+    if (number > 0)
+      setBookNumber(number)
+    else {
+      setBookNumber(1)
+    }
+  }
   return (
     <div>
       <div className="container__detail__m">
@@ -26,68 +34,53 @@ const DetailBook = () => {
             <div className="text__content__1">
               <div className="text">
                 <span> Nhà cung cấp: </span>
-                <span>
-                  <a>Nhã Nam</a>
+                <span>Nhã Nam
                 </span>
               </div>
               <div className="text">
                 <span>Tác giả: </span>
-                <span>
-                  <a>Paulo Coelho</a>
+                <span>Paulo Coelho
                 </span>
               </div>
               <div className="text">
                 <span>Nhà xuất bản: </span>
-                <span>
-                  <a>NXB Hội Nhà Văn</a>
+                <span>NXB Hội Nhà Văn
                 </span>
               </div>
               <div className="text">
                 <span>Hình thức bìa: </span>
-                <span>
-                  <a>Bìa mềm</a>
+                <span>Bìa mềm
                 </span>
               </div>
             </div>
           </div>
           <div className="rate">
-            <Rate allowHalf defaultValue={2.5} />
+            <Rate defaultValue={2} disabled={true} />
             <a>(37 đánh giá)</a>
           </div>
-
           <div className="text__content">
             <span className="price">55.300&nbsp;đ</span>
             <span className="old_price">79.000&nbsp;đ</span>
-            <span className="discount">-30%</span>
           </div>
 
           <div className="text__content">
-            <div className="text__content__1">
+            <div className="text__content__2">
               <div className="text">
-                <span> Thời gian giao hàng</span>
-              </div>
-
-              <div className="text">
-                <span>Giao hàng đến </span>
-                <span>
-                  <a>Thay đổi</a>
+                <span>Giao hàng đến:  </span>
+                <span className="text__margin">
+                  Da Nang
                 </span>
               </div>
               <div className="text">
-                <span>Chính sách đổi trả </span>
-              </div>
-              <div className="text">
-                <span>Đổi trả sản phẩm trong 30 ngày </span>
-                <span>
-                  <a>Xem thêm</a>
-                </span>
+                <span>Chính sách đổi trả: </span>
+                <span className="text__margin">Đổi trả sản phẩm trong 30 ngày </span>
               </div>
             </div>
           </div>
 
           <div className="text__content">
             <h3>Số lượng: </h3>
-            <input type="number" />
+            <Input type="number" value={bookNumber} onChange={(e) => handleSetBookNumber(e.target.value)} />
           </div>
         </div>
         <div className="container__low">
@@ -102,7 +95,7 @@ const DetailBook = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 export default DetailBook;

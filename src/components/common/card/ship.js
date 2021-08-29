@@ -34,7 +34,7 @@ function Shipping() {
             />
 
             <img
-              style={{ maxHeight: '50px' }}
+              style={{ maxHeight: '40px', maxWidth: '60px' }}
               src="https://cdn0.fahasa.com/media//wysiwyg/Logo-NCC/momopay.png"
             />
 

@@ -1,15 +1,10 @@
-
-span, a{
-  font-weight: 700;
-  font-size: 15px;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 .container__detail__m{
-  width: 1228px;
   height: auto;
   display: flex;
   flex-wrap: wrap;
+  background: #fff;
+  margin-bottom: 20px;
+  padding-top: 15px;
 
 }
 .container__left__detail{
@@ -17,9 +12,7 @@ span, a{
   height: auto;
   display: flex;
   flex-wrap: wrap;
-
 }
-
 
 .container__right__detail{
   width: 70%;
@@ -27,12 +20,6 @@ span, a{
   display: flex;
   flex-wrap: wrap;
 }
-
-
-
-
-
-
 /* DETAIL LEFT */
 
 .img__left{
@@ -41,44 +28,41 @@ span, a{
   align-items: center;
 }
 
-img{
+.img__left img{
   width: 100%;
 }
-
-
-
-
-
 
 .text__content{
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-
 }
 .text__content__1{
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+}
 
+.text__content__2{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+.text__content__1 h1{
+  font-weight: bold;
 }
 .text{
   width: 40%;
+}
+.text__margin{
+  margin-left: 50px;
 }
 .container__right__detail h1{
 
   height: auto;
 }
-
-
-
-
-
-
-
-
-
-
 .content__price{
   width: 100%;
   height: auto;
@@ -87,6 +71,7 @@ img{
 }
 .price{
   font-size: 35px;
+  font-weight: bold;
   color: #C92127;
 }
 .old_price{
@@ -109,26 +94,24 @@ img{
   margin-left: 40px;
   text-align: center;
 }
-
-
-
 /* DETAIL LOW */
-
 .container__low{
   width: 100%;
   height: auto;
-  margin: 10px 0 10px 0;
+  margin: 30px 0 0 0;
+  padding-bottom: 30px;
 }
 .container__low__detail{
-  width: 30%;
+  width: 100%;
   height: auto;
   display: flex;
-  flex-wrap: wrap;
-  margin-left: 5px;
+  margin-left: 40px;
 }
 
 .container__low button{
+  width: 20%;
   margin: 0 0 0 20px;
+  font-size: 16px;
 }
 
 
@@ -148,8 +131,6 @@ img{
     margin: 10px 0 10px 5px;
   }
 
-  
-
 }
 @media screen and (max-width: 375px) {
   .container__detail__m{
@@ -158,11 +139,19 @@ img{
   .container__left__detail{
     width: 100%;
   }
+  .img__left{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .img__left img{
+    width: 50%;
+    height: 90%;
+  }
   .text__content input{
     width: 20%;
-    
   }
-
   h1{
     margin-left: 10px;
   }
@@ -178,9 +167,7 @@ img{
     width: 100%;
   }
   .rate{
-  
-    margin: 0 0 5px 15px;
-    
+    margin: 0 0 0 15px;
   }
   .container__right__detail{
     width: 100%;
@@ -190,10 +177,8 @@ img{
     width: 100%;
   }
   .container__low button{
-    margin: 10px 0 10px 20px;
+    width: 40%;
+    font-size: 12px;
   }
-
- 
-
 }
 

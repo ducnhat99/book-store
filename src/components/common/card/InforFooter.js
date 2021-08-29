@@ -29,18 +29,18 @@ function Infor() {
         <div className="icon__top">
           <img
             src="https://www.fahasa.com/media/wysiwyg/Logo-NCC/logo-bo-cong-thuong-da-thong-bao.png"
-            style={{ width: '120px', height: '40px' }}
+            style={{ width: '120px', height: '30px' }}
           />
         </div>
 
         <div className="icon__left">
-          <FacebookOutlined />
+          <FacebookOutlined className="icon_info" />
 
-          <InstagramOutlined />
+          <InstagramOutlined className="icon_info" />
 
-          <YoutubeOutlined />
+          <YoutubeOutlined className="icon_info" />
 
-          <TwitterOutlined />
+          <TwitterOutlined className="icon_info" />
         </div>
 
         <div className="icon__bottom">
