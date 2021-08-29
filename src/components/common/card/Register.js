@@ -29,15 +29,9 @@ const Register = (props) => {
       </div>
       <div className="register-container">
         <div className="register__input">
-          <label>Họ</label>
-          <Input placeholder="Nhập họ" className="register__input__main" />
+          <label>Họ và tên</label>
+          <Input placeholder="Nhập họ và tên" className="register__input__main" />
         </div>
-        <div className="register__input">
-          <label>Tên</label>
-          <Input placeholder="Nhập tên" className="register__input__main" />
-        </div>
-      </div>
-      <div className="register-container">
         <div className="register__input" >
           <label>Giới tính</label>
           <Select defaultValue="Nam" className="register__input__main">
@@ -46,15 +40,15 @@ const Register = (props) => {
             <Option value="Khác">Khác</Option>
           </Select>
         </div>
+      </div>
+      <div className="register-container">
         <div className="register__input" >
           <label>Sinh nhật</label>
-          <Space direction="vertical" className="register__input__main">
+          <Space direction="vertical" width={500} className="register__input__main">
             <DatePicker />
           </Space>
         </div>
-      </div>
-      <div className="register-container">
-        <div className="register__input__address">
+        <div className="register__input">
           <label>Nhập địa chỉ</label>
           <Input placeholder="Nhập địa chỉ" className="register__input__main" />
           {/* <Select defaultValue="Đà Nẵng" className="register__input__main">
@@ -63,6 +57,8 @@ const Register = (props) => {
             <Option value="Khác">Khác</Option>
           </Select> */}
         </div>
+      </div>
+      <div className="register-container">
         {/* <div className="register__input" >
           <label>Quận/Huyện</label>
           <Select defaultValue="Thanh Khê" className="register__input__main">
@@ -80,7 +76,6 @@ const Register = (props) => {
           </Select>
         </div> */}
       </div>
-
       <div className="register__btn__all">
         <Button type="primary" className="register__btn__main">
           Đăng kí

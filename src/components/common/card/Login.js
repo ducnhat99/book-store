@@ -7,15 +7,15 @@ import Register from './Register'
 const Login = (props) => {
   const [isLogin, setIsLogin] = React.useState(true)
   const backgroundLogin = () => {
-    if (isLogin) return { background: "#ff4d4f", color: "#fff" }
+    if (isLogin) return { background: "#ff4d4f", margin: '10px 0 0 15px', color: "#fff" }
     else {
-      return { background: "#fff", color: "#ff4d4f" }
+      return { background: "#fff", color: "#ff4d4f", margin: '10px 0 0 15px', width: '45%' }
     }
   };
   const backgroundRegister = () => {
-    if (isLogin) return { background: "#fff", color: "#ff4d4f" }
+    if (isLogin) return { background: "#fff", margin: '10px 15px 0 0', color: "#ff4d4f" }
     else {
-      return { background: "#ff4d4f", color: "#fff" }
+      return { background: "#ff4d4f", color: "#fff", margin: '10px 15px 0 0', width: '45%' }
     }
   };
   const handleDisplayLogin = () => {
@@ -26,9 +26,13 @@ const Login = (props) => {
     if (isLogin) return { display: 'none' }
     else return { display: 'block' }
   }
+  const handleChangeHeadLogin = () => {
+    if (isLogin) return { width: '390px' }
+    else return { width: '600px' }
+  }
   return (
     <form>
-      <span className="login__btn__head">
+      <span className="login__btn__head" style={handleChangeHeadLogin()}>
         <Button value="login" className="login__btn" danger style={backgroundLogin()} onClick={() => setIsLogin(true)}>
           Đăng nhập
         </Button>

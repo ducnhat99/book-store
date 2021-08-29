@@ -22,10 +22,7 @@
   width: 50%;
   margin: 20px 0 0 0;
 }
-.register__input__address{
-  width: 100%;
-  margin: 20px 0 0 0;
-}
+
 .register__input__address label{
   margin: 0px 0 0 20px;
 }
@@ -38,16 +35,16 @@
   margin: 5px 0 0 20px;
 }
 .register__btn__main{
-  width: 50%;
-  margin: 25px 0 0 0;
+  width: 45%;
+  margin: 25px 0 0 20px;
 }
 .register__btn__all{
-  width: 100%;
-  text-align: center;
-  margin: 25px 0 0 100px ;
+  width: 98%;
+  margin: 10px 0 0 0 ;
+  display: flex;
   justify-content: space-between;
 }
-.register__btn__all{
+
+.ant-picker{
   width: 100%;
-  margin: 0px 0 10px 0px ;
 }
