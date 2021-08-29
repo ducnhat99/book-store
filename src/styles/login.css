@@ -2,18 +2,18 @@
   width: 400px;
   height: auto;
   border-radius: 5px;
-  padding-top: 20px;
+  padding-top: 30px;
   font-family: "Roboto";
 }
 .login__btn__head{
-  width: 400px;
   height: auto;
-  margin: 0 0 0 5px;
+  margin: 20px 0 0 5px;
+  display: flex;
+  justify-content:space-between;
 }
 
 .login__btn {
   width: 45%;
-  margin: 10px 0 0 10px;
 }
 .login__btn:hover{
   background: #ff4d4f;
