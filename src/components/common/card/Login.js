@@ -2,47 +2,60 @@ import React from 'react';
 import { Button, Input } from 'antd';
 import 'antd/dist/antd.css';
 import '../../../styles/login.css';
-import Register from './Register'
+import Register from './Register';
 
 const Login = (props) => {
-  const [isLogin, setIsLogin] = React.useState(true)
+  const [isLogin, setIsLogin] = React.useState(true);
   const backgroundLogin = () => {
-    if (isLogin) return { background: "#ff4d4f", color: "#fff" }
+    if (isLogin) return { background: '#ff4d4f', color: '#fff' };
     else {
-      return { background: "#fff", color: "#ff4d4f" }
+      return { background: '#fff', color: '#ff4d4f' };
     }
   };
   const backgroundRegister = () => {
-    if (isLogin) return { background: "#fff", color: "#ff4d4f" }
+    if (isLogin) return { background: '#fff', color: '#ff4d4f' };
     else {
-      return { background: "#ff4d4f", color: "#fff" }
+      return { background: '#ff4d4f', color: '#fff' };
     }
   };
   const handleDisplayLogin = () => {
-    if (isLogin) return { display: 'block' }
-    else return { display: 'none' }
-  }
+    if (isLogin) return { display: 'block' };
+    else return { display: 'none' };
+  };
   const handleDisplayRegister = () => {
-    if (isLogin) return { display: 'none' }
-    else return { display: 'block' }
-  }
+    if (isLogin) return { display: 'none' };
+    else return { display: 'block' };
+  };
   return (
     <form>
       <span className="login__btn__head">
-        <Button value="login" className="login__btn" danger style={backgroundLogin()} onClick={() => setIsLogin(true)}>
+        <Button
+          value="login"
+          className="login__btn"
+          danger
+          style={backgroundLogin()}
+          onClick={() => setIsLogin(true)}
+        >
           Đăng nhập
         </Button>
-        <Button value="register" className="login__btn" style={backgroundRegister()} danger onClick={() => setIsLogin(false)}>
+        <Button
+          value="register"
+          className="login__btn"
+          style={backgroundRegister()}
+          danger
+          onClick={() => setIsLogin(false)}
+        >
           Đăng ký
         </Button>
       </span>
+
       <div className="login" style={handleDisplayLogin()}>
         <div className="login__input">
           <label>Địa chỉ Email</label>
           <Input placeholder="Nhập địa chỉ email" className="login__input__main" />
         </div>
         <div className="login__input">
-          <label>Mật khẩu</label>
+          <label id="label__password">Mật khẩu</label>
           <Input.Password placeholder="Nhập mật khẩu" className="login__input__main" />
         </div>
         <div style={{ float: 'right', marginRight: '25px', color: 'red' }}>
@@ -63,6 +76,7 @@ const Login = (props) => {
           </Button>
         </div>
       </div>
+
       <div style={handleDisplayRegister()}>
         <Register handleCancel={props.handleCancel} />
       </div>
