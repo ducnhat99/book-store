@@ -1,4 +1,5 @@
 import { Rate, Popover } from 'antd';
+import { Link } from 'react-router-dom'
 import CardHover from './CardHover';
 
 const SaleCardItem = (props) => {
@@ -7,8 +8,8 @@ const SaleCardItem = (props) => {
         <CardHover {...props} />
     );
     return (
-        <Popover content={content} placement="rightTop">
-            <div className="new-card">
+        <Link to="/detail">
+            <Popover content={content} placement="rightTop">
                 <div className="new-card-content">
                     <div className="new-card-images">
                         <img src={images}></img>
@@ -26,8 +27,8 @@ const SaleCardItem = (props) => {
                         <Rate defaultValue={rateStar} disabled={true} />
                     </div>
                 </div>
-            </div>
-        </Popover>
+            </Popover>
+        </Link>
     )
 }
 

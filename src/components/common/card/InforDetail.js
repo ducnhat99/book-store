@@ -4,7 +4,6 @@ import '../../../styles/infor-detail.css';
 const InforDetail = () => {
   return (
     <div className="container__detail__main">
-      <div className="clear"></div>
       <br />
       <h1 style={{ marginLeft: '15px' }}>Thông tin sản phẩm</h1>
 
@@ -19,9 +18,7 @@ const InforDetail = () => {
           <tr>
             <th class="table-label">Tên Nhà Cung Cấp</th>
             <td class="data_supplier">
-              <a class="xem-chi-tiet" href="nha-nam?fhs_campaign=ATTRIBUTE_PRODUCT">
-                Nhã Nam
-              </a>{' '}
+              Nhã Nam
             </td>
           </tr>
           <tr>
@@ -56,50 +53,10 @@ const InforDetail = () => {
             <th class="table-label">Hình thức</th>
             <td class="data_book_layout">Bìa Mềm</td>
           </tr>
-
-          <tr>
-            <th style={{ verticalAlign: 'middle' }} class="">
-              Sản phẩm hiển thị trong
-            </th>
-            <td>
-              <ul class="fhs_product_link">
-                <li>
-                  <a
-                    style={{ fontSize: ' 14px', color: ' #2489F4' }}
-                    href="nha-nam?fhs_campaign=INTERNAL_LINKING"
-                  >
-                    Nhã Nam
-                  </a>
-                </li>
-                <li>
-                  <a
-                    style={{ fontSize: ' 14px', color: ' #2489F4' }}
-                    href="sach-dich-nhieu-nhat?fhs_campaign=INTERNAL_LINKING"
-                  >
-                    Top sách được phiên dịch nhiều nhất
-                  </a>
-                </li>
-                <li>
-                  <a
-                    style={{ fontSize: ' 14px', color: ' #2489F4' }}
-                    href="vnpay?fhs_campaign=INTERNAL_LINKING"
-                  >
-                    Ví VNPAY hoàn 50K
-                  </a>
-                </li>
-              </ul>
-            </td>
-          </tr>
-
           <tr>
             <th class="table-label">Sản phẩm bán chạy nhất</th>
             <td>
-              <a
-                style={{ fontSize: ' 14px', color: ' #2489F4' }}
-                href="https://www.fahasa.com/sach-trong-nuoc/van-hoc-trong-nuoc/tieu-thuyet.html?order=num_orders_month"
-              >
-                Top 100 sản phẩm Tiểu thuyết bán chạy của tháng
-              </a>
+              Top 100 sản phẩm Tiểu thuyết bán chạy của tháng
             </td>
           </tr>
         </table>
@@ -154,7 +111,6 @@ const InforDetail = () => {
             “Santiago có khả năng cảm nhận bằng trái tim như&nbsp;<em>Hoàng tử bé</em>&nbsp;của
             Saint-Exupéry.”&nbsp;<em>- Frankfurter Allgemeine Zeitung, Đức</em>
           </p>{' '}
-          <div class="clear"></div>
         </div>
       </div>
 

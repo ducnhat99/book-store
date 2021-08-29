@@ -5,11 +5,8 @@ import '../../../styles/detail.css';
 
 const Detail = () => {
   return (
-    <div>
-      <div className="container__detail">
-        <div className="text__detail__header">
-          <h2>Tiểu thuyết</h2>
-        </div>
+    <div className="container__detail">
+      <div className="container">
         <DetailBook />
         <InforDetail />
       </div>

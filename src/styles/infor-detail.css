@@ -3,27 +3,26 @@
   height: auto;
   display: flex;
   flex-wrap: wrap;
-  
+  background: #fff;
+  padding-bottom: 20px;
 }
 .data-table_1{
-  width: 90%;
+  width: 100%;
   height: auto;
   /* display: flex;
   flex-wrap: wrap; */
   margin: 0 0 0 20px;
 }
 .table-label{
-  width: 30%;
+  width: 45%;
   height: auto;
   text-align: left;
   font-size: 15px;
   margin-top: 5px;
 }
-
-
 /* TABLE_2 */
 .data-table_2{
-  width: 90%;
+  width: 100%;
   height: auto;
   display: flex;
   flex-wrap: wrap;
@@ -35,21 +34,12 @@
   display: flex;
   flex-wrap: wrap;
 }
-
-
-
-
-
-
-
 .clear{
   width: 100%;
   height: 1px;
-  background-color: gray;
+  background-color: #c1c1c1;
   margin-top: 15px;
 }
-
-
 
 @media screen and (max-width: 1024px) {
   .container__detail__main{
@@ -62,10 +52,7 @@
   }
   .data-table_2{
     width: 100%;
-    
   }
-  
-
 }
 @media screen and (max-width: 375px) {
  
