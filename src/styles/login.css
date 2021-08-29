@@ -42,3 +42,23 @@
  
   
 }
+@media screen and (max-width: 375px) {
+  .login{
+    width: 370px;
+ 
+  }
+  .login__input__main{
+    width: 55%;
+    margin: 5px 0 0 20px;
+  }
+  .login__btn {
+    width: 30%;
+    margin: 10px 0 0 40px;
+  }
+  #label__password{
+    margin-right: 22spx;
+  }
+  
+  
+  
+}
