@@ -1,0 +1,199 @@
+
+span, a{
+  font-weight: 700;
+  font-size: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container__detail__m{
+  width: 1228px;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+
+}
+.container__left__detail{
+  width: 30%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+
+.container__right__detail{
+  width: 70%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+
+
+
+
+/* DETAIL LEFT */
+
+.img__left{
+  width: 100%;
+  height: auto;
+  align-items: center;
+}
+
+img{
+  width: 100%;
+}
+
+
+
+
+
+
+.text__content{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
+}
+.text__content__1{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
+}
+.text{
+  width: 40%;
+}
+.container__right__detail h1{
+
+  height: auto;
+}
+
+
+
+
+
+
+
+
+
+
+.content__price{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+.price{
+  font-size: 35px;
+  color: #C92127;
+}
+.old_price{
+  font-size: 15px;
+  margin: 15px 0 0 10px;
+  text-decoration: line-through;
+}
+.discount{
+  width: 40px;
+  height: 25px;
+  font-size: 15px;
+  background-color: #C92127;
+  color: white;
+  border-radius: 5px;
+  margin: 15px 0 0 10px;
+}
+.text__content input{
+  width: 10%;
+  height: 35px;
+  margin-left: 40px;
+  text-align: center;
+}
+
+
+
+/* DETAIL LOW */
+
+.container__low{
+  width: 100%;
+  height: auto;
+  margin: 10px 0 10px 0;
+}
+.container__low__detail{
+  width: 30%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 5px;
+}
+
+.container__low button{
+  margin: 0 0 0 20px;
+}
+
+
+@media screen and (max-width: 1024px) {
+  .container__detail__m{
+    width: 1023px;
+  }
+  /* .text__content__1{
+    width: 100%;
+    margin: 0px 0 0px 0;
+  } */
+  .text__content input{
+    width: 15%;
+    
+  }
+  .container__low button{
+    margin: 10px 0 10px 5px;
+  }
+
+  
+
+}
+@media screen and (max-width: 375px) {
+  .container__detail__m{
+    width: 374px;
+  }
+  .container__left__detail{
+    width: 100%;
+  }
+  .text__content input{
+    width: 20%;
+    
+  }
+
+  h1{
+    margin-left: 10px;
+  }
+  .text__content{
+    width: 90%;
+    margin: 0 15px;
+  }
+  .text__content__1{
+    width: 100%;
+    margin: 10px 0 10px 0;
+  }
+  .text{
+    width: 100%;
+  }
+  .rate{
+  
+    margin: 0 0 5px 15px;
+    
+  }
+  .container__right__detail{
+    width: 100%;
+    height: auto;
+  }
+  .container__low__detail{
+    width: 100%;
+  }
+  .container__low button{
+    margin: 10px 0 10px 20px;
+  }
+
+ 
+
+}
+

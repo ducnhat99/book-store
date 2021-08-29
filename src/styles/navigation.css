@@ -24,6 +24,7 @@
     justify-content: center;
     align-items: center;
     top: 50px;
+  
 }
 
 .btn--more-notification{
@@ -35,4 +36,4 @@
     .navigation-item p{
         display: none;
     }
-}
+}   
