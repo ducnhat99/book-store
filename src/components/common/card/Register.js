@@ -78,7 +78,7 @@ const Register = (props) => {
       </div>
       <div className="register__btn__all">
         <Button type="primary" className="register__btn__main">
-          Đăng kí
+          Xác nhận
         </Button>
         <br />
         <Button danger className="register__btn__main" onClick={props.handleCancel}>

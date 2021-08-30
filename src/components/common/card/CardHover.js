@@ -1,8 +1,6 @@
 import { Rate } from 'antd';
 
-
 const CardHover = (props) => {
-    console.log(props)
     return (
         <div className="card__hover">
             <div className="card__hover__title">

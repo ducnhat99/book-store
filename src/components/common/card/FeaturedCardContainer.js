@@ -1,5 +1,6 @@
 import { Button } from 'antd';
-import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+import { Link } from 'react-router-dom'
+import { animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 import 'antd/dist/antd.css';
 import top from '../../../images/featured.jpg';
 import humble from '../../../images/humble.jpg'
@@ -33,7 +34,9 @@ This worldwide bestseller offers simple guidance for building the kind of open a
 This worldwide bestseller offers simple guidance for building the kind of open and trusting relationships vital for tackling global systemic challenges and developing adaptive, innovative organizations—over 200,000 copies sold and translated into seventeen languages!" />
                     </div>
                     <div className="featured-load-more">
-                        <Button type="default" className="btn-featured-load-more"> Xem thêm</Button>
+                        <Link to="/featuredbook">
+                            <Button type="default" className="btn-featured-load-more"> Xem thêm</Button>
+                        </Link>
                     </div>
                 </div>
             </div>

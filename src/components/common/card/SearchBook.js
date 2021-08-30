@@ -2,7 +2,7 @@ import { Pagination, Radio, Rate } from 'antd';
 import NewCardItem from './NewCardItem'
 import images from '../../../images/7kyquanthegioi.jpg'
 
-const NewBookMore = () => {
+const SearchBook = (props) => {
     const listNewCard = [
         {
             images: images,
@@ -211,7 +211,7 @@ const NewBookMore = () => {
                     </div>
                     <div className="book-more--container">
                         <div className="card-header">
-                            <h2>SÁCH MỚI</h2>
+                            <h2>TÌM KIẾM VỚI TỪ KHÓA: {props.location.state.valueSearch}</h2>
                         </div>
                         <div className="book-more--card-container">
                             {listNewCard.map((item, index) => {
@@ -230,4 +230,4 @@ const NewBookMore = () => {
     )
 }
 
-export default NewBookMore
+export default SearchBook
