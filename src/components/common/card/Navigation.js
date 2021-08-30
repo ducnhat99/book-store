@@ -62,7 +62,6 @@ const Navigation = () => {
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
-        width={600}
         className="modal__login"
       >
         <Login handleCancel={handleCancel} />

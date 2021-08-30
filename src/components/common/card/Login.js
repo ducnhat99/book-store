@@ -31,7 +31,7 @@ const Login = (props) => {
     else return { width: '600px' }
   }
   return (
-    <form>
+    <form className="box--login__container">
       <span className="login__btn__head">
         <Button
           value="login"

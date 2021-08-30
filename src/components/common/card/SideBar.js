@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 
 const SideBar = () => {
     const category = [
@@ -11,21 +12,23 @@ const SideBar = () => {
         'Âm nhạc - mỹ thuật',
         'Tiểu sử - hồi ký',
         'Địa lý',
-        'Khoa học ký thuật'
+        'Khoa học ky thuật'
     ]
     return (
         <div className="sidebar">
-            <table className="sidebar-table">
-                <tr className="sidebar-table-header">
-                    <th>Danh mục</th>
-                </tr>
+            <ul className="sidebar-table">
+                <li className="sidebar-table-header">
+                    <h3>Danh mục</h3>
+                </li>
                 {category.map((item, index) => {
-                    return <tr>
-                        <td onClick={() => console.log('a')}>{item}</td>
-                    </tr>
+                    return <Link style={{ width: '100%', height: '40px' }} to={{
+                        pathname: `/category`,
+                        state: { category: item }
+                    }}><li>{item}</li>
+                    </Link>
                 })}
-            </table>
-        </div>
+            </ul>
+        </div >
     )
 }
 

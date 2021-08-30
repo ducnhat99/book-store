@@ -44,7 +44,18 @@
   display: flex;
   justify-content: space-between;
 }
-
 .ant-picker{
   width: 100%;
+}
+
+@media screen and (max-width: 375px) {
+  .register{
+      width: 100%;
+    }
+  .register__input{
+    width: 100%;
+  }
+  .register-container{
+    flex-wrap: wrap;
+  }
 }
