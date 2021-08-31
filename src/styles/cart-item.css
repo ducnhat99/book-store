@@ -15,8 +15,7 @@
 }
 
 .cart-item--remove__icon{
-    width: 30px;
-    height: 30px;
+    width: 40%;
 }
 
 .cart-item--remove__icon svg{
@@ -118,5 +117,49 @@
 .cart-item__total--price{
     color: #F7941E;
     font-size: 16px;
+}
+
+@media screen and (max-width: 375px){
+    .cart--item-box{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .cart-item--remove__icon{
+        width: 60%;
+    }
+    .cart--item--info{
+        width: 70%;
+        height: 80%;
+    }
+    .cart--item--remove{
+        height: 80%;
+    }
+    .cart--item__images{
+        height: 80%;
+    }
+    .cart--item--price{
+        height: 20%;
+        display: flex;
+        width: 100%;
+    }
+    .cart--item__total{
+        display: flex;
+    }
+    .cart--item--price__number{
+        margin: 0;
+        height: 20px;
+        width: 55%;
+    }
+    .cart--item__total{
+        margin: 0;
+        height: 30px;
+        width: 45%;
+    }
+    .cart--item__total p:first-child{
+        display: none;
+    }
+.cart--item__images--box img{
+    height: 90%;
+}
 }
 
