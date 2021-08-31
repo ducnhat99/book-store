@@ -9,11 +9,13 @@ import SaleBookMore from '../components/common/card/SaleBookMore'
 import FeaturedBookMore from '../components/common/card/FeaturedBookMore'
 import CategoryBook from '../components/common/card/CategoryBook'
 import SearchBook from '../components/common/card/SearchBook'
+import Cart from '../components/common/card/Cart'
 
 const Home = () => {
     return (
         <div className="home">
             <Header />
+            <Route path="/cart" component={Cart} />
             <Route path="/search/:valueSearch" component={SearchBook} />
             <Route path="/category" component={CategoryBook} />
             <Route path="/salebook" component={SaleBookMore} />

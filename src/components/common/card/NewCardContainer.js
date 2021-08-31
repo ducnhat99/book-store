@@ -65,18 +65,24 @@ const NewCardContainer = () => {
     ]
     const scrollType = {
         duration: 700,
-        delay: 1200,
         spyThrottle: 1000
     };
+    const handleMouseEnter = () => {
+        window.countdown = setTimeout(function () { scroll.scrollTo(580, scrollType) }, 1000)
+    }
+    const handleMouseLeave = () => {
+        clearTimeout(window.countdown)
+    }
     return (
         <div className="card-container">
             <div className="card-header">
                 <h2>SÁCH MỚI</h2>
             </div>
             <div className="card-main">
-                <div className="card-item" onMouseEnter={() => scroll.scrollTo(580, scrollType)} >
+                {/* onMouseEnter={() => scroll.scrollTo(580, scrollType)} */}
+                <div className="card-item">
                     {listNewCard.map((item, index) => {
-                        return <div className="new-card" >
+                        return <div className="new-card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                             <NewCardItem key={index} index={index} images={item.images} title={item.title} author={item.author} product={item.product} page={item.page} price={item.price} realPrice={item.realPrice} rateStar={item.rateStar} description={item.description} />
                         </div>
                     })}
