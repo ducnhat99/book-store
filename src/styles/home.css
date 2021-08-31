@@ -19,6 +19,8 @@
 @import './notification.css';
 @import './cart-notification.css';
 @import './new-book-more.css';
+@import './cart.css';
+@import './cart-item.css';
 
 @font-face {
   font-family: Roboto;
