@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
+import { Link } from 'react-router-dom'
 import 'antd/dist/antd.css';
 import { Button, Modal, Popover } from 'antd';
 import bell from '../../../images/bell.svg';
@@ -47,12 +48,14 @@ const Navigation = () => {
           <p>Thông báo</p>
         </div>
       </Popover>
-      <Popover content={cartContent} placement="bottomRight">
-        <div className="navigation-item">
-          <img className="navigation-img" src={cart}></img>
-          <p>Giỏ hàng</p>
-        </div>
-      </Popover>
+      <Link to="/cart">
+        <Popover content={cartContent} placement="bottomRight">
+          <div className="navigation-item">
+            <img className="navigation-img" src={cart}></img>
+            <p>Giỏ hàng</p>
+          </div>
+        </Popover>
+      </Link>
       <div className="navigation-item" onClick={showModal}>
         <img className="navigation-img" src={loginLogo}></img>
         <p>Đăng nhập</p>
