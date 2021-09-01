@@ -1,9 +1,9 @@
 import { Button } from 'antd';
-import { Link } from 'react-router-dom'
-import { animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+import { Link } from 'react-router-dom';
+import { animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 import 'antd/dist/antd.css';
 import top from '../../../images/featured.jpg';
-import humble from '../../../images/humble.jpg'
+import humble from '../../../images/humble.jpg';
 import FeaturedCardItem from './FeaturedCardItem';
 
 const FeaturedCardContainer = () => {
@@ -49,5 +49,4 @@ This worldwide bestseller offers simple guidance for building the kind of open a
         </div >
     )
 }
-
-export default FeaturedCardContainer
+export default FeaturedCardContainer;

@@ -1,9 +1,16 @@
 import { Button } from 'antd';
-import { Link } from 'react-router-dom'
-import { DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+import { Link } from 'react-router-dom';
+import {
+  DirectLink,
+  Element,
+  Events,
+  animateScroll as scroll,
+  scrollSpy,
+  scroller,
+} from 'react-scroll';
 import 'antd/dist/antd.css';
-import NewCardItem from './NewCardItem'
-import images from '../../../images/7kyquanthegioi.jpg'
+import NewCardItem from './NewCardItem';
+import images from '../../../images/7kyquanthegioi.jpg';
 
 const NewCardContainer = () => {
     const listNewCard = [
@@ -94,8 +101,14 @@ const NewCardContainer = () => {
                 </div>
             </div>
         </div>
-    )
-}
+        <div className="card-load-more">
+          <Link to="/newbook">
+            <Button className="btn-card-load-more">Xem thêm</Button>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default NewCardContainer
-
+export default NewCardContainer;

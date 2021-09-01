@@ -1,9 +1,9 @@
 import { Button } from 'antd';
+import { Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 import { Link } from 'react-router-dom'
-import { DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 import 'antd/dist/antd.css';
-import images from '../../../images/book-orange.jpg'
-import NewCardItem from '../card/NewCardItem'
+import images from '../../../images/book-orange.jpg';
+import NewCardItem from '../card/NewCardItem';
 
 const SaleCardContainer = () => {
     const scrollType = {
@@ -46,7 +46,14 @@ const SaleCardContainer = () => {
                 </div>
             </div>
         </div>
-    )
-}
+        <div className="card-load-more">
+          <Link to="/salebook">
+            <Button className="btn-card-load-more">Xem thêm</Button>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default SaleCardContainer
+export default SaleCardContainer;

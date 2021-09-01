@@ -1,17 +1,44 @@
-const Notification = () => {
-    return (
-        <div className="notification--container">
-            <div className="notification--container__title">
-                <h4>Sách tiếng anh Zenbooks sale up to 50% </h4>
-            </div>
-            <div className="notification--container__date">
-                <p>22/08/2021</p>
-            </div>
-            <div className="notification--container__item">
-                <p>Cơ hội chỉ diễn ra duy nhất sinh nhật tháng 8 này. Click xem mua ngay!</p>
-            </div>
-        </div>
-    )
-}
+import React from 'react';
+import '../../../styles/notification.css';
+import ItemNotification from './ItemNotification';
 
-export default Notification
+const Notification = () => {
+  return (
+    <div className="">
+      <div className="container__notice">
+        <div className="notice__title__header">
+          <div className="notice__title__header__up">
+            <div className="notice__personal">
+              <button>Thông tin cá nhân</button>
+            </div>
+
+            <div className="notice__product">
+              <button>Thông tin sản phẩm </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="notice__content">
+          <div className="notice__content__main">
+            <div className="notice__content_0">
+              <ItemNotification
+                title="Thông tin sản phẩm"
+                content="skjfkalkkslafflsfkn"
+                Date="01/01/2021"
+              />
+            </div>
+            <div className="noti__content_0">
+              <ItemNotification
+                title="Thông tin sản phẩm"
+                content="skjfkalkkslafflsfkn"
+                Date="01/01/2021"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Notification;
