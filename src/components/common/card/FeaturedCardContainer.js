@@ -29,7 +29,10 @@ const FeaturedCardContainer = () => {
                     </div>
                 </div>
                 <div className="featured-main-item">
-                    <div className="featured-main-list-item" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                    <div className="featured-main-list-item" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={() => {
+                        handleMouseLeave()
+                        scroll.scrollToTop();
+                    }}>
                         <FeaturedCardItem images={humble} title="Humble Inquiry: The Gentle Art Of Asking Instead Of Telling" author="Edgar H. Schein, Peter A. Schein" product="Tiểu thuyết" page={192} price="253.300d" realPrice="298.000d" rateStar={1} description="Humble Inquiry: The Gentle Art Of Asking Instead Of Telling
 This worldwide bestseller offers simple guidance for building the kind of open and trusting relationships vital for tackling global systemic challenges and developing adaptive, innovative organizations—over 200,000 copies sold and translated into seventeen languages!" />
                         <FeaturedCardItem images={humble} title="Humble Inquiry: The Gentle Art Of Asking Instead Of Telling" author="Edgar H. Schein, Peter A. Schein" product="Tiểu thuyết" page={192} price="253.300d" realPrice="298.000d" rateStar={2} description="Humble Inquiry: The Gentle Art Of Asking Instead Of Telling
@@ -41,7 +44,7 @@ This worldwide bestseller offers simple guidance for building the kind of open a
                     </div>
                     <div className="featured-load-more">
                         <Link to="/featuredbook">
-                            <Button type="default" className="btn-featured-load-more"> Xem thêm</Button>
+                            <Button type="default" className="btn-featured-load-more" onClick={() => scroll.scrollToTop()}> Xem thêm</Button>
                         </Link>
                     </div>
                 </div>

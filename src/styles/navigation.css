@@ -7,11 +7,34 @@
 
 .navigation-item{
     text-align: center;
+    position: relative;
 }
 
 .navigation-item p{
     margin: 0;
     color: #F9AF56;
+}
+
+.navigation--unseen{
+    width: 20px;
+    height: 20px;
+    background: red;
+    border-radius: 10px;
+    position: absolute;
+    top: -5px;
+    right: 10px;
+    color: #fff;
+}
+
+.navigation--unseen--cart{
+    width: 20px;
+    height: 20px;
+    background: red;
+    border-radius: 10px;
+    position: absolute;
+    top: -5px;
+    right: 0px;
+    color: #fff;
 }
 
 .navigation-img{
@@ -35,5 +58,17 @@
 @media screen and (max-width: 375px){
     .navigation-item p{
         display: none;
+    }
+    .navigation--unseen{
+        width: 15px;
+        height: 15px;
+        right: -5px;
+        font-size: 12px;
+    }
+    .navigation--unseen--cart{
+        width: 15px;
+        height: 15px;
+        right: -5px;
+        font-size: 12px;
     }
 }   
