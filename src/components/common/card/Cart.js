@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { Button } from 'antd';
 import CartItem from "./CartItem"
 import images from '../../../images/7kyquanthegioi.jpg'
@@ -58,7 +59,9 @@ const Cart = () => {
                             <p>{totalPrice + shipPrice}d</p>
                         </div>
                         <div className="cart-checkout-btn">
-                            <Button type="primary">THANH TOÁN</Button>
+                            <Link to="/checkout">
+                                <Button type="primary">THANH TOÁN</Button>
+                            </Link>
                         </div>
                     </div>
                 </div>
