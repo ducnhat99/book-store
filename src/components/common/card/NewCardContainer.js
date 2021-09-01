@@ -1,16 +1,9 @@
 import { Button } from 'antd';
-import { Link } from 'react-router-dom';
-import {
-  DirectLink,
-  Element,
-  Events,
-  animateScroll as scroll,
-  scrollSpy,
-  scroller,
-} from 'react-scroll';
+import { Link } from 'react-router-dom'
+import { DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 import 'antd/dist/antd.css';
-import NewCardItem from './NewCardItem';
-import images from '../../../images/7kyquanthegioi.jpg';
+import NewCardItem from './NewCardItem'
+import images from '../../../images/7kyquanthegioi.jpg'
 
 const NewCardContainer = () => {
     const listNewCard = [
@@ -89,26 +82,23 @@ const NewCardContainer = () => {
                 {/* onMouseEnter={() => scroll.scrollTo(580, scrollType)} */}
                 <div className="card-item">
                     {listNewCard.map((item, index) => {
-                        return <div className="new-card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                        return <div className="new-card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={() => {
+                            handleMouseLeave()
+                            scroll.scrollToTop();
+                        }}>
                             <NewCardItem key={index} index={index} images={item.images} title={item.title} author={item.author} product={item.product} page={item.page} price={item.price} realPrice={item.realPrice} rateStar={item.rateStar} description={item.description} />
                         </div>
                     })}
                 </div>
                 <div className="card-load-more">
                     <Link to="/newbook">
-                        <Button className="btn-card-load-more">Xem thêm</Button>
+                        <Button className="btn-card-load-more" onClick={() => scroll.scrollToTop()}>Xem thêm</Button>
                     </Link>
                 </div>
             </div>
         </div>
-        <div className="card-load-more">
-          <Link to="/newbook">
-            <Button className="btn-card-load-more">Xem thêm</Button>
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
-};
+    )
+}
 
-export default NewCardContainer;
+export default NewCardContainer
+

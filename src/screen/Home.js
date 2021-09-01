@@ -11,12 +11,14 @@ import CategoryBook from '../components/common/card/CategoryBook'
 import SearchBook from '../components/common/card/SearchBook'
 import Cart from '../components/common/card/Cart'
 import Checkout from '../components/common/card/Checkout'
+import Notification from '../components/common/card/Notification'
 
 const Home = () => {
     return (
         <Switch>
             <div className="home">
                 <Header />
+                <Route path="/customer" component={Notification} />
                 <Route path="/checkout" component={Checkout} />
                 <Route path="/cart" component={Cart} />
                 <Route path="/search/:valueSearch" component={SearchBook} />

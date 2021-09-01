@@ -1,9 +1,11 @@
 import React from 'react';
 import { Button, Rate, Input } from 'antd';
+import { useHistory } from "react-router-dom";
 import '../../../styles/detail-book.css';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 
 const DetailBook = () => {
+  const history = useHistory()
   const [bookNumber, setBookNumber] = React.useState(1)
   const handleSetBookNumber = (number) => {
     if (number > 0)
@@ -89,7 +91,7 @@ const DetailBook = () => {
               <ShoppingCartOutlined />
               Thêm vào giỏ hàng
             </Button>
-            <Button size="large" danger>
+            <Button size="large" danger onClick={() => history.push("./checkout")}>
               Mua ngay
             </Button>
           </div>

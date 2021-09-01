@@ -55,6 +55,10 @@ const Checkout = () => {
                                 <Radio value="Thanh toán khi nhận hàng" className="checkout--main__radio--item">Thanh toán khi nhận hàng</Radio>
                             </Radio.Group>
                         </div>
+                        <div className="checkout--main--pay__price">
+                            <p>Tổng số tiền</p>
+                            <p>150000d</p>
+                        </div>
                         <div className="checkout--main--pay__btn--box">
                             <div className="checkout--main--pay__btn">
                                 <Button type="primary">Xác nhận thanh toán</Button>
