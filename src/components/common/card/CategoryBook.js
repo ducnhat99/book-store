@@ -1,8 +1,9 @@
-import { Pagination, Radio, Rate } from 'antd';
+import { Pagination, Radio, Rate, Select } from 'antd';
 import images from '../../../images/humble.jpg';
 import NewCardItem from './NewCardItem';
 
 const CategoryBook = (props) => {
+    const { Option } = Select;
     const listNewCard = [
         {
             images: images,
@@ -145,7 +146,6 @@ const CategoryBook = (props) => {
                         <div className="new-book-more--search__header">
                             <h2>MUA THEO</h2>
                         </div>
-
                         <div className="new-book-more--search--price">
                             <div className="new-book-more--search--price__header">
                                 <h3>
@@ -187,6 +187,16 @@ const CategoryBook = (props) => {
                     <div className="book-more--container">
                         <div className="card-header">
                             <h2>{props.location.state.category}</h2>
+                        </div>
+                        <div className="book-more--selected">
+                            <p>Sắp xếp theo:</p>
+                            <Select defaultValue="Sắp xếp theo" style={{ width: 200 }}>
+                                <Option value="Giá từ thấp lên cao">Giá từ thấp lên cao</Option>
+                                <Option value="Giá từ cao xuống thấp">Giá từ cao xuống thấp</Option>
+                                <Option value="Mới nhất" >
+                                    Mới nhất
+                                </Option>
+                            </Select>
                         </div>
                         <div className="book-more--card-container">
                             {listNewCard.map((item, index) => {

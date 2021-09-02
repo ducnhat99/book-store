@@ -38,7 +38,7 @@ const Navigation = () => {
       <CartNotification />
       <CartNotification />
       <div className="btn--more-notification">
-        <Button>Xem tất cả</Button>
+        <Button onClick={() => { history.push("/cart") }}>Xem tất cả</Button>
       </div>
     </>
   );

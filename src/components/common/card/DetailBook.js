@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Rate, Input } from 'antd';
+import { Button, Rate, Input, InputNumber } from 'antd';
 import { useHistory } from "react-router-dom";
 import '../../../styles/detail-book.css';
 import { ShoppingCartOutlined } from '@ant-design/icons';
@@ -7,13 +7,6 @@ import { ShoppingCartOutlined } from '@ant-design/icons';
 const DetailBook = () => {
   const history = useHistory()
   const [bookNumber, setBookNumber] = React.useState(1)
-  const handleSetBookNumber = (number) => {
-    if (number > 0)
-      setBookNumber(number)
-    else {
-      setBookNumber(1)
-    }
-  }
   return (
     <div>
       <div className="container__detail__m">
@@ -80,9 +73,9 @@ const DetailBook = () => {
             </div>
           </div>
 
-          <div className="text__content">
+          <div className="text__content__input">
             <h3>Số lượng: </h3>
-            <Input type="number" value={bookNumber} onChange={(e) => handleSetBookNumber(e.target.value)} />
+            <InputNumber type="number" size="small" min={1} max={100000} size="small" min={1} max={100000} value={bookNumber} onChange={(value) => setBookNumber(value)} />
           </div>
         </div>
         <div className="container__low">
