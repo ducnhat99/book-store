@@ -13,7 +13,20 @@
 }
 
 .login__btn {
-  width: 45%;
+  width: 42%;
+  margin: 0 0 0 15px;
+}
+.login__btn-rgt{
+  width: 42%;
+  margin: 0 20px 0 0;
+}
+.register__btn-login{
+  width: 45.5%;
+  margin: 0 0 0 15px;
+}
+.register__btn-rgt{
+  width: 45.5%;
+  margin: 0 10px 0 0;
 }
 .login__btn:hover{
   background: #ff4d4f;
@@ -52,10 +65,31 @@
     width: 55%;
     margin: 5px 0 0 20px;
   }
-  .login__btn {
-    width: 42%;
+ 
+  .login__btn__head{
+    display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    margin: 10px 0 0 0;
+  }
+  .login__btn:hover{
+  background: #fff;
+  color:#ff4d4f
+}
+  .login__btn {
+  width: 70%;
+  margin: 0 0 10px 40px;
+}
+.login__btn-rgt{
+  width: 70%;
+  margin: 0 0 0 40px;
+}
+  .register__btn-login{
+    width: 42%;
+    margin: 0 0 0 15px;
+  }
+  .register__btn-rgt{
+    width: 42%;
+    margin: 0 10px 0 0;
   }
   .login__input{
     width: 95%;

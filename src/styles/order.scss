@@ -39,3 +39,74 @@
         }
     }
 }
+    .order-phone{display: none;}
+@media screen and (max-width: 375px) {
+    .order--table{
+        display: none;
+    }
+    .order-phone{
+        display: flex;
+        width: 99%;
+        height: auto;
+        margin-right: 1%;
+        border: 1px solid #000;
+        margin-bottom: 5px;
+        .order-phone--content{
+            width: 90%;
+            height: 100%;
+            .order-phone--content__container{
+                width: 100%;
+                height: 25px;
+                display: flex;
+                border-bottom: 1px solid #000;
+            }
+            .order-phone--content__container:last-child{
+                border: none;
+            }
+            .order-phone--content__container p:first-child{
+                width: 30%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                border-right: 1px solid #000;
+            }
+            .order-phone--content__container p:last-child{
+                width: 70%;
+                height: 100%;
+                padding-left: 3px;
+            }
+            .order-phone--content__container--title{
+                width: 100%;
+                height: 40px;
+                display: flex;
+                border-bottom: 1px solid #000;
+            }
+            .order-phone--content__container--title p:first-child{
+                width: 30%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                border-right: 1px solid #000;
+            }
+            .order-phone--content__container--title p:last-child{
+                width: 70%;
+                height: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                -webkit-line-clamp: 2;
+                display:-webkit-box;
+                -webkit-box-orient: vertical;
+                padding-left: 3px;
+                word-wrap: break-word;
+            }
+        }
+        .order-phone--cancel{
+            width: 10%;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-left: 1px solid #000;
+        }
+    }
+}

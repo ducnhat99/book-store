@@ -17,3 +17,9 @@
         }
     }
 }
+
+@media screen and (max-width: 375px) {
+    .ntf--container{
+        min-height: 650px;
+    }
+}

@@ -1,0 +1,93 @@
+.comment{
+    width: 100%;
+    height: auto;
+    background: #fff;
+    margin-top: 10px;
+    .comment--write{
+        width: 100%;
+        height: auto;
+        border-bottom: 1px solid #E8E8E8;
+        .comment--write--rate-star{
+            width: 100%;
+            height: 50px;
+            display: flex;
+            p{
+                width: 15%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                font-size: 18px;
+                padding-left: 20px;
+            }
+            div{
+                width: 85%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+            }
+        }
+        .comment--write--content{
+            width: 100%;
+            height: 150px;
+            display: flex;
+            margin-bottom: 10px;
+            p{
+                width: 15%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                font-size: 18px;
+                padding-left: 20px;
+            }
+            textarea{
+                width: 70%;
+                height: 100%;
+            }
+        }
+        .comment--write__btn{
+            width: 85%;
+            height: 50px;
+            margin-left: 15%;
+            button{
+                border: none;
+                background: #C92127;
+                border-radius: 10px;
+                font-size: 14px;
+                font-weight: bold;
+                color: #fff;
+            }
+        }
+    }
+    .card-comment-container{
+            margin-top: 20px;
+            padding-left: 20px;
+            width: 100%;
+            height: auto;
+            padding-bottom: 20px;
+        }
+}
+@media screen and (max-width: 375px) {
+    .comment{
+        .comment--write{
+            .comment--write--rate-star{
+                p{
+                    width: 30%;
+                }
+                div{
+                    width: 70%;
+                }
+            }
+            .comment--write--content{
+                p{
+                    width: 30%;
+                }
+                textarea{
+                    width: 65%;
+                }
+            }
+        .comment--write__btn{
+            margin-left: 30%;
+        }
+        }
+    }
+}

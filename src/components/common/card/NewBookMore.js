@@ -1,8 +1,10 @@
-import { Pagination, Radio, Rate } from 'antd';
+import { Pagination, Radio, Rate, Select } from 'antd';
 import NewCardItem from './NewCardItem'
 import images from '../../../images/7kyquanthegioi.jpg'
 
+
 const NewBookMore = () => {
+    const { Option } = Select;
     const listNewCard = [
         {
             images: images,
@@ -212,6 +214,16 @@ const NewBookMore = () => {
                     <div className="book-more--container">
                         <div className="card-header">
                             <h2>SÁCH MỚI</h2>
+                        </div>
+                        <div className="book-more--selected">
+                            <p>Sắp xếp theo:</p>
+                            <Select defaultValue="Sắp xếp theo" style={{ width: 200 }}>
+                                <Option value="Giá từ thấp lên cao">Giá từ thấp lên cao</Option>
+                                <Option value="Giá từ cao xuống thấp">Giá từ cao xuống thấp</Option>
+                                <Option value="Mới nhất" >
+                                    Mới nhất
+                                </Option>
+                            </Select>
                         </div>
                         <div className="book-more--card-container">
                             {listNewCard.map((item, index) => {
