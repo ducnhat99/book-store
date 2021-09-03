@@ -17,9 +17,16 @@
         }
     }
 }
-
+@media screen and (max-width: 1024px) {
+    .ntf--main__tab1{
+        min-height: 900px;
+    }
+}
 @media screen and (max-width: 375px) {
     .ntf--container{
+        min-height: 650px;
+    }
+    .ntf--main__tab1{
         min-height: 650px;
     }
 }

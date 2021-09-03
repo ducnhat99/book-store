@@ -82,7 +82,10 @@ const Navigation = () => {
         </Link>
       </div>
       <div className="navigation--user--info">
-        <a onClick={() => dispatch(isSignOut())}>
+        <a onClick={() => {
+          dispatch(isSignOut())
+          history.push("/")
+        }}>
           <img src={settionLogo} alt="setting logo"></img>
           <p>Đăng xuất</p>
         </a>

@@ -1,25 +1,15 @@
 import React from 'react';
-import { Button, Input, DatePicker, Space } from 'antd';
+import { Button, Input, DatePicker, Space, Select } from 'antd';
 import 'antd/dist/antd.css';
 import '../../../styles/save-edit-infor.css';
 import EditPassword from './EditPassword';
 
 const SaveEditInfor = (props) => {
-  const [isEdit, setIsEdit] = React.useState(true);
-
-  const handleDisplayEditInfor = () => {
-    if (isEdit) return { display: 'block' };
-    else return { display: 'none' };
-  };
-
-  const handleDisplayEditPassword = () => {
-    if (isEdit) return { display: 'none' };
-    else return { display: 'block' };
-  };
+  const { Option } = Select;
 
   return (
     <form className="box--edit__container">
-      <div className="edit--infor" style={handleDisplayEditInfor()}>
+      <div className="edit--infor">
         <div className="edit--infor__btn__main">
           <label id="edit--infor__text__head">Thông tin tài khoản</label>
         </div>
@@ -38,6 +28,14 @@ const SaveEditInfor = (props) => {
           <label>Số điện thoại</label>
           <Input placeholder="Nhập số điện thoại" className="edit--infor__input__main" />
         </div>
+        <div className="edit--infor__input" >
+          <label>Giới tính</label>
+          <Select defaultValue="Nam" className="edit--infor__input__main">
+            <Option value="Nam">Nam</Option>
+            <Option value="Nữ">Nữ</Option>
+            <Option value="Khác">Khác</Option>
+          </Select>
+        </div>
         <div className="edit--infor__input">
           <label>Sinh nhật</label>
           <Space direction="vertical" width={500} className="edit--infor__input__main">
@@ -49,26 +47,11 @@ const SaveEditInfor = (props) => {
 
         <div className="edit--infor__btn__all">
           <div className="edit--infor__btn__main">
-            <Button type="primary" id="edit--infor__save" danger onClick={() => setIsEdit(true)}>
+            <Button type="primary" id="edit--infor__save" danger >
               Lưu thay đổi
             </Button>
           </div>
-
-          <div className="edit--infor__btn__main">
-            <p
-              style={{ width: '100%', textAlign: 'center', fontSize: '14px' }}
-              value="edit--password"
-              danger
-              onClick={() => setIsEdit(false)}
-            >
-              Bạn muốn đổi mật khẩu <a style={{ fontSize: '14px' }}>Nhấn vào đây!</a>
-            </p>
-          </div>
         </div>
-      </div>
-
-      <div style={handleDisplayEditPassword()}>
-        <EditPassword handleCancel={props.handleCancel} />
       </div>
     </form>
   );

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,gBAAgB,CAAA;EACZ,UAAU,EAAE,IAAI;EAChB,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,IAAI;EACZ,UAAU,EAAE,IAAI;EAChB,OAAO,EAAE,mBAAmB;CAC/B;;AACD,MAAM,CAAC,MAAM,MAAM,SAAS,EAAE,KAAK;EAC/B,AAAA,gBAAgB,CAAA;IACZ,WAAW,EAAE,IAAI;GACpB",
+    "sources": [
+        "bought-together.scss"
+    ],
+    "names": [],
+    "file": "bought-together.css"
+}
