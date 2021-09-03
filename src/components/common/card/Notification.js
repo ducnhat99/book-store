@@ -1,7 +1,9 @@
 import React from 'react';
 import { Tabs } from 'antd';
 import NotificationHover from './NotificationHover';
+import SaveEditInfor from './SaveEditInfor'
 import Order from './Order'
+import EditPassword from './EditPassword';
 
 const Notification = () => {
   const { TabPane } = Tabs;
@@ -19,7 +21,10 @@ const Notification = () => {
             <Order />
           </TabPane>
           <TabPane tab="Thông tin cá nhân" key="3" className="ntf--main__tab1">
-            Coming soon -_-
+            <SaveEditInfor />
+          </TabPane>
+          <TabPane tab="Đổi mật khẩu" key="4" className="ntf--main__tab1">
+            <EditPassword />
           </TabPane>
         </Tabs>
       </div>
