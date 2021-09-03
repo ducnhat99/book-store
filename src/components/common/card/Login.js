@@ -1,25 +1,26 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import { Button, Input } from 'antd';
 import 'antd/dist/antd.css';
 import '../../../styles/login.css';
 import Register from './Register';
+import { isLogged, isSignOut } from '../../../slice/bookSlice'
 
 const Login = (props) => {
+  const dispatch = useDispatch()
+  const [userValue, setUserValue] = React.useState('')
+  const [passValue, setPassValue] = React.useState('')
   const [isLogin, setIsLogin] = React.useState(true);
   const backgroundLogin = () => {
     if (isLogin) return 'login__btn'
-    // background: "#ff4d4f", margin: '10px 0 0 15px', color: "#fff"
     else {
       return 'register__btn-login'
-      // background: "#fff", color: "#ff4d4f", margin: '10px 0 0 15px', width: '45%'
     }
   };
   const backgroundRegister = () => {
     if (isLogin) return 'login__btn-rgt'
-    // background: "#fff", margin: '10px 15px 0 0', color: "#ff4d4f"
     else {
       return 'register__btn-rgt'
-      // background: "#ff4d4f", color: "#fff", margin: '10px 15px 0 0', width: '45%'
     }
   };
   const handleDisplayLogin = () => {
@@ -29,6 +30,12 @@ const Login = (props) => {
   const handleDisplayRegister = () => {
     if (isLogin) return { display: 'none' }
     else return { display: 'block' }
+  }
+  const handleLogin = () => {
+    if (userValue === "user" && passValue === "user") {
+      dispatch(isLogged())
+      props.handleCancel()
+    }
   }
   return (
     <form className="box--login__container">
@@ -54,18 +61,18 @@ const Login = (props) => {
       <div className="login" style={handleDisplayLogin()}>
         <div className="login__input">
           <label>Địa chỉ Email</label>
-          <Input placeholder="Nhập địa chỉ email" className="login__input__main" />
+          <Input placeholder="Nhập địa chỉ email" value={userValue} onChange={(e) => setUserValue(e.target.value)} className="login__input__main" />
         </div>
         <div className="login__input">
           <label id="label__password">Mật khẩu</label>
-          <Input.Password placeholder="Nhập mật khẩu" className="login__input__main" />
+          <Input.Password placeholder="Nhập mật khẩu" value={passValue} onChange={(e) => setPassValue(e.target.value)} className="login__input__main" />
         </div>
         <div style={{ float: 'right', marginRight: '25px', color: 'red' }}>
           <p>Quên mật khẩu ?</p>
         </div>
         <br />
         <div className="login__btn__all">
-          <Button type="primary" className="login__btn__main">
+          <Button type="primary" className="login__btn__main" onClick={handleLogin}>
             Đăng nhập
           </Button>
           <br />

@@ -1,12 +1,26 @@
 import React from 'react';
-import { Button, Rate, Input, InputNumber } from 'antd';
+import { Button, Rate, Input, InputNumber, Modal } from 'antd';
 import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux'
+import Login from './Login';
 import '../../../styles/detail-book.css';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 
 const DetailBook = () => {
+  const isUserLogin = useSelector(state => state.book.isUserLogin)
   const history = useHistory()
   const [bookNumber, setBookNumber] = React.useState(1)
+  const [isModalVisible, setIsModalVisible] = React.useState(false);
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
   return (
     <div>
       <div className="container__detail__m">
@@ -51,7 +65,7 @@ const DetailBook = () => {
           </div>
           <div className="rate">
             <Rate defaultValue={2} disabled={true} />
-            <a>(37 đánh giá)</a>
+            <a href="#comment">(37 đánh giá)</a>
           </div>
           <div className="text__content">
             <span className="price">55.300&nbsp;đ</span>
@@ -79,17 +93,31 @@ const DetailBook = () => {
           </div>
         </div>
         <div className="container__low">
-          <div className="container__low__detail">
-            <Button size="large" type="primary" danger>
-              <ShoppingCartOutlined />
-              Thêm vào giỏ hàng
-            </Button>
-            <Button size="large" danger onClick={() => history.push("./checkout")}>
-              Mua ngay
-            </Button>
-          </div>
+          {isUserLogin ?
+            <div className="container__low__detail">
+              <Button size="large" type="primary" danger>
+                <ShoppingCartOutlined />
+                Thêm vào giỏ hàng
+              </Button>
+              <Button size="large" danger onClick={() => history.push("./checkout")}>
+                Mua ngay
+              </Button>
+            </div>
+            : <div className="container__low__detail--login">
+              <Button onClick={showModal} size="large" type="primary" danger style={{ background: "#1890ff", border: 'none' }}>Đăng nhập để mua hàng</Button>
+            </div>
+          }
         </div>
       </div>
+      <Modal
+        footer={null}
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        className="modal__login"
+      >
+        <Login handleCancel={handleCancel} />
+      </Modal>
     </div >
   );
 };
