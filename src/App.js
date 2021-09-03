@@ -1,3 +1,5 @@
+import store from './store/bookStore'
+import { Provider } from 'react-redux'
 import {
   BrowserRouter,
 } from 'react-router-dom';
@@ -7,9 +9,11 @@ import './styles/index.css'
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Home />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Home />
+        </BrowserRouter>
+      </Provider>
     </>
   );
 }

@@ -139,6 +139,12 @@
   display: flex;
   margin-left: 40px;
 }
+.container__low__detail--login{
+  width: 100%;
+  height: auto;
+  display: flex;
+  margin-left: 27%;
+}
 
 .container__low button{
   width: 20%;
@@ -151,10 +157,7 @@
   .container__detail__m{
     width: 1023px;
   }
-  /* .text__content__1{
-    width: 100%;
-    margin: 0px 0 0px 0;
-  } */
+
   .text__content input{
     width: 15%;
     
@@ -170,6 +173,9 @@
   }
   .container__left__detail{
     width: 100%;
+  }
+  .text__content__input{
+    margin-left: 15px;
   }
   .img__left{
     width: 100%;
@@ -208,8 +214,20 @@
   .container__low__detail{
     width: 100%;
   }
-  .container__low button{
-    width: 40%;
+  .container__low__detail--login{
+    width: 100%;
+  }
+.container__low__detail--login button{
+  margin-left: 0;
+  width: 52%;
+}
+  /* .container__low__detail--login button{
+    width: 45%;
+    font-size: 12px;
+    margin-left: 0;
+  } */
+  .container__low__detail button{
+    width: 38%;
     font-size: 12px;
   }
 }

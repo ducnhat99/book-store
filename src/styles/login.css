@@ -28,10 +28,7 @@
   width: 45.5%;
   margin: 0 10px 0 0;
 }
-.login__btn:hover{
-  background: #ff4d4f;
-  color:#fff
-}
+
 .login__input{
   width: 100%;
   margin: 20px 0 0 0px;
@@ -62,8 +59,8 @@
     padding-top: 10px;
   }
   .login__input__main{
-    width: 55%;
-    margin: 5px 0 0 20px;
+    width: 70%;
+    margin: 5px 0 0 40px;
   }
  
   .login__btn__head{
@@ -92,14 +89,17 @@
     margin: 0 10px 0 0;
   }
   .login__input{
-    width: 95%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
+    flex-wrap: wrap;
   }
   .login__input label {
+    width: 100%;
     display: flex;
     align-items: center;
+    padding-left: 20px;
   }
   .login__btn__all{
     display: flex;
