@@ -1,6 +1,9 @@
 import { Pagination, Select, Input, Space, Button } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { useHistory } from "react-router-dom";
+
 const DetailCart = () => {
+    const history = useHistory()
     const detailCart = [
         {
             detailCartId: 1,
@@ -54,7 +57,7 @@ const DetailCart = () => {
                             <td>{item.bookName}</td>
                             <td>{item.bookNumber}</td>
                             <td>{item.price}</td>
-                            <td><EditOutlined /></td>
+                            <td onClick={() => history.push("/admin/editdetailcart")}><EditOutlined /></td>
                             <td><DeleteOutlined /></td>
                         </tr>
                     })}

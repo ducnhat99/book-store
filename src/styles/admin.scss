@@ -5,8 +5,14 @@
 @import './list-user.scss';
 @import './list-cart.scss';
 @import './form-edit.scss';
+@import './admin-home.scss';
 
 .admin{
     background: #F0F0F0;
     font-family: 'Roboto';
+}
+@media screen and (max-width: 375px){
+    .admin{
+        width: 100%;
+    }
 }
