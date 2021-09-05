@@ -1,0 +1,57 @@
+.admin-list-book{
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+    padding: 0 10px;
+
+    .admin-list-book_pagination{
+        margin-top: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .admin-list-book--header{
+        width: 100%;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        h2{
+            font-weight: bold;
+        }
+    }
+    .admin-list-book-content{
+        margin-top: 10px;
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        table{
+            border: 1px solid #000;
+            width: 100%;
+            text-align: center;
+            tr{
+                .admin-list-book-id{
+                    width: 5%;
+                }
+                .admin-list-book-name{
+                    width: 30%;
+                }
+                .admin-list-book-author{
+                    width: 20%;
+                }
+                .admin-list-book-price{
+                    width: 10%;
+                }
+                .admin-list-book-number{
+                    width: 5%;
+                }
+                th{
+                    border: 1px solid #000;
+                }
+                td{
+                    border: 1px solid #000;
+                }
+            }
+        }
+    }
+}

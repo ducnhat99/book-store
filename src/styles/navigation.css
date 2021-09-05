@@ -42,12 +42,12 @@
     height: 20px;
 }
 
-.modal__login{
+/* .modal__login{
     display: flex;
     justify-content: center;
     align-items: center;
     top: 50px;
-}
+} */
 .bellPhone{
     display: none;
 }

@@ -9,7 +9,8 @@ import bell from '../../../images/bell.svg';
 import cart from '../../../images/cart.svg';
 import loginLogo from '../../../images/login.svg';
 import userLogo from '../../../images/user.svg'
-import settionLogo from '../../../images/setting.svg'
+import settingLogo from '../../../images/setting.svg'
+import signout from '../../../images/signout.svg'
 import Login from './Login';
 import CartNotification from './CartNotification';
 import NotificationHover from './NotificationHover';
@@ -77,16 +78,16 @@ const Navigation = () => {
     <div className="navigation--user">
       <div className="navigation--user--info">
         <Link to="/customer">
-          <img src={settionLogo} alt="setting logo"></img>
+          <img src={settingLogo} alt="setting logo"></img>
           <p>Bảng điều khiển của khách hàng</p>
         </Link>
       </div>
       <div className="navigation--user--info">
         <a onClick={() => {
           dispatch(isSignOut())
-          history.push("/")
+          history.push("/home")
         }}>
-          <img src={settionLogo} alt="setting logo"></img>
+          <img src={signout} alt="setting logo"></img>
           <p>Đăng xuất</p>
         </a>
       </div>

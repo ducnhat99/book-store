@@ -1,0 +1,46 @@
+.admin-list-search{
+    display: flex;
+    justify-content: flex-start;
+    .ant-input-group-wrapper{
+        width: 55%;
+        margin-right: 30px;
+        .ant-input-group{
+        width: 100%;
+        margin-left: 5%;
+        .ant-input{
+            border: 1px solid #d9d9d9 ;
+        }
+    }
+    }
+    
+}
+.admin-list-user{
+    margin-top: 10px;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    .admin-list-user_select{
+        margin-left: 10px;
+    }
+    table{
+        width: 100%;
+        border: 1px solid #000;
+        text-align: center;
+        th{
+            border: 1px solid #000;
+        }
+        td{
+            border: 1px solid #000;
+        }
+        .admin-list-user-name{
+            width: 15%;
+        }
+        .admin-list-user-id{
+            width: 5%;
+        }
+        .admin-list-user-number{
+            width: 10%;
+        }
+    }
+}

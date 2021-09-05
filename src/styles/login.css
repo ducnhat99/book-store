@@ -1,11 +1,12 @@
 .login{
-  width: 400px;
+  width: 100%;
   height: auto;
   border-radius: 5px;
   padding-top: 30px;
   font-family: "Roboto";
 }
 .login__btn__head{
+  width: 100%;
   height: auto;
   margin: 20px 0 0 5px;
   display: flex;
@@ -18,14 +19,14 @@
 }
 .login__btn-rgt{
   width: 42%;
-  margin: 0 20px 0 0;
+  margin: 0 30px 0 0;
 }
 .register__btn-login{
-  width: 45.5%;
+  width: 45%;
   margin: 0 0 0 15px;
 }
 .register__btn-rgt{
-  width: 45.5%;
+  width: 45%;
   margin: 0 10px 0 0;
 }
 
@@ -50,16 +51,22 @@
   width: 100%;
   margin: 0px 0 10px 0px ;
 }
+
 @media screen and (max-width: 375px) {
   .box--login__container{
     width: 260px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
   }
   .login{
     width: 100%;
     padding-top: 10px;
+    display: flex;
+    justify-content: center;
   }
   .login__input__main{
-    width: 70%;
+    width: 100%;
     margin: 5px 0 0 40px;
   }
  
@@ -73,11 +80,11 @@
   color:#ff4d4f
 }
   .login__btn {
-  width: 70%;
+  width: 100%;
   margin: 0 0 10px 40px;
 }
 .login__btn-rgt{
-  width: 70%;
+  width: 100%;
   margin: 0 0 0 40px;
 }
   .register__btn-login{
@@ -104,11 +111,11 @@
   .login__btn__all{
     display: flex;
     flex-direction: column;
-    align-items: center;  
+    align-items: flex-end;  
 }
   .login__btn__main{
     margin: 0;
-    width: 70%;
+    width: 83%;
   }
   .login__btn__main:first-child{
     margin-top: 25px;
