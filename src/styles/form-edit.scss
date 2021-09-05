@@ -1,0 +1,35 @@
+.admin-list-book{
+form{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 20px;
+    .admin-form-edit--container{
+        width: 47%;
+        margin-top: 10px;
+        .admin-form-edit__select{
+            width: 100%;
+            .ant-upload .ant-upload-select .ant-upload-select-text{
+                width: 100%;
+            }
+            .ant-upload{
+                width: 100%;
+            }
+            button{
+                width: 100%;
+            }
+        }
+    }
+}
+}
+.admin-form-edit--btn{
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    button{
+        width: 20%;
+        height: 40px;
+        border-radius: 10px;
+    }
+}

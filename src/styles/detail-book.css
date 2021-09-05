@@ -155,7 +155,7 @@
 
 @media screen and (max-width: 1024px) {
   .container__detail__m{
-    width: 1023px;
+    width: 100%;
   }
 
   .text__content input{
@@ -169,7 +169,7 @@
 }
 @media screen and (max-width: 375px) {
   .container__detail__m{
-    width: 374px;
+    width: 100%;
   }
   .container__left__detail{
     width: 100%;

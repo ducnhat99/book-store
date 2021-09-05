@@ -43,7 +43,7 @@
 
 @media screen and (max-width: 1024px) {
   .container__detail__main{
-    width: 1023px;
+    width: 100%;
   }
   .data-table_1{
     width: 100%;
@@ -57,7 +57,7 @@
 @media screen and (max-width: 375px) {
  
   .container__detail__main{
-    width: 374px;
+    width: 100%;
   }
   .data-table_1{
     width: 100%;

@@ -1,5 +1,5 @@
-.register{
-  width: 600px;
+.register-form{
+  width: 100%;
   height: auto;
   border-radius: 5px;
   font-family: "Roboto";
@@ -49,7 +49,7 @@
 }
 
 @media screen and (max-width: 375px) {
-  .register{
+  .register-form{
       width: 100%;
     }
   .register__input{

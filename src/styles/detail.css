@@ -11,15 +11,11 @@
   .container__detail{
     width: 100%;
   }
-  .ant-modal{
-    left: -120px;
-  }
+
 }
 @media screen and (max-width: 375px) {
   .container__detail{
     width: 100%;
   }
-  .ant-modal{
-    left: -50px;
-  }
+
 }

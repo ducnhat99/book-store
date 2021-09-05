@@ -6,7 +6,7 @@ import '../../../styles/register.css';
 const Register = (props) => {
   const { Option } = Select;
   return (
-    <form id="register" className="register">
+    <form id="register" className="register-form">
       <div className="register-container">
         <div className="register__input">
           <label>Email</label>

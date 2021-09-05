@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
+import { useHistory } from "react-router-dom";
 import { Button, Input } from 'antd';
 import 'antd/dist/antd.css';
 import '../../../styles/login.css';
@@ -7,6 +8,7 @@ import Register from './Register';
 import { isLogged, isSignOut } from '../../../slice/bookSlice'
 
 const Login = (props) => {
+  const history = useHistory()
   const dispatch = useDispatch()
   const [userValue, setUserValue] = React.useState('')
   const [passValue, setPassValue] = React.useState('')
@@ -34,6 +36,10 @@ const Login = (props) => {
   const handleLogin = () => {
     if (userValue === "user" && passValue === "user") {
       dispatch(isLogged())
+      props.handleCancel()
+    }
+    if (userValue === "admin" && passValue === "admin") {
+      history.push("/admin")
       props.handleCancel()
     }
   }
@@ -67,7 +73,7 @@ const Login = (props) => {
           <label id="label__password">Mật khẩu</label>
           <Input.Password placeholder="Nhập mật khẩu" value={passValue} onChange={(e) => setPassValue(e.target.value)} className="login__input__main" />
         </div>
-        <div style={{ float: 'right', marginRight: '25px', color: 'red' }}>
+        <div style={{ float: 'right', marginRight: '25px', color: 'red', marginTop: '10px' }}>
           <p>Quên mật khẩu ?</p>
         </div>
         <br />
