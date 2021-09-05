@@ -1,9 +1,10 @@
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import images from '../../../../images/humble.jpg'
+import { useHistory } from "react-router-dom";
 import { Pagination, Select, Input, Space, Button } from 'antd';
 
-
 const ListBook = () => {
+    const history = useHistory()
     const { Option } = Select;
     const { Search } = Input;
     const listBookAdmin = [
@@ -66,7 +67,7 @@ const ListBook = () => {
                     <Option value="z-a">Sắp xếp từ Z-A</Option>
                 </Select>
                 <Search placeholder="input search text" />
-                <Button type="primary">Thêm sách</Button>
+                <Button type="primary" onClick={() => history.push("/admin/addbook")}>Thêm sách</Button>
             </div>
             <div className="admin-list-book-content">
                 <table>
@@ -90,7 +91,7 @@ const ListBook = () => {
                             <td>{item.yearXB}</td>
                             <td>{item.numberBook}</td>
                             <td>{item.price}</td>
-                            <td><EditOutlined /></td>
+                            <td onClick={() => history.push("/admin/editbook")}><EditOutlined /></td>
                             <td><DeleteOutlined /></td>
                         </tr>
                     })}

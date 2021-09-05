@@ -1,7 +1,9 @@
 import { Pagination, Select, Input, Space, Button } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { useHistory } from "react-router-dom";
 
 const ListUser = () => {
+    const history = useHistory()
     const { Option } = Select;
     const { Search } = Input;
     const listUser = [
@@ -59,21 +61,21 @@ const ListUser = () => {
                     <Option value="z-a">Khách hàng</Option>
                 </Select>
                 <Search placeholder="input search text" />
-                <Button type="primary">Thêm người dùng</Button>
+                <Button type="primary" onClick={() => history.push("/admin/adduser")}>Thêm người dùng</Button>
             </div>
-            <div className="admin-list-user">
+            <div className="admin-list-book-content">
                 <table>
                     <tr>
-                        <th className="admin-list-user-id">Mã người dùng</th>
-                        <th className="admin-list-user-name">Tên người dùng</th>
-                        <th className="admin-list-user-name">Địa chỉ email</th>
-                        <th className="admin-list-user-number">Số điện thoại</th>
-                        <th className="admin-list-user-number">Mật khẩu</th>
-                        <th className="admin-list-user-name">Địa chỉ</th>
-                        <th className="admin-list-user-number">Ngày đăng ký</th>
-                        <th className="admin-list-user-number">Phân quyền</th>
-                        <th className="admin-list-user-id">Chỉnh sửa</th>
-                        <th className="admin-list-user-id">Xóa</th>
+                        <th style={{ width: '5%' }}>Mã người dùng</th>
+                        <th style={{ width: '20%' }}>Tên người dùng</th>
+                        <th style={{ width: '20%' }}>Địa chỉ email</th>
+                        <th style={{ width: '15%' }}>Số điện thoại</th>
+                        <th style={{ width: '10%' }}>Mật khẩu</th>
+                        <th style={{ width: '10%' }}>Địa chỉ</th>
+                        <th style={{ width: '5%' }}>Ngày đăng ký</th>
+                        <th style={{ width: '5%' }}>Phân quyền</th>
+                        <th style={{ width: '5%' }}>Chỉnh sửa</th>
+                        <th style={{ width: '5%' }}>Xóa</th>
                     </tr>
                     {listUser.map((item, index) => {
                         return <tr>
@@ -85,7 +87,7 @@ const ListUser = () => {
                             <td>{item.address}</td>
                             <td>{item.dateAdd}</td>
                             <td>{item.roll}</td>
-                            <td><EditOutlined /></td>
+                            <td onClick={() => history.push("/admin/edituser")}><EditOutlined /></td>
                             <td><DeleteOutlined /></td>
                         </tr>
                     })}

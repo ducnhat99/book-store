@@ -33,3 +33,10 @@ form{
         border-radius: 10px;
     }
 }
+@media screen and (max-width: 375px){
+    .admin-form-edit--btn{
+        button{
+            width: 40%;
+        }
+    }
+}

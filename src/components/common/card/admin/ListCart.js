@@ -1,8 +1,10 @@
 import { CheckCircleOutlined, DeleteOutlined, FileTextOutlined, EditOutlined } from '@ant-design/icons';
 import images from '../../../../images/humble.jpg'
 import { Pagination, Select, Input, Space, Button } from 'antd';
+import { useHistory } from "react-router-dom";
 
 const ListCart = () => {
+    const history = useHistory()
     const { Option } = Select;
     const { Search } = Input;
     const listCart = [
@@ -92,9 +94,9 @@ const ListCart = () => {
                             <td>{item.dateOrder}</td>
                             <td>{item.price}</td>
                             <td>{item.status}</td>
-                            <td><FileTextOutlined /></td>
+                            <td onClick={() => history.push("/admin/detailcart")}><FileTextOutlined /></td>
                             <td><CheckCircleOutlined /></td>
-                            <td><EditOutlined /></td>
+                            <td onClick={() => history.push("/admin/editcart")}><EditOutlined /></td>
                             <td><DeleteOutlined /></td>
                         </tr>
                     })}

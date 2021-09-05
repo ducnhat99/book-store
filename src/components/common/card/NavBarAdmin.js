@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from "react-router-dom";
 import { useState } from 'react';
 import { Menu, Drawer, Button } from 'antd';
 import {
@@ -27,41 +28,36 @@ const NavBarAdmin = () => {
   const onClose = () => {
     setVisible(false);
   };
+  const history = useHistory()
 
   return (
-    <div>
-      <div style={{ width: 250, padding: '24px' }} className="mobileHidden">
-        <Menu defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']} mode="inline" theme="dark">
-          <div style={{ margin: ' 30px 0 30px 20px' }}>
-            <Menu.Item key="" icon={<FundProjectionScreenOutlined />}>
-              Dasboard Kit
-            </Menu.Item>
-          </div>
-
-          <Menu.Item key="1" icon={<PieChartOutlined />}>
-            Qverview
+    <div style={{ width: '100%', height: '100%' }}>
+      <div style={{ width: "100%", height: '100%' }} className="mobileHidden">
+        <Menu defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']} mode="inline" theme="dark" style={{ width: '100%', height: '100%' }}>
+          <Menu.Item key="1" icon={<PieChartOutlined />} onClick={() => history.push("/admin/home")}>
+            Trang chủ
           </Menu.Item>
-          <Menu.Item key="2" icon={<DesktopOutlined />}>
-            Tickets
+          <Menu.Item key="2" icon={<DesktopOutlined />} onClick={() => history.push("/admin/listbook")}>
+            Quản lý sách
           </Menu.Item>
-          <Menu.Item key="3" icon={<BulbOutlined />}>
-            Idears
+          <Menu.Item key="3" icon={<BulbOutlined />} onClick={() => history.push("/admin/listcart")}>
+            Quản lý đơn hàng
           </Menu.Item>
-          <Menu.Item key="4" icon={<TeamOutlined />}>
-            Contacts
+          <Menu.Item key="4" icon={<TeamOutlined />} onClick={() => history.push("/admin/listuser")}>
+            Quản lý người dùng
           </Menu.Item>
-          <Menu.Item key="5" icon={<UserOutlined />}>
-            Agents
+          <Menu.Item key="5" icon={<UserOutlined />} onClick={() => history.push("/admin/adduser")}>
+            Thêm người dùng
           </Menu.Item>
-          <Menu.Item key="6" icon={<ContainerOutlined />}>
-            Articles
+          <Menu.Item key="6" icon={<ContainerOutlined />} onClick={() => history.push("/admin/addbook")}>
+            Thêm sách
           </Menu.Item>
-          <Menu.Item key="7" icon={<SettingFilled />}>
-            Settings
+          <Menu.Item key="7" icon={<SettingFilled />} onClick={() => history.push("/admin/listcategory")}>
+            Quản lý danh mục
           </Menu.Item>
-          <Menu.Item key="8" icon={<UserOutlined />}>
+          {/* <Menu.Item key="8" icon={<UserOutlined />}>
             Subscription
-          </Menu.Item>
+          </Menu.Item> */}
 
           {/* <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
             <Menu.Item key="5">Option 5</Menu.Item>
@@ -78,47 +74,6 @@ const NavBarAdmin = () => {
             </SubMenu>
           </SubMenu> */}
         </Menu>
-      </div>
-
-      <div style={{ width: 250, padding: '24px' }} className="mobileVisible">
-        <Button type="primary" onClick={showDrawer}>
-          Menu
-        </Button>
-
-        <Drawer title="Basic Drawer" placement="right" onClose={onClose} visible={visible}>
-          <Menu defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']} mode="inline" theme="dark">
-            <div style={{ margin: ' 30px 0 30px 20px' }}>
-              <Menu.Item key="" icon={<FundProjectionScreenOutlined />}>
-                Dasboard Kit
-              </Menu.Item>
-            </div>
-
-            <Menu.Item key="1" icon={<PieChartOutlined />}>
-              Qverview
-            </Menu.Item>
-            <Menu.Item key="2" icon={<DesktopOutlined />}>
-              Tickets
-            </Menu.Item>
-            <Menu.Item key="3" icon={<BulbOutlined />}>
-              Idears
-            </Menu.Item>
-            <Menu.Item key="4" icon={<TeamOutlined />}>
-              Contacts
-            </Menu.Item>
-            <Menu.Item key="5" icon={<UserOutlined />}>
-              Agents
-            </Menu.Item>
-            <Menu.Item key="6" icon={<ContainerOutlined />}>
-              Articles
-            </Menu.Item>
-            <Menu.Item key="7" icon={<SettingFilled />}>
-              Settings
-            </Menu.Item>
-            <Menu.Item key="8" icon={<UserOutlined />}>
-              Subscription
-            </Menu.Item>
-          </Menu>
-        </Drawer>
       </div>
     </div>
   );
