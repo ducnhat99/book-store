@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
-import Logo from "../common/card/Logo"
-import Search from "../common/card/Search"
-import Navigation from "../common/card/Navigation"
+import Logo from "../common/card/header/Logo"
+import Search from "../common/card/header/Search"
+import Navigation from "../common/card/header/Navigation"
 import menu from "../../images/menu.svg"
 import { Drawer, Button, Space, Radio } from 'antd';
 import 'antd/dist/antd.css';

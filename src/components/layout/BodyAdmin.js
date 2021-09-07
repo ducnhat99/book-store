@@ -10,9 +10,9 @@ import ListBook from "../common/card/admin/ListBook"
 import ListCart from "../common/card/admin/ListCart"
 import ListCategory from "../common/card/admin/ListCategory"
 import ListUser from "../common/card/admin/ListUser"
-import NavBarAdmin from "../common/card/NavBarAdmin"
+import NavBarAdmin from "../common/card/admin/NavBarAdmin"
 import AdminHome from "../common/card/admin/AdminHome";
-
+import ROUTE from "../../constants/Router"
 const BodyAdmin = () => {
     return (
         <div className="body-admin">
@@ -21,32 +21,19 @@ const BodyAdmin = () => {
                     <NavBarAdmin />
                 </div>
                 <div className="body-admin--main">
-                    <Route path="/admin/home" component={AdminHome} />
-                    <Route path="/admin/listbook" component={ListBook} />
-                    <Route path="/admin/listcart" component={ListCart} />
-                    <Route path="/admin/listuser" component={ListUser} />
-                    <Route path="/admin/adduser" component={AddUser} />
-                    <Route path="/admin/addbook" component={AddBook} />
-                    <Route path="/admin/listcategory" component={ListCategory} />
-                    <Route path="/admin/editbook" component={FormEditBook} />
-                    <Route path="/admin/editdetailcart" component={EditDetailCart} />
-                    <Route path="/admin/editcart" component={EditCart} />
-                    <Route path="/admin/detailcart" component={DetailCart} />
-                    <Route path="/admin/edituser" component={EditUser} />
-
-                    <Redirect to="/admin/home" />
-                    {/* <Redirect to="/listbook" /> */}
-                    {/* <ListBook /> */}
-                    {/* <ListCategory /> */}
-                    {/* <ListUser /> */}
-                    {/* <ListCart /> */}
-                    {/* <FormEditBook /> */}
-                    {/* <AddBook /> */}
-                    {/* <AddUser /> */}
-                    {/* <EditUser /> */}
-                    {/* <EditCart /> */}
-                    {/* <DetailCart /> */}
-                    {/* <EditDetailCart /> */}
+                    <Route path={ROUTE.HOMEADMIN} component={AdminHome} />
+                    <Route path={ROUTE.LISTBOOK} component={ListBook} />
+                    <Route path={ROUTE.LISTCART} component={ListCart} />
+                    <Route path={ROUTE.LISTUSER} component={ListUser} />
+                    <Route path={ROUTE.ADDUSER} component={AddUser} />
+                    <Route path={ROUTE.ADDBOOK} component={AddBook} />
+                    <Route path={ROUTE.LISTCATEGORY} component={ListCategory} />
+                    <Route path={ROUTE.EDITBOOK} component={FormEditBook} />
+                    <Route path={ROUTE.EDITDETAILCART} component={EditDetailCart} />
+                    <Route path={ROUTE.EDITCART} component={EditCart} />
+                    <Route path={ROUTE.DETAILCART} component={DetailCart} />
+                    <Route path={ROUTE.EDITUSER} component={EditUser} />
+                    <Redirect to={ROUTE.HOMEADMIN} />
                 </div>
             </div>
         </div>
