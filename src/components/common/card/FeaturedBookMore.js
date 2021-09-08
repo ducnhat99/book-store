@@ -1,156 +1,39 @@
+import * as React from 'react'
 import { Pagination, Radio, Rate, Select } from 'antd';
 import images from '../../../images/humble.jpg';
 import NewCardItem from './NewCardItem';
+import { useSelector, useDispatch } from 'react-redux'
+import { getBooks, getCategory } from '../../../slice/bookSlice'
+import { useEffect } from 'react';
 
 const FeaturedBookMore = () => {
+    const dispatch = useDispatch()
+    let listBook = useSelector(state => state.book.listBook)
+    const listCategory = useSelector(state => state.book.listCategory)
+    // const listBookSale = []
+    const pageLimit = 12;
+    const [pageSlice, setPageSlice] = React.useState(0)
+    const handleChange = (page, pageSize) => {
+        setPageSlice((page - 1) * pageSize)
+    }
+    useEffect(() => {
+        dispatch(getBooks())
+        dispatch(getCategory())
+    }, [dispatch])
+    const renderNewBook = (data) => {
+        if (!data || data.length === 0) return;
+        return data.slice(pageSlice, pageLimit + pageSlice).map((item, index) => {
+            return listCategory.map((categoryItem) => {
+                if (categoryItem.id === item.categoryId) {
+                    return <div className="card-more-item">
+                        <NewCardItem key={index} index={item.id} images={item.imagesBook} title={item.bookName} author={item.author} product={categoryItem.categoryName} page={item.quantityPage} price={item.price} realPrice={item.realPrice} rateStar={5} description={item.description} />
+                    </div>
+                }
+            })
+
+        })
+    }
     const { Option } = Select;
-    const category = [
-        'Kỹ năng sống',
-        'Kinh tế',
-        'Lịch sử',
-        'Văn học',
-        'Từ điển',
-        'Tham khảo',
-        'Ngoại ngữ',
-        'Âm nhạc - mỹ thuật',
-        'Tiểu sử - hồi ký',
-        'Địa lý',
-        'Khoa học ký thuật'
-    ];
-    const listNewCard = [
-        {
-            images: images,
-            title: "Humble Inquiry: The Gentle Art Of Asking Instead Of Telling",
-            anthor: "Edgar H. Schein, Peter A. Schein",
-            product: "Tiểu thuyết",
-            page: 192,
-            price: "253.300d",
-            realPrice: "298.000d",
-            rateStar: 5,
-            description: "Humble Inquiry: The Gentle Art Of Asking Instead Of Telling. This worldwide bestseller offers simple guidance for building the kind of open and trusting relationships vital for tackling global systemic challenges and developing adaptive, innovative organizations—over 200, 000 copies sold and translated into seventeen languages!"
-        },
-        {
-            images: images,
-            title: "Humble Inquiry: The Gentle Art Of Asking Instead Of Telling",
-            anthor: "Edgar H. Schein, Peter A. Schein",
-            product: "Tiểu thuyết",
-            page: 192,
-            price: "253.300d",
-            realPrice: "298.000d",
-            rateStar: 5,
-            description: "Humble Inquiry: The Gentle Art Of Asking Instead Of Telling. This worldwide bestseller offers simple guidance for building the kind of open and trusting relationships vital for tackling global systemic challenges and developing adaptive, innovative organizations—over 200, 000 copies sold and translated into seventeen languages!"
-        },
-        {
-            images: images,
-            title: "Humble Inquiry: The Gentle Art Of Asking Instead Of Telling",
-            anthor: "Edgar H. Schein, Peter A. Schein",
-            product: "Tiểu thuyết",
-            page: 192,
-            price: "253.300d",
-            realPrice: "298.000d",
-            rateStar: 5,
-            description: "Humble Inquiry: The Gentle Art Of Asking Instead Of Telling. This worldwide bestseller offers simple guidance for building the kind of open and trusting relationships vital for tackling global systemic challenges and developing adaptive, innovative organizations—over 200, 000 copies sold and translated into seventeen languages!"
-        },
-        {
-            images: images,
-            title: "Humble Inquiry: The Gentle Art Of Asking Instead Of Telling",
-            anthor: "Edgar H. Schein, Peter A. Schein",
-            product: "Tiểu thuyết",
-            page: 192,
-            price: "253.300d",
-            realPrice: "298.000d",
-            rateStar: 5,
-            description: "Humble Inquiry: The Gentle Art Of Asking Instead Of Telling. This worldwide bestseller offers simple guidance for building the kind of open and trusting relationships vital for tackling global systemic challenges and developing adaptive, innovative organizations—over 200, 000 copies sold and translated into seventeen languages!"
-        },
-        {
-            images: images,
-            title: "Humble Inquiry: The Gentle Art Of Asking Instead Of Telling",
-            anthor: "Edgar H. Schein, Peter A. Schein",
-            product: "Tiểu thuyết",
-            page: 192,
-            price: "253.300d",
-            realPrice: "298.000d",
-            rateStar: 5,
-            description: "Humble Inquiry: The Gentle Art Of Asking Instead Of Telling. This worldwide bestseller offers simple guidance for building the kind of open and trusting relationships vital for tackling global systemic challenges and developing adaptive, innovative organizations—over 200, 000 copies sold and translated into seventeen languages!"
-        },
-        {
-            images: images,
-            title: "Humble Inquiry: The Gentle Art Of Asking Instead Of Telling",
-            anthor: "Edgar H. Schein, Peter A. Schein",
-            product: "Tiểu thuyết",
-            page: 192,
-            price: "253.300d",
-            realPrice: "298.000d",
-            rateStar: 5,
-            description: "Humble Inquiry: The Gentle Art Of Asking Instead Of Telling. This worldwide bestseller offers simple guidance for building the kind of open and trusting relationships vital for tackling global systemic challenges and developing adaptive, innovative organizations—over 200, 000 copies sold and translated into seventeen languages!"
-        },
-        {
-            images: images,
-            title: "Humble Inquiry: The Gentle Art Of Asking Instead Of Telling",
-            anthor: "Edgar H. Schein, Peter A. Schein",
-            product: "Tiểu thuyết",
-            page: 192,
-            price: "253.300d",
-            realPrice: "298.000d",
-            rateStar: 5,
-            description: "Humble Inquiry: The Gentle Art Of Asking Instead Of Telling. This worldwide bestseller offers simple guidance for building the kind of open and trusting relationships vital for tackling global systemic challenges and developing adaptive, innovative organizations—over 200, 000 copies sold and translated into seventeen languages!"
-        },
-        {
-            images: images,
-            title: "Humble Inquiry: The Gentle Art Of Asking Instead Of Telling",
-            anthor: "Edgar H. Schein, Peter A. Schein",
-            product: "Tiểu thuyết",
-            page: 192,
-            price: "253.300d",
-            realPrice: "298.000d",
-            rateStar: 5,
-            description: "Humble Inquiry: The Gentle Art Of Asking Instead Of Telling. This worldwide bestseller offers simple guidance for building the kind of open and trusting relationships vital for tackling global systemic challenges and developing adaptive, innovative organizations—over 200, 000 copies sold and translated into seventeen languages!"
-        },
-        {
-            images: images,
-            title: "Humble Inquiry: The Gentle Art Of Asking Instead Of Telling",
-            anthor: "Edgar H. Schein, Peter A. Schein",
-            product: "Tiểu thuyết",
-            page: 192,
-            price: "253.300d",
-            realPrice: "298.000d",
-            rateStar: 5,
-            description: "Humble Inquiry: The Gentle Art Of Asking Instead Of Telling. This worldwide bestseller offers simple guidance for building the kind of open and trusting relationships vital for tackling global systemic challenges and developing adaptive, innovative organizations—over 200, 000 copies sold and translated into seventeen languages!"
-        },
-        {
-            images: images,
-            title: "Humble Inquiry: The Gentle Art Of Asking Instead Of Telling",
-            anthor: "Edgar H. Schein, Peter A. Schein",
-            product: "Tiểu thuyết",
-            page: 192,
-            price: "253.300d",
-            realPrice: "298.000d",
-            rateStar: 5,
-            description: "Humble Inquiry: The Gentle Art Of Asking Instead Of Telling. This worldwide bestseller offers simple guidance for building the kind of open and trusting relationships vital for tackling global systemic challenges and developing adaptive, innovative organizations—over 200, 000 copies sold and translated into seventeen languages!"
-        },
-        {
-            images: images,
-            title: "Humble Inquiry: The Gentle Art Of Asking Instead Of Telling",
-            anthor: "Edgar H. Schein, Peter A. Schein",
-            product: "Tiểu thuyết",
-            page: 192,
-            price: "253.300d",
-            realPrice: "298.000d",
-            rateStar: 5,
-            description: "Humble Inquiry: The Gentle Art Of Asking Instead Of Telling. This worldwide bestseller offers simple guidance for building the kind of open and trusting relationships vital for tackling global systemic challenges and developing adaptive, innovative organizations—over 200, 000 copies sold and translated into seventeen languages!"
-        },
-        {
-            images: images,
-            title: "Humble Inquiry: The Gentle Art Of Asking Instead Of Telling",
-            anthor: "Edgar H. Schein, Peter A. Schein",
-            product: "Tiểu thuyết",
-            page: 192,
-            price: "253.300d",
-            realPrice: "298.000d",
-            rateStar: 5,
-            description: "Humble Inquiry: The Gentle Art Of Asking Instead Of Telling. This worldwide bestseller offers simple guidance for building the kind of open and trusting relationships vital for tackling global systemic challenges and developing adaptive, innovative organizations—over 200, 000 copies sold and translated into seventeen languages!"
-        },
-    ]
     return (
         <div className="book-more">
             <div className="container">
@@ -166,8 +49,8 @@ const FeaturedBookMore = () => {
                                 </h3>
                             </div>
                             <div className="new-book-more--search--category__list">
-                                {category.map((item, index) => {
-                                    return <a>{item}</a>
+                                {listCategory.map((item, index) => {
+                                    return <a>{item.categoryName}</a>
                                 })}
                             </div>
                         </div>
@@ -224,14 +107,10 @@ const FeaturedBookMore = () => {
                             </Select>
                         </div>
                         <div className="book-more--card-container">
-                            {listNewCard.map((item, index) => {
-                                return <div className="card-more-item" >
-                                    <NewCardItem key={index} index={index} images={item.images} title={item.title} author={item.author} product={item.product} page={item.page} price={item.price} realPrice={item.realPrice} rateStar={item.rateStar} description={item.description} />
-                                </div>
-                            })}
+                            {renderNewBook(listBook)}
                         </div>
                         <div className="book-more-pagination">
-                            <Pagination defaultCurrent={1} total={50} />
+                            <Pagination defaultCurrent={1} total={listBook.length} onChange={handleChange} pageSize={pageLimit} />
                         </div>
                     </div>
                 </div>
