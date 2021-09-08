@@ -52,6 +52,12 @@
   margin: 0px 0 10px 0px ;
 }
 
+.msg--error_login{
+  margin: 10px 0 0 20px ;
+  color: #ff4d4f;
+  font-size: 14px;
+}
+
 @media screen and (max-width: 375px) {
   .box--login__container{
     width: 260px;
@@ -120,4 +126,9 @@
   .login__btn__main:first-child{
     margin-top: 25px;
   }
+  .msg--error_login{
+    margin: 0px 0 0 40px ;
+   
+  }
+  
 }
