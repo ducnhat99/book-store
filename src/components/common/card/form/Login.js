@@ -1,27 +1,31 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux'
-import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { Button, Input } from 'antd';
 import 'antd/dist/antd.css';
 import Register from './Register';
-import { isLogged, isSignOut } from '../../../../slice/bookSlice'
+import { isLogged, isSignOut } from '../../../../slice/bookSlice';
+import { isEmpty } from 'validator';
+import isEmail from 'validator/lib/isEmail';
 
 const Login = (props) => {
-  const history = useHistory()
-  const dispatch = useDispatch()
-  const [userValue, setUserValue] = React.useState('')
-  const [passValue, setPassValue] = React.useState('')
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const [userValue, setUserValue] = React.useState('');
+  const [passValue, setPassValue] = React.useState('');
   const [isLogin, setIsLogin] = React.useState(true);
+  const [validationMsg, setValidationMsg] = React.useState({});
+
   const backgroundLogin = () => {
-    if (isLogin) return 'login__btn'
+    if (isLogin) return 'login__btn';
     else {
-      return 'register__btn-login'
+      return 'register__btn-login';
     }
   };
   const backgroundRegister = () => {
-    if (isLogin) return 'login__btn-rgt'
+    if (isLogin) return 'login__btn-rgt';
     else {
-      return 'register__btn-rgt'
+      return 'register__btn-rgt';
     }
   };
   const handleDisplayLogin = () => {
@@ -29,28 +33,57 @@ const Login = (props) => {
     else return { display: 'none' };
   };
   const handleDisplayRegister = () => {
-    if (isLogin) return { display: 'none' }
-    else return { display: 'block' }
-  }
+    if (isLogin) return { display: 'none' };
+    else return { display: 'block' };
+  };
+
+  const onChangeEmail = (e) => {
+    const value = e.target.value;
+    setUserValue(value);
+  };
+
+  const onChangePassword = (e) => {
+    const value = e.target.value;
+    setPassValue(value);
+  };
+
+  const validateAll = () => {
+    const msg = {};
+    if (isEmpty(userValue)) {
+      msg.email = 'Xin vui lòng nhập Email';
+    } else if (!isEmail(userValue)) {
+      msg.email = 'Email của bạn không chính xác';
+    }
+
+    if (isEmpty(passValue)) {
+      msg.password = 'Xin vui lòng nhập mật khẩu';
+    } else if (passValue.length < 8) {
+      msg.password = 'Mật khẩu phải trên 8 kí tự';
+    }
+
+    setValidationMsg(msg);
+    if (Object.keys(msg).lenght > 0) return false;
+    return true;
+  };
+
   const handleLogin = () => {
-    if (userValue === "user" && passValue === "user") {
-      dispatch(isLogged())
-      props.handleCancel()
+    const isValid = validateAll();
+    if (!isValid) return;
+
+    if (userValue === 'user' && passValue === 'user') {
+      dispatch(isLogged());
+      props.handleCancel();
     }
-    if (userValue === "admin" && passValue === "admin") {
-      history.push("/admin")
-      props.handleCancel()
+    if (userValue === 'admin' && passValue === 'admin') {
+      history.push('/admin');
+      props.handleCancel();
     }
-  }
+  };
+
   return (
     <form className="box--login__container">
       <span className="login__btn__head">
-        <Button
-          value="login"
-          className={backgroundLogin()}
-          danger
-          onClick={() => setIsLogin(true)}
-        >
+        <Button value="login" className={backgroundLogin()} danger onClick={() => setIsLogin(true)}>
           Đăng nhập
         </Button>
         <Button
@@ -66,12 +99,32 @@ const Login = (props) => {
       <div className="login" style={handleDisplayLogin()}>
         <div className="login__input">
           <label>Địa chỉ Email</label>
-          <Input placeholder="Nhập địa chỉ email" value={userValue} onChange={(e) => setUserValue(e.target.value)} className="login__input__main" />
+          <Input
+            name="email"
+            type="text"
+            id="email"
+            placeholder="Nhập địa chỉ email"
+            value={userValue}
+            onChange={onChangeEmail}
+            className="login__input__main"
+          />
         </div>
+        <p className="msg--error_login">{validationMsg.email}</p>
+
         <div className="login__input">
           <label id="label__password">Mật khẩu</label>
-          <Input.Password placeholder="Nhập mật khẩu" value={passValue} onChange={(e) => setPassValue(e.target.value)} className="login__input__main" />
+          <Input.Password
+            name="password"
+            type="text"
+            id="password"
+            placeholder="Nhập mật khẩu"
+            value={passValue}
+            onChange={onChangePassword}
+            className="login__input__main"
+          />
         </div>
+        <p className="msg--error_login">{validationMsg.password}</p>
+
         <div style={{ float: 'right', marginRight: '25px', color: 'red', marginTop: '10px' }}>
           <p>Quên mật khẩu ?</p>
         </div>
