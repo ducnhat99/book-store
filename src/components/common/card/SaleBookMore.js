@@ -1,156 +1,43 @@
+import * as React from 'react'
 import { Pagination, Radio, Rate, Select } from 'antd';
-import images from '../../../images/book-orange.jpg'
 import NewCardItem from './NewCardItem';
+import { useSelector, useDispatch } from 'react-redux'
+import { getBooks, getCategory } from '../../../slice/bookSlice'
+import { useEffect } from 'react';
 
 const SaleBookMore = () => {
+    const dispatch = useDispatch()
+    let listBook = useSelector(state => state.book.listBook)
+    const listCategory = useSelector(state => state.book.listCategory)
+    const listBookSale = []
+    const pageLimit = 12;
+    const [pageSlice, setPageSlice] = React.useState(0)
+    const handleChange = (page, pageSize) => {
+        setPageSlice((page - 1) * pageSize)
+    }
+    useEffect(() => {
+        dispatch(getBooks())
+        dispatch(getCategory())
+    }, [dispatch])
+    listBook.forEach(item => {
+        if (item.realPrice !== "") {
+            listBookSale.push(item)
+        }
+    });
+    const renderNewBook = (data) => {
+        if (!data || data.length === 0) return;
+        return data.slice(pageSlice, pageLimit + pageSlice).map((item, index) => {
+            return listCategory.map((categoryItem) => {
+                if (categoryItem.id === item.categoryId) {
+                    return <div className="card-more-item">
+                        <NewCardItem key={index} index={item.id} images={item.imagesBook} title={item.bookName} author={item.author} product={categoryItem.categoryName} page={item.quantityPage} price={item.price} realPrice={item.realPrice} rateStar={5} description={item.description} />
+                    </div>
+                }
+            })
+
+        })
+    }
     const { Option } = Select;
-    const category = [
-        'Kỹ năng sống',
-        'Kinh tế',
-        'Lịch sử',
-        'Văn học',
-        'Từ điển',
-        'Tham khảo',
-        'Ngoại ngữ',
-        'Âm nhạc - mỹ thuật',
-        'Tiểu sử - hồi ký',
-        'Địa lý',
-        'Khoa học ký thuật'
-    ];
-    const listNewCard = [
-        {
-            images: images,
-            title: "Cây Cam Ngọt Của Tôi",
-            anthor: "Tony Buổi Sáng",
-            product: "Văn học",
-            page: 300,
-            price: "70.500d",
-            realPrice: "100.000d",
-            rateStar: 3,
-            description: "“Hai số phận” không chỉ đơn thuần là một cuốn tiểu thuyết, đây có thể xem là thánh kinh cho những người đọc và suy ngẫm, những ai không dễ dãi, không chấp nhận lối mòn.“Hai số phận” làm rung động mọi trái tim quả cảm, nó có thể làm thay đổi cả cuộc đời bạn.Đọc cuốn sách này, bạn sẽ bị chi phối bởi cá tính của hai nhân vật chính, hoặc bạn là Kane, hoặc sẽ là Abel, không thể nào nhầm lẫn.Và điều đó sẽ khiến bạn thấy được chính mình."
-        },
-        {
-            images: images,
-            title: "Cây Cam Ngọt Của Tôi",
-            anthor: "Tony Buổi Sáng",
-            product: "Văn học",
-            page: 300,
-            price: "70.500d",
-            realPrice: "100.000d",
-            rateStar: 3,
-            description: "“Hai số phận” không chỉ đơn thuần là một cuốn tiểu thuyết, đây có thể xem là thánh kinh cho những người đọc và suy ngẫm, những ai không dễ dãi, không chấp nhận lối mòn.“Hai số phận” làm rung động mọi trái tim quả cảm, nó có thể làm thay đổi cả cuộc đời bạn.Đọc cuốn sách này, bạn sẽ bị chi phối bởi cá tính của hai nhân vật chính, hoặc bạn là Kane, hoặc sẽ là Abel, không thể nào nhầm lẫn.Và điều đó sẽ khiến bạn thấy được chính mình."
-        },
-        {
-            images: images,
-            title: "Cây Cam Ngọt Của Tôi",
-            anthor: "Tony Buổi Sáng",
-            product: "Văn học",
-            page: 300,
-            price: "70.500d",
-            realPrice: "100.000d",
-            rateStar: 3,
-            description: "“Hai số phận” không chỉ đơn thuần là một cuốn tiểu thuyết, đây có thể xem là thánh kinh cho những người đọc và suy ngẫm, những ai không dễ dãi, không chấp nhận lối mòn.“Hai số phận” làm rung động mọi trái tim quả cảm, nó có thể làm thay đổi cả cuộc đời bạn.Đọc cuốn sách này, bạn sẽ bị chi phối bởi cá tính của hai nhân vật chính, hoặc bạn là Kane, hoặc sẽ là Abel, không thể nào nhầm lẫn.Và điều đó sẽ khiến bạn thấy được chính mình."
-        },
-        {
-            images: images,
-            title: "Cây Cam Ngọt Của Tôi",
-            anthor: "Tony Buổi Sáng",
-            product: "Văn học",
-            page: 300,
-            price: "70.500d",
-            realPrice: "100.000d",
-            rateStar: 3,
-            description: "“Hai số phận” không chỉ đơn thuần là một cuốn tiểu thuyết, đây có thể xem là thánh kinh cho những người đọc và suy ngẫm, những ai không dễ dãi, không chấp nhận lối mòn.“Hai số phận” làm rung động mọi trái tim quả cảm, nó có thể làm thay đổi cả cuộc đời bạn.Đọc cuốn sách này, bạn sẽ bị chi phối bởi cá tính của hai nhân vật chính, hoặc bạn là Kane, hoặc sẽ là Abel, không thể nào nhầm lẫn.Và điều đó sẽ khiến bạn thấy được chính mình."
-        },
-        {
-            images: images,
-            title: "Cây Cam Ngọt Của Tôi",
-            anthor: "Tony Buổi Sáng",
-            product: "Văn học",
-            page: 300,
-            price: "70.500d",
-            realPrice: "100.000d",
-            rateStar: 3,
-            description: "“Hai số phận” không chỉ đơn thuần là một cuốn tiểu thuyết, đây có thể xem là thánh kinh cho những người đọc và suy ngẫm, những ai không dễ dãi, không chấp nhận lối mòn.“Hai số phận” làm rung động mọi trái tim quả cảm, nó có thể làm thay đổi cả cuộc đời bạn.Đọc cuốn sách này, bạn sẽ bị chi phối bởi cá tính của hai nhân vật chính, hoặc bạn là Kane, hoặc sẽ là Abel, không thể nào nhầm lẫn.Và điều đó sẽ khiến bạn thấy được chính mình."
-        },
-        {
-            images: images,
-            title: "Cây Cam Ngọt Của Tôi",
-            anthor: "Tony Buổi Sáng",
-            product: "Văn học",
-            page: 300,
-            price: "70.500d",
-            realPrice: "100.000d",
-            rateStar: 3,
-            description: "“Hai số phận” không chỉ đơn thuần là một cuốn tiểu thuyết, đây có thể xem là thánh kinh cho những người đọc và suy ngẫm, những ai không dễ dãi, không chấp nhận lối mòn.“Hai số phận” làm rung động mọi trái tim quả cảm, nó có thể làm thay đổi cả cuộc đời bạn.Đọc cuốn sách này, bạn sẽ bị chi phối bởi cá tính của hai nhân vật chính, hoặc bạn là Kane, hoặc sẽ là Abel, không thể nào nhầm lẫn.Và điều đó sẽ khiến bạn thấy được chính mình."
-        },
-        {
-            images: images,
-            title: "Cây Cam Ngọt Của Tôi",
-            anthor: "Tony Buổi Sáng",
-            product: "Văn học",
-            page: 300,
-            price: "70.500d",
-            realPrice: "100.000d",
-            rateStar: 3,
-            description: "“Hai số phận” không chỉ đơn thuần là một cuốn tiểu thuyết, đây có thể xem là thánh kinh cho những người đọc và suy ngẫm, những ai không dễ dãi, không chấp nhận lối mòn.“Hai số phận” làm rung động mọi trái tim quả cảm, nó có thể làm thay đổi cả cuộc đời bạn.Đọc cuốn sách này, bạn sẽ bị chi phối bởi cá tính của hai nhân vật chính, hoặc bạn là Kane, hoặc sẽ là Abel, không thể nào nhầm lẫn.Và điều đó sẽ khiến bạn thấy được chính mình."
-        },
-        {
-            images: images,
-            title: "Cây Cam Ngọt Của Tôi",
-            anthor: "Tony Buổi Sáng",
-            product: "Văn học",
-            page: 300,
-            price: "70.500d",
-            realPrice: "100.000d",
-            rateStar: 3,
-            description: "“Hai số phận” không chỉ đơn thuần là một cuốn tiểu thuyết, đây có thể xem là thánh kinh cho những người đọc và suy ngẫm, những ai không dễ dãi, không chấp nhận lối mòn.“Hai số phận” làm rung động mọi trái tim quả cảm, nó có thể làm thay đổi cả cuộc đời bạn.Đọc cuốn sách này, bạn sẽ bị chi phối bởi cá tính của hai nhân vật chính, hoặc bạn là Kane, hoặc sẽ là Abel, không thể nào nhầm lẫn.Và điều đó sẽ khiến bạn thấy được chính mình."
-        },
-        {
-            images: images,
-            title: "Cây Cam Ngọt Của Tôi",
-            anthor: "Tony Buổi Sáng",
-            product: "Văn học",
-            page: 300,
-            price: "70.500d",
-            realPrice: "100.000d",
-            rateStar: 3,
-            description: "“Hai số phận” không chỉ đơn thuần là một cuốn tiểu thuyết, đây có thể xem là thánh kinh cho những người đọc và suy ngẫm, những ai không dễ dãi, không chấp nhận lối mòn.“Hai số phận” làm rung động mọi trái tim quả cảm, nó có thể làm thay đổi cả cuộc đời bạn.Đọc cuốn sách này, bạn sẽ bị chi phối bởi cá tính của hai nhân vật chính, hoặc bạn là Kane, hoặc sẽ là Abel, không thể nào nhầm lẫn.Và điều đó sẽ khiến bạn thấy được chính mình."
-        },
-        {
-            images: images,
-            title: "Cây Cam Ngọt Của Tôi",
-            anthor: "Tony Buổi Sáng",
-            product: "Văn học",
-            page: 300,
-            price: "70.500d",
-            realPrice: "100.000d",
-            rateStar: 3,
-            description: "“Hai số phận” không chỉ đơn thuần là một cuốn tiểu thuyết, đây có thể xem là thánh kinh cho những người đọc và suy ngẫm, những ai không dễ dãi, không chấp nhận lối mòn.“Hai số phận” làm rung động mọi trái tim quả cảm, nó có thể làm thay đổi cả cuộc đời bạn.Đọc cuốn sách này, bạn sẽ bị chi phối bởi cá tính của hai nhân vật chính, hoặc bạn là Kane, hoặc sẽ là Abel, không thể nào nhầm lẫn.Và điều đó sẽ khiến bạn thấy được chính mình."
-        },
-        {
-            images: images,
-            title: "Cây Cam Ngọt Của Tôi",
-            anthor: "Tony Buổi Sáng",
-            product: "Văn học",
-            page: 300,
-            price: "70.500d",
-            realPrice: "100.000d",
-            rateStar: 3,
-            description: "“Hai số phận” không chỉ đơn thuần là một cuốn tiểu thuyết, đây có thể xem là thánh kinh cho những người đọc và suy ngẫm, những ai không dễ dãi, không chấp nhận lối mòn.“Hai số phận” làm rung động mọi trái tim quả cảm, nó có thể làm thay đổi cả cuộc đời bạn.Đọc cuốn sách này, bạn sẽ bị chi phối bởi cá tính của hai nhân vật chính, hoặc bạn là Kane, hoặc sẽ là Abel, không thể nào nhầm lẫn.Và điều đó sẽ khiến bạn thấy được chính mình."
-        },
-        {
-            images: images,
-            title: "Cây Cam Ngọt Của Tôi",
-            anthor: "Tony Buổi Sáng",
-            product: "Văn học",
-            page: 300,
-            price: "70.500d",
-            realPrice: "100.000d",
-            rateStar: 3,
-            description: "“Hai số phận” không chỉ đơn thuần là một cuốn tiểu thuyết, đây có thể xem là thánh kinh cho những người đọc và suy ngẫm, những ai không dễ dãi, không chấp nhận lối mòn.“Hai số phận” làm rung động mọi trái tim quả cảm, nó có thể làm thay đổi cả cuộc đời bạn.Đọc cuốn sách này, bạn sẽ bị chi phối bởi cá tính của hai nhân vật chính, hoặc bạn là Kane, hoặc sẽ là Abel, không thể nào nhầm lẫn.Và điều đó sẽ khiến bạn thấy được chính mình."
-        },
-    ]
     return (
         <div className="book-more">
             <div className="container">
@@ -166,8 +53,8 @@ const SaleBookMore = () => {
                                 </h3>
                             </div>
                             <div className="new-book-more--search--category__list">
-                                {category.map((item, index) => {
-                                    return <a>{item}</a>
+                                {listCategory.map((item, index) => {
+                                    return <a>{item.categoryName}</a>
                                 })}
                             </div>
                         </div>
@@ -224,14 +111,10 @@ const SaleBookMore = () => {
                             </Select>
                         </div>
                         <div className="book-more--card-container">
-                            {listNewCard.map((item, index) => {
-                                return <div className="card-more-item" >
-                                    <NewCardItem key={index} index={index} images={item.images} title={item.title} author={item.author} product={item.product} page={item.page} price={item.price} realPrice={item.realPrice} rateStar={item.rateStar} description={item.description} />
-                                </div>
-                            })}
+                            {renderNewBook(listBookSale)}
                         </div>
                         <div className="book-more-pagination">
-                            <Pagination defaultCurrent={1} total={50} />
+                            <Pagination defaultCurrent={1} total={listBookSale.length} onChange={handleChange} pageSize={pageLimit} />
                         </div>
                     </div>
                 </div>

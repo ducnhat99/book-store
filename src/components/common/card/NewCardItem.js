@@ -7,13 +7,12 @@ const NewCardItem = (props) => {
     const content = (
         <CardHover {...props} />
     );
-
     return (
         <Link to="/detail">
             <Popover content={content} placement="rightTop" >
                 <div className="new-card-content">
                     <div className="new-card-images">
-                        <img src={images}></img>
+                        <img src={`data:image/jpg;base64,${images}`} />
                     </div>
                     <div className="new-card-title">
                         <h3>{title}</h3>

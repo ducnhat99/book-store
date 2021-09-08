@@ -14,7 +14,7 @@ const FeaturedCardItem = (props) => {
                 <div className="featured-item" >
                     <div className="featured-item-images-container">
                         <div className="featured-item-images">
-                            <img src={images} alt="featured-book"></img>
+                            <img src={`data:image/jpg;base64,${images}`} alt="featured-book"></img>
                         </div>
                     </div>
                     <div className="featured-item-content">
