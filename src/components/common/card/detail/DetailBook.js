@@ -4,9 +4,10 @@ import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import Login from '../form/Login';
 import { ShoppingCartOutlined } from '@ant-design/icons';
+import { USERLOGIN } from '../../../../constants/UserLogin';
 
 const DetailBook = () => {
-  const isUserLogin = useSelector(state => state.book.isUserLogin)
+  const isUserLogin = JSON.parse(localStorage.getItem(USERLOGIN))
   const history = useHistory()
   const [bookNumber, setBookNumber] = React.useState(1)
   const [isModalVisible, setIsModalVisible] = React.useState(false);

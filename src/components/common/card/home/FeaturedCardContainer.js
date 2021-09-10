@@ -23,12 +23,14 @@ const FeaturedCardContainer = () => {
     //         listBookSale.push(item)
     //     }
     // });
+    listBook = [...listBook]
+    listBook.sort((a, b) => b.rateStar - a.rateStar)
     const renderNewBook = (data) => {
         if (!data || data.length === 0) return;
         return data.slice(0, 4).map((item, index) => {
             return listCategory.map((categoryItem) => {
                 if (categoryItem.id === item.categoryId) {
-                    return <FeaturedCardItem key={index} index={item.id} images={item.imagesBook} title={item.bookName} author={item.author} product={categoryItem.categoryName} page={item.quantityPage} price={item.price} realPrice={item.realPrice} rateStar={5} description={item.description} />
+                    return <FeaturedCardItem key={index} index={item.id} images={item.imagesBook} title={item.bookName} author={item.author} product={categoryItem.categoryName} page={item.quantityPage} price={item.price} realPrice={item.realPrice} rateStar={item.rateStar} description={item.description} />
                 }
             })
 

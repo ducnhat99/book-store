@@ -7,7 +7,13 @@ const CardHover = (props) => {
                 <h3>{props.title}</h3>
             </div>
             <div className="card__hover__price">
-                <p>{props.price} <span>{props.realPrice}</span></p>
+                <p>{props.price.toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                })} <span>{props.realPrice.toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                })}</span></p>
             </div>
             <div className="card__hover__rate">
                 <Rate defaultValue={props.rateStar} disabled={true} />

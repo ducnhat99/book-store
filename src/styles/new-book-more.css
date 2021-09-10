@@ -2,6 +2,18 @@
     width: 100%;
     height: auto;
 }
+.containerNull{
+     width: 100%;
+        height: 50px;
+        border: 1px solid #fcd344;
+        padding: 0 10px;
+        background: #fafaec;
+        color: #3d6611;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        font-weight: bold;
+}
 
 .book-more--main{
     margin-top: 10px;
@@ -10,7 +22,7 @@
 
 .book-more--search{
     width: 24%;
-    height: 1230px;
+    height: 100%;
     background: #fff;
     margin-right: 1%;
 }
@@ -32,6 +44,7 @@
     width: 75%;
     padding: 10px 1%;
     margin-bottom: 10px;
+    min-height: 760px;
     height: 100%;
     background: #fff;
 }
