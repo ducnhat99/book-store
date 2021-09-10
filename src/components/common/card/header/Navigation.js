@@ -14,14 +14,15 @@ import signout from '../../../../images/signout.svg'
 import Login from '../form/Login';
 import CartNotification from '../cart/CartNotification';
 import NotificationHover from '../notification/NotificationHover';
-import { isLogged, isSignOut } from "../../../../slice/bookSlice"
 import {
   UserOutlined
 } from '@ant-design/icons';
+import { isLogged, isSignOut } from "../../../../slice/bookSlice"
+import { USERLOGIN } from '../../../../constants/UserLogin';
 
 const Navigation = () => {
   const dispatch = useDispatch()
-  const isUserLogin = useSelector(state => state.book.isUserLogin)
+  const isUserLogin = JSON.parse(localStorage.getItem(USERLOGIN))
   const history = useHistory()
   const [isModalVisible, setIsModalVisible] = useState(false);
   const showModal = () => {

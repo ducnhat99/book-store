@@ -4,9 +4,10 @@ import { useHistory } from 'react-router-dom';
 import { Button, Input } from 'antd';
 import 'antd/dist/antd.css';
 import Register from './Register';
-import { isLogged, isSignOut } from '../../../../slice/bookSlice';
 import { isEmpty } from 'validator';
 import isEmail from 'validator/lib/isEmail';
+import { isLogged, isSignOut } from '../../../../slice/bookSlice'
+import { USERLOGIN } from '../../../../constants/UserLogin';
 
 const Login = (props) => {
   const history = useHistory();
@@ -71,7 +72,8 @@ const Login = (props) => {
     if (!isValid) return;
 
     if (userValue === 'user' && passValue === 'user') {
-      dispatch(isLogged());
+      localStorage.setItem(USERLOGIN, JSON.stringify(true))
+      window.location.reload(false);
       props.handleCancel();
     }
     if (userValue === 'admin' && passValue === 'admin') {

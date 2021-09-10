@@ -18,13 +18,19 @@ const NewCardItem = (props) => {
                         <h3>{title}</h3>
                     </div>
                     <div className="new-card-item-price">
-                        <p>{price}</p>
+                        <p>{price.toLocaleString('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND'
+                        })}</p>
                     </div>
                     <div className="new-card-item-real-price">
-                        <p>{realPrice}</p>
+                        <p>{realPrice.toLocaleString('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND'
+                        })}</p>
                     </div>
                     <div>
-                        <Rate defaultValue={rateStar} disabled={true} />
+                        <Rate value={rateStar} disabled={true} />
                     </div>
                 </div>
             </Popover >

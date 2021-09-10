@@ -1,30 +1,25 @@
 import { Link } from 'react-router-dom'
+import { useEffect } from 'react';
+import { getBooks, getCategory } from '../../../../slice/bookSlice'
+import { useSelector, useDispatch } from 'react-redux'
 
 const SideBar = () => {
-    const category = [
-        'Kỹ năng sống',
-        'Kinh tế',
-        'Lịch sử',
-        'Văn học',
-        'Từ điển',
-        'Tham khảo',
-        'Ngoại ngữ',
-        'Âm nhạc - mỹ thuật',
-        'Tiểu sử - hồi ký',
-        'Địa lý',
-        'Khoa học ky thuật'
-    ]
+    const dispatch = useDispatch()
+    const listCategory = useSelector(state => state.book.listCategory)
+    useEffect(() => {
+        dispatch(getCategory());
+    }, [dispatch])
     return (
         <div className="sidebar">
             <ul className="sidebar-table">
                 <li className="sidebar-table-header">
                     <h3>Danh mục</h3>
                 </li>
-                {category.map((item, index) => {
+                {listCategory.map((item, index) => {
                     return <Link style={{ width: '100%', height: '40px' }} to={{
-                        pathname: `/category`,
-                        state: { category: item }
-                    }}><li>{item}</li>
+                        pathname: `/category/${item.id}`,
+                        state: { category: item.categoryName }
+                    }}><li>{item.categoryName}</li>
                     </Link>
                 })}
             </ul>

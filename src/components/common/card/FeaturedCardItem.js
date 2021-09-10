@@ -22,13 +22,19 @@ const FeaturedCardItem = (props) => {
                             <h3>{title}</h3>
                         </div>
                         <div className="featured-item-content-price">
-                            <p>{price}</p>
+                            <p>{price.toLocaleString('vi-VN', {
+                                style: 'currency',
+                                currency: 'VND'
+                            })}</p>
                         </div>
                         <div className="featured-item-content-real-price">
-                            <p>{realPrice}</p>
+                            <p>{realPrice.toLocaleString('vi-VN', {
+                                style: 'currency',
+                                currency: 'VND'
+                            })}</p>
                         </div>
                         <div className="featured-rate-start">
-                            <Rate defaultValue={rateStar} disabled={true} />
+                            <Rate value={rateStar} disabled={true} />
                         </div>
                     </div>
                 </div>

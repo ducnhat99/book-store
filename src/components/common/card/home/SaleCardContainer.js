@@ -31,7 +31,7 @@ const SaleCardContainer = () => {
                         handleMouseLeave()
                         scroll.scrollToTop();
                     }}>
-                        <NewCardItem key={index} index={item.id} images={item.imagesBook} title={item.bookName} author={item.author} product={categoryItem.categoryName} page={item.quantityPage} price={item.price} realPrice={item.realPrice} rateStar={5} description={item.description} />
+                        <NewCardItem key={index} index={item.id} images={item.imagesBook} title={item.bookName} author={item.author} product={categoryItem.categoryName} page={item.quantityPage} price={item.price} realPrice={item.realPrice} rateStar={item.rateStar} description={item.description} />
                     </div>
                 }
             })

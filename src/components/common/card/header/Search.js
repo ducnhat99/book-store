@@ -7,10 +7,12 @@ const SearchItem = () => {
     const history = useHistory()
     const [valueSearch, setValueSearch] = React.useState('')
     const handleSearch = (value) => {
-        history.push({
-            pathname: `/search/${valueSearch}`,
-            state: { valueSearch: valueSearch }
-        })
+        valueSearch ?
+            history.push({
+                pathname: `/search`,
+                state: { valueSearch: valueSearch }
+            })
+            : history.push('/home')
     }
     return (
         <>

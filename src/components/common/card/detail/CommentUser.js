@@ -5,9 +5,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment';
 import Login from '../form/Login';
 import CardComment from './CardComment';
+import { USERLOGIN } from '../../../../constants/UserLogin';
 
 const CommentUser = () => {
-    const isUserLogin = useSelector(state => state.book.isUserLogin)
+    const isUserLogin = JSON.parse(localStorage.getItem(USERLOGIN))
     const { TextArea } = Input;
     const [rateStar, setRateStar] = React.useState(5)
     const [content, setContent] = React.useState('')
