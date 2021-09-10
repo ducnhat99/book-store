@@ -47,6 +47,11 @@
 .ant-picker{
   width: 100%;
 }
+.msg--error_register{
+  margin: 5px 0px 0 20px;
+  display: flex;
+  color: red;
+}
 
 @media screen and (max-width: 375px) {
   .register-form{
@@ -57,5 +62,8 @@
   }
   .register-container{
     flex-wrap: wrap;
+  }
+  .msg--error_register{
+    margin: 5px 0px 0 20px;
   }
 }
