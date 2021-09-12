@@ -1,13 +1,14 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Button, Input } from 'antd';
+import { SmileOutlined } from '@ant-design/icons';
+import { Button, Input, notification } from 'antd';
 import 'antd/dist/antd.css';
 import Register from './Register';
 import { isEmpty } from 'validator';
 import isEmail from 'validator/lib/isEmail';
-import { isLogged, isSignOut } from '../../../../slice/bookSlice'
-import { USERLOGIN } from '../../../../constants/UserLogin';
+import { isLogged, getListUser } from '../../../../slice/bookSlice'
 
 const Login = (props) => {
   const history = useHistory();
@@ -16,7 +17,17 @@ const Login = (props) => {
   const [passValue, setPassValue] = React.useState('');
   const [isLogin, setIsLogin] = React.useState(true);
   const [validationMsg, setValidationMsg] = React.useState({});
-
+  const listUsers = useSelector(state => state.book.listUsers)
+  useEffect(() => {
+    dispatch(getListUser())
+  }, [dispatch])
+  const openNotification = () => {
+    notification.open({
+      description:
+        'Đăng nhập thành công',
+      icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+    });
+  };
   const backgroundLogin = () => {
     if (isLogin) return 'login__btn';
     else {
@@ -48,45 +59,46 @@ const Login = (props) => {
     setPassValue(value);
   };
 
-  const validateAll = () => {
-    const msg = {};
-    if (isEmpty(userValue)) {
-      msg.email = 'Xin vui lòng nhập Email';
-    } else if (!isEmail(userValue)) {
-      msg.email = 'Email của bạn không chính xác';
-    }
-
-    if (isEmpty(passValue)) {
-      msg.password = 'Xin vui lòng nhập mật khẩu';
-    } else if (passValue.length < 8) {
-      msg.password = 'Mật khẩu phải trên 8 kí tự';
-    }
-
-    setValidationMsg(msg);
-    if (Object.keys(msg).lenght > 0) return false;
-    return true;
-  };
-
   const handleLogin = () => {
-    const isValid = validateAll();
-    if (!isValid) return;
-
-    if (userValue === 'user' && passValue === 'user') {
-      localStorage.setItem(USERLOGIN, JSON.stringify(true))
-      window.location.reload(false);
-      props.handleCancel();
-    }
-    if (userValue === 'admin' && passValue === 'admin') {
-      history.push('/admin');
-      props.handleCancel();
-    }
+    let msg = {};
+    listUsers.map((item) => {
+      if (isEmpty(userValue)) {
+        msg.email = 'Xin vui lòng nhập Email';
+      } else if (!isEmail(userValue)) {
+        msg.email = 'Email của bạn không chính xác';
+      }
+      if (isEmpty(passValue)) {
+        msg.password = 'Xin vui lòng nhập mật khẩu';
+      } else if (passValue.length < 6) {
+        msg.password = 'Mật khẩu phải trên 6 kí tự';
+      }
+      if (userValue !== item.email && passValue !== item.password) {
+        msg.exact = 'Tài khoản hoặc mật khẩu không chính xác'
+      }
+      if (userValue === item.email && passValue === item.password && item.roll === "user") {
+        msg.exact = ''
+        dispatch(isLogged(item.id))
+        window.location.reload(false);
+        props.handleCancel();
+        openNotification()
+      }
+      if (userValue === item.email && passValue === item.password && item.roll === "admin") {
+        msg.exact = ''
+        history.push('/admin');
+        props.handleCancel();
+        openNotification()
+      }
+      setValidationMsg(msg);
+      if (Object.keys(msg).lenght > 0) return false;
+      return true;
+    })
   };
 
   return (
     <form className="box--login__container">
       <span className="login__btn__head">
         <Button value="login" className={backgroundLogin()} danger onClick={() => setIsLogin(true)}>
-          Đăng nhập
+          Trang đăng nhập
         </Button>
         <Button
           value="register"
@@ -94,7 +106,7 @@ const Login = (props) => {
           danger
           onClick={() => setIsLogin(false)}
         >
-          Đăng ký
+          Trang đăng ký
         </Button>
       </span>
 
@@ -125,29 +137,23 @@ const Login = (props) => {
             className="login__input__main"
           />
         </div>
-        <p className="msg--error_login">{validationMsg.password}</p>
-
+        {validationMsg.password ? <p className="msg--error_login">{validationMsg.password}</p> : <p className="msg--error_login">{validationMsg.exact}</p>}
         <div style={{ float: 'right', marginRight: '25px', color: 'red', marginTop: '10px' }}>
           <p>Quên mật khẩu ?</p>
         </div>
         <br />
         <div className="login__btn__all">
-          <Button type="primary" className="login__btn__main" onClick={handleLogin}>
+          <Button type="primary" onClick={handleLogin}>
             Đăng nhập
           </Button>
-          <br />
-          <Button danger className="login__btn__main" onClick={props.handleCancel}>
+          <Button danger onClick={props.handleCancel}>
             Bỏ qua
-          </Button>
-          <br />
-          <Button type="primary" block className="login__btn__main">
-            Đăng nhập bằng facebook
           </Button>
         </div>
       </div>
 
       <div style={handleDisplayRegister()}>
-        <Register handleCancel={props.handleCancel} />
+        <Register handleCancel={props.handleCancel} handleLogin={() => setIsLogin(true)} />
       </div>
     </form>
   );

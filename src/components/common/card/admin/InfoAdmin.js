@@ -12,6 +12,7 @@ const InfoAdmin = () => {
         <div className="navigation--user">
             <div className="navigation--user--info">
                 <a onClick={() => {
+                    dispatch(isSignOut())
                     history.push("/home")
                 }}>
                     <img src={signout} alt="setting logo"></img>

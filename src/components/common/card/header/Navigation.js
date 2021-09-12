@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom'
 import { useHistory } from "react-router-dom";
@@ -14,6 +14,7 @@ import signout from '../../../../images/signout.svg'
 import Login from '../form/Login';
 import CartNotification from '../cart/CartNotification';
 import NotificationHover from '../notification/NotificationHover';
+import { getCartUser } from '../../../../slice/bookSlice'
 import {
   UserOutlined
 } from '@ant-design/icons';
@@ -25,6 +26,10 @@ const Navigation = () => {
   const isUserLogin = JSON.parse(localStorage.getItem(USERLOGIN))
   const history = useHistory()
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const listCartUser = useSelector(state => state.book.listCartUser)
+  useEffect(() => {
+    dispatch(getCartUser(isUserLogin))
+  }, [dispatch])
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -101,7 +106,7 @@ const Navigation = () => {
           <img className="navigation-img" src={bell}></img>
           <p>Thông báo</p>
           {isUserLogin ? <div className="navigation--unseen">
-            3
+            4
           </div> : null}
         </div>
       </Popover>
@@ -110,7 +115,7 @@ const Navigation = () => {
           <img className="navigation-img" src={bell}></img>
           <p>Thông báo</p>
           {isUserLogin ? <div className="navigation--unseen">
-            3
+            4
           </div> : null}
         </div>
       </div>
@@ -118,9 +123,9 @@ const Navigation = () => {
         <div className="navigation-item" onClick={handleClickCart}>
           <img className="navigation-img" src={cart}></img>
           <p>Giỏ hàng</p>
-          {isUserLogin ? <div className="navigation--unseen--cart">
-            3
-          </div> : null
+          {isUserLogin ? listCartUser.length ? <div className="navigation--unseen--cart">
+            {listCartUser.length}
+          </div> : null : null
           }
         </div>
       </Popover>
@@ -128,9 +133,9 @@ const Navigation = () => {
         <div className="navigation-item" onClick={handleClickCart}>
           <img className="navigation-img" src={cart}></img>
           <p>Giỏ hàng</p>
-          {isUserLogin ? <div className="navigation--unseen--cart">
-            3
-          </div> : null
+          {isUserLogin ? listCartUser.length ? <div className="navigation--unseen--cart">
+            {listCartUser.length}
+          </div> : null : null
           }
         </div>
       </div>

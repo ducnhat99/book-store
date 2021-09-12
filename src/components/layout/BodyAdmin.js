@@ -21,19 +21,21 @@ const BodyAdmin = () => {
                     <NavBarAdmin />
                 </div>
                 <div className="body-admin--main">
-                    <Route path={ROUTE.HOMEADMIN} component={AdminHome} />
-                    <Route path={ROUTE.LISTBOOK} component={ListBook} />
-                    <Route path={ROUTE.LISTCART} component={ListCart} />
-                    <Route path={ROUTE.LISTUSER} component={ListUser} />
-                    <Route path={ROUTE.ADDUSER} component={AddUser} />
-                    <Route path={ROUTE.ADDBOOK} component={AddBook} />
-                    <Route path={ROUTE.LISTCATEGORY} component={ListCategory} />
-                    <Route path={ROUTE.EDITBOOK} component={FormEditBook} />
-                    <Route path={ROUTE.EDITDETAILCART} component={EditDetailCart} />
-                    <Route path={ROUTE.EDITCART} component={EditCart} />
-                    <Route path={ROUTE.DETAILCART} component={DetailCart} />
-                    <Route path={ROUTE.EDITUSER} component={EditUser} />
-                    <Redirect to={ROUTE.HOMEADMIN} />
+                    <Switch>
+                        <Route path={ROUTE.HOMEADMIN} component={AdminHome} />
+                        <Route path={ROUTE.LISTBOOK} component={ListBook} />
+                        <Route path={ROUTE.LISTCART} component={ListCart} />
+                        <Route path={ROUTE.LISTUSER} component={ListUser} />
+                        <Route path={ROUTE.ADDUSER} component={AddUser} />
+                        <Route path={ROUTE.ADDBOOK} component={AddBook} />
+                        <Route path={ROUTE.LISTCATEGORY} component={ListCategory} />
+                        <Route path={ROUTE.EDITBOOK} component={FormEditBook} />
+                        <Route path={ROUTE.EDITDETAILCART} component={EditDetailCart} />
+                        <Route path={ROUTE.EDITCART} component={EditCart} />
+                        <Route path={ROUTE.DETAILCART} component={DetailCart} />
+                        <Route path={ROUTE.EDITUSER} component={EditUser} />
+                        <Redirect to={ROUTE.HOMEADMIN} />
+                    </Switch>
                 </div>
             </div>
         </div>

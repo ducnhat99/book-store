@@ -1,22 +1,50 @@
 import React, { useEffect } from 'react';
 import { Rate } from 'antd';
-import { Comment, Avatar, Form, Button, List, Input, Modal } from 'antd';
+import { Comment, Avatar, Form, Button, List, Input, Modal, Pagination } from 'antd';
 import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment';
 import Login from '../form/Login';
 import CardComment from './CardComment';
 import { USERLOGIN } from '../../../../constants/UserLogin';
+import { getCommentsBook, addCommentApi, getListComments, getListUser } from '../../../../slice/bookSlice'
 
-const CommentUser = () => {
-    const isUserLogin = JSON.parse(localStorage.getItem(USERLOGIN))
-    const { TextArea } = Input;
+const CommentUser = (props) => {
+    const { id } = props
+    const dispatch = useDispatch()
+    const [comment, setComment] = React.useState([])
     const [rateStar, setRateStar] = React.useState(5)
     const [content, setContent] = React.useState('')
-    const [listComment, setListComment] = React.useState([])
+    const isUserLogin = JSON.parse(localStorage.getItem(USERLOGIN))
+    const { TextArea } = Input;
+    const listComments = useSelector(state => state.book.commentsBook)
+    const listCommentsAll = useSelector(state => state.book.listComments)
+    const listUser = useSelector(state => state.book.listUsers)
+    const pageLimit = 12;
+    const [pageSlice, setPageSlice] = React.useState(0)
+    const handleChange = (page, pageSize) => {
+        setPageSlice((page - 1) * pageSize)
+    }
+    useEffect(() => {
+        dispatch(getCommentsBook(id))
+        dispatch(getListComments())
+        dispatch(getListUser())
+    }, [dispatch, id])
+    useEffect(() => {
+        let list = [...listComments]
+        list = list.sort((a, b) => b.id - a.id)
+        setComment(list)
+    }, [listComments])
+    const commentId = Math.max(...listCommentsAll.map(item => item.id))
     const handleClickComment = () => {
         if (!!content && !!rateStar) {
-            const list = [{ userName: 'Nhat', rateStar: rateStar, content: content, datetime: moment().fromNow() }, ...listComment];
-            setListComment(list)
+            dispatch(addCommentApi({
+                userId: isUserLogin,
+                bookId: parseInt(id),
+                id: commentId + 1,
+                content: content,
+                star: rateStar,
+                dateTime: moment().format('DD/MM/YYYY')
+            }))
             setContent('')
             return
         }
@@ -61,9 +89,18 @@ const CommentUser = () => {
                 <p className="comment--login">Vui lòng <a style={{ color: 'blue' }} onClick={showModal}>đăng nhập</a> để viết đánh giá</p>
             }
             <div className="card-comment-container">
-                {listComment.map((item, index) => {
-                    return <CardComment userName={item.userName} rateStar={item.rateStar} content={item.content} datetime={item.datetime} />
+                {comment.slice(pageSlice, pageLimit + pageSlice).map((item, index) => {
+                    return listUser.map((user) => {
+                        if (user.id === item.userId) {
+                            return <CardComment userName={user.fullName} rateStar={item.star} content={item.content} dateTime={item.dateTime} />
+                        }
+                    })
                 })}
+            </div>
+            <div className="book-more-pagination">
+                {
+                    comment.length > 12 ? <Pagination defaultCurrent={1} total={comment.length} onChange={handleChange} pageSize={pageLimit} /> : null
+                }
             </div>
             <Modal
                 footer={null}

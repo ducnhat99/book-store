@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom'
 import CardHover from './CardHover';
 
 const FeaturedCardItem = (props) => {
-    const { images, title, price, realPrice, rateStar } = props
+    const { index, images, title, price, realPrice, rateStar } = props
     const content = (
         <CardHover {...props} />
     );
 
     return (
-        <Link to="/detail" className="featured-item__link" >
+        <Link to={`/detail/${index}`} className="featured-item__link" >
             <Popover content={content} placement="rightTop">
                 <div className="featured-item" >
                     <div className="featured-item-images-container">
