@@ -1,12 +1,12 @@
 import React from 'react';
 import { Button, Rate, Input, InputNumber, Modal } from 'antd';
 import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux'
 import Login from '../form/Login';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { USERLOGIN } from '../../../../constants/UserLogin';
 
-const DetailBook = () => {
+const DetailBook = (props) => {
+  const { id, bookName, imagesBook, supplier, author, publisher, rateStar, bookLayout, price, realPrice } = props
   const isUserLogin = JSON.parse(localStorage.getItem(USERLOGIN))
   const history = useHistory()
   const [bookNumber, setBookNumber] = React.useState(1)
@@ -26,60 +26,48 @@ const DetailBook = () => {
       <div className="container__detail__m">
         <div className="container__left__detail">
           <div className="img__left">
-            <img
-              id="image"
-              src="https://cdn0.fahasa.com/media/catalog/product/cache/1/small_image/600x600/9df78eab33525d08d6e5fb8d27136e95/i/m/image_195509_1_36793.jpg"
-              alt="Nhà Giả Kim (Tái Bản 2020)"
-              title="Nhà Giả Kim (Tái Bản 2020)"
-            />
+            <img src={`data:image/jpg;base64,${imagesBook}`} />
           </div>
         </div>
         <div className="container__right__detail">
           <div className="text__content__1">
-            <h1>Nhà Giả Kim (Tái Bản 2020)</h1>
+            <h1>{bookName}</h1>
           </div>
 
           <div className="text__content">
             <div className="text__content__1">
               <div className="text">
                 <span> Nhà cung cấp: </span>
-                <span>Nhã Nam
+                <span>{supplier}
                 </span>
               </div>
               <div className="text">
                 <span>Tác giả: </span>
-                <span>Paulo Coelho
+                <span>{author}
                 </span>
               </div>
               <div className="text">
                 <span>Nhà xuất bản: </span>
-                <span>NXB Hội Nhà Văn
+                <span>{publisher}
                 </span>
               </div>
               <div className="text">
                 <span>Hình thức bìa: </span>
-                <span>Bìa mềm
+                <span>{bookLayout}
                 </span>
               </div>
             </div>
           </div>
           <div className="rate">
-            <Rate defaultValue={2} disabled={true} />
-            <a href="#comment">(37 đánh giá)</a>
+            <Rate value={rateStar} disabled={true} />
           </div>
           <div className="text__content">
-            <span className="price">55.300&nbsp;đ</span>
-            <span className="old_price">79.000&nbsp;đ</span>
+            <span className="price">{price}đ</span>
+            {realPrice ? <span className="old_price">{realPrice}đ</span> : null}
           </div>
 
           <div className="text__content">
             <div className="text__content__2">
-              <div className="text">
-                <span>Giao hàng đến:  </span>
-                <span className="text__margin">
-                  Da Nang
-                </span>
-              </div>
               <div className="text">
                 <span>Chính sách đổi trả: </span>
                 <span className="text__margin">Đổi trả sản phẩm trong 30 ngày </span>

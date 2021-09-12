@@ -24,9 +24,89 @@ export const getBookCategory = createAsyncThunk('book/getBookCategory', async (i
         .catch((e) => console.log(e));
     return res;
 });
-export const getComments = createAsyncThunk('book/getComments', async () => {
+export const getBookDetail = createAsyncThunk('book/getBookDetail', async (id) => {
+    const res = await axios
+        .get(`${HOST}book/${id}`)
+        .then((res) => res.data)
+        .catch((e) => console.log(e));
+    return res;
+});
+export const getCommentsBook = createAsyncThunk('book/getCommentsBook', async (id) => {
+    const res = await axios
+        .get(`${HOST}book/${id}/comments`)
+        .then((res) => res.data)
+        .catch((e) => console.log(e));
+    return res;
+});
+export const getUser = createAsyncThunk('book/getUser', async (id) => {
+    const res = await axios
+        .get(`${HOST}users/${id}`)
+        .then((res) => res.data)
+        .catch((e) => console.log(e));
+    return res;
+});
+export const getListUser = createAsyncThunk('book/getListUser', async () => {
+    const res = await axios
+        .get(`${HOST}users`)
+        .then((res) => res.data)
+        .catch((e) => console.log(e));
+    return res;
+});
+export const addCommentApi = createAsyncThunk('book/addCommentApi', async (payload) => {
+    const res = await axios
+        .post(`${HOST}comments`, {
+            userId: payload.userId,
+            bookId: payload.bookId,
+            id: payload.id,
+            content: payload.content,
+            star: payload.star,
+            dateTime: payload.dateTime
+        })
+        .then((res) => res.data)
+        .catch((e) => console.log(e));
+    return res;
+});
+export const getListComments = createAsyncThunk('book/getListComments', async () => {
     const res = await axios
         .get(`${HOST}comments`)
+        .then((res) => res.data)
+        .catch((e) => console.log(e));
+    return res;
+});
+export const addUsersApi = createAsyncThunk('book/addUsersApi', async (payload) => {
+    const res = await axios
+        .post(`${HOST}users`, {
+            id: payload.id,
+            fullName: payload.fullName,
+            email: payload.email,
+            password: payload.password,
+            phoneNumber: payload.phoneNumber,
+            address: payload.address,
+            birthDay: payload.birthDay,
+            sex: payload.sex,
+            registerDay: payload.registerDay,
+            roll: payload.roll,
+        })
+        .then((res) => res.data)
+        .catch((e) => console.log(e));
+    return res;
+});
+export const getCartUser = createAsyncThunk('book/getCartUser', async (id) => {
+    const res = await axios
+        .get(`${HOST}users/${id}/cart`)
+        .then((res) => res.data)
+        .catch((e) => console.log(e));
+    return res;
+});
+export const putCart = createAsyncThunk('book/putCart', async (payload) => {
+    const res = await axios
+        .put(`${HOST}cart/${payload.id}`, {
+            userId: payload.userId,
+            bookId: payload.bookId,
+            id: payload.id,
+            quantity: payload.quantity,
+            total: payload.total
+        })
         .then((res) => res.data)
         .catch((e) => console.log(e));
     return res;
@@ -37,18 +117,24 @@ export const bookSlice = createSlice({
         listBook: [],
         listCategory: [],
         listBookCategory: [],
+        bookDetail: [],
+        commentsBook: [],
+        user: [],
+        listUsers: [],
         listComments: [],
+        listCartUser: [],
     },
     reducers: {
-        isLogged: state => {
-            localStorage.setItem(USERLOGIN, JSON.stringify(true))
+        isLogged: (state, action) => {
+            localStorage.setItem(USERLOGIN, JSON.stringify(action.payload))
         },
         isSignOut: state => {
-            localStorage.setItem(USERLOGIN, JSON.stringify(false))
+            localStorage.setItem(USERLOGIN, JSON.stringify(0))
         },
     },
     extraReducers(builder) {
         builder
+            //listBook
             .addCase(getBooks.pending, (state, action) => {
                 state.status = 'loading'
             })
@@ -60,6 +146,7 @@ export const bookSlice = createSlice({
                 state.status = 'failed'
                 state.error = action.error.message
             })
+            //listCategory    
             .addCase(getCategory.pending, (state, action) => {
                 state.status = 'loading'
             })
@@ -71,6 +158,7 @@ export const bookSlice = createSlice({
                 state.status = 'failed'
                 state.error = action.error.message
             })
+            //listBookCategory    
             .addCase(getBookCategory.pending, (state, action) => {
                 state.status = 'loading'
             })
@@ -82,14 +170,117 @@ export const bookSlice = createSlice({
                 state.status = 'failed'
                 state.error = action.error.message
             })
-            .addCase(getComments.pending, (state, action) => {
+            //bookDetail    
+            .addCase(getBookDetail.pending, (state, action) => {
                 state.status = 'loading'
             })
-            .addCase(getComments.fulfilled, (state, action) => {
+            .addCase(getBookDetail.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                state.bookDetail = action.payload
+            })
+            .addCase(getBookDetail.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+            //commentBook    
+            .addCase(getCommentsBook.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(getCommentsBook.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                state.commentsBook = action.payload
+            })
+            .addCase(getCommentsBook.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+            //user    
+            .addCase(getUser.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(getUser.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                state.user = action.payload
+            })
+            .addCase(getUser.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+            //listUser
+            .addCase(getListUser.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(getListUser.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                state.listUsers = action.payload
+            })
+            .addCase(getListUser.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+            //listComments
+            .addCase(getListComments.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(getListComments.fulfilled, (state, action) => {
                 state.status = 'succeeded'
                 state.listComments = action.payload
             })
-            .addCase(getComments.rejected, (state, action) => {
+            .addCase(getListComments.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+            //addComment
+            .addCase(addCommentApi.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(addCommentApi.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                state.commentsBook.push(action.payload)
+            })
+            .addCase(addCommentApi.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+            //addUsers
+            .addCase(addUsersApi.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(addUsersApi.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                state.listUsers.push(action.payload)
+            })
+            .addCase(addUsersApi.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+            //listCartUser
+            .addCase(getCartUser.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(getCartUser.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                state.listCartUser = action.payload
+            })
+            .addCase(getCartUser.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+            //putCart
+            .addCase(putCart.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(putCart.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                const indexOfObject = state.listCartUser.findIndex((obj) => {
+                    if (obj.id === action.payload.id) {
+                        return true;
+                    }
+                    return false;
+                });
+                state.listCartUser.splice(indexOfObject, 1, action.payload)
+            })
+            .addCase(putCart.rejected, (state, action) => {
                 state.status = 'failed'
                 state.error = action.error.message
             })

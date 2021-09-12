@@ -1,37 +1,40 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 import { Button } from 'antd';
 import CartItem from "./CartItem"
 import images from '../../../../images/7kyquanthegioi.jpg'
-
+import { USERLOGIN } from '../../../../constants/UserLogin';
+import { getCartUser, getBooks } from '../../../../slice/bookSlice'
 const Cart = () => {
+    const isUserLogin = JSON.parse(localStorage.getItem(USERLOGIN))
+    const listCartUser = useSelector(state => state.book.listCartUser)
+    const listBook = useSelector(state => state.book.listBook)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(getCartUser(isUserLogin))
+        dispatch(getBooks())
+    }, [dispatch])
     let totalPrice = 0
-    let shipPrice = 0
-    const cartData = [
-        {
-            images: images,
-            title: "Địch Công Kỳ Án - Bí Mật Quả Chuông (Tập 5)",
-            price: 50000,
-            realPrice: 75000,
-            quantity: 1
-        },
-        {
-            images: images,
-            title: "Địch Công Kỳ Án - Bí Mật Quả Chuông (Tập 5)",
-            price: 50000,
-            realPrice: 75000,
-            quantity: 3
-        },
-        {
-            images: images,
-            title: "Địch Công Kỳ Án - Bí Mật Quả Chuông (Tập 5)",
-            price: 45000,
-            realPrice: 75000,
-            quantity: 5
-        },
-    ]
-    cartData.map((item, index) => {
-        return totalPrice += (item.price * item.quantity)
+    let shipPrice = 30000
+    const listCartRender = (data) => {
+        return data.map((item, index) => {
+            return listBook.map((bookItem) => {
+                if (bookItem.id === item.bookId) {
+                    return <CartItem id={item.id}
+                        bookId={item.bookId}
+                        images={bookItem.imagesBook}
+                        title={bookItem.bookName}
+                        price={bookItem.price}
+                        realPrice={bookItem.realPrice}
+                        quantity={item.quantity}
+                        total={item.total} />
+                }
+            })
+        })
+    }
+    listCartUser.map((item, index) => {
+        return totalPrice += item.total
     })
     return (
         <div className="cart--container">
@@ -41,9 +44,7 @@ const Cart = () => {
                 </div>
                 <div className="cart-container--main">
                     <div className="cart-container__item">
-                        {cartData.map((item, index) => {
-                            return <CartItem images={item.images} title={item.title} price={item.price} realPrice={item.realPrice} quantity={item.quantity} />
-                        })}
+                        {listCartRender(listCartUser)}
                     </div>
                     <div className="cart-checkout">
                         <div className="cart-checkout-price">

@@ -10,7 +10,7 @@ const ROUTE = {
     SALEBOOK: "/salebook",
     NEWBOOK: "/newbook",
     FEATUREDBOOK: "/featuredbook",
-    DETAIL: "/detail",
+    DETAIL: "/detail/:bookId",
     //admin
     HOMEADMIN: "/admin/home",
     LISTBOOK: "/admin/listbook",

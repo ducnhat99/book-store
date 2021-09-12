@@ -20,17 +20,19 @@ const Home = () => {
     return (
         <div className="home">
             <Header />
-            <Route path={ROUTE.CUSTOMER} component={Notification} />
-            <Route path={ROUTE.CHECKOUT} component={Checkout} />
-            <Route path={ROUTE.CART} component={Cart} />
-            <Route path={ROUTE.SEARCH} component={SearchBook} />
-            <Route path={ROUTE.CATEGORY} component={CategoryBook} />
-            <Route path={ROUTE.SALEBOOK} component={SaleBookMore} />
-            <Route path={ROUTE.NEWBOOK} component={NewBookMore} />
-            <Route path={ROUTE.FEATUREDBOOK} component={FeaturedBookMore} />
-            <Route path={ROUTE.DETAIL} component={Detail} />
-            <Route path={ROUTE.HOME} component={HomeBody} />
-            <Redirect to={ROUTE.HOME} />
+            <Switch>
+                <Route path={ROUTE.CUSTOMER} component={Notification} />
+                <Route path={ROUTE.CHECKOUT} component={Checkout} />
+                <Route path={ROUTE.CART} component={Cart} />
+                <Route path={ROUTE.SEARCH} component={SearchBook} />
+                <Route path={ROUTE.CATEGORY} component={CategoryBook} />
+                <Route path={ROUTE.SALEBOOK} component={SaleBookMore} />
+                <Route path={ROUTE.NEWBOOK} component={NewBookMore} />
+                <Route path={ROUTE.FEATUREDBOOK} component={FeaturedBookMore} />
+                <Route path={ROUTE.DETAIL} component={Detail} />
+                <Route path={ROUTE.HOME} component={HomeBody} />
+                <Redirect to={ROUTE.HOME} />
+            </Switch>
             <Footer />
         </div>
     )

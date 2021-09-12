@@ -5,7 +5,7 @@ import NewCardItem from './NewCardItem'
 import images from '../../../images/7kyquanthegioi.jpg'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from "react-router-dom";
-import { getBooks, getCategory, getComments } from '../../../slice/bookSlice'
+import { getBooks, getCategory } from '../../../slice/bookSlice'
 
 const SearchBook = (props) => {
     const dispatch = useDispatch()
@@ -22,7 +22,6 @@ const SearchBook = (props) => {
     useEffect(() => {
         dispatch(getBooks())
         dispatch(getCategory())
-        dispatch(getComments())
     }, [dispatch])
     useEffect(() => {
         if (props.location.state.valueSearch) {
