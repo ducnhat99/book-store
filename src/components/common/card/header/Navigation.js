@@ -14,7 +14,7 @@ import signout from '../../../../images/signout.svg'
 import Login from '../form/Login';
 import CartNotification from '../cart/CartNotification';
 import NotificationHover from '../notification/NotificationHover';
-import { getCartUser } from '../../../../slice/bookSlice'
+import { getCartUser, getBooks } from '../../../../slice/bookSlice'
 import {
   UserOutlined
 } from '@ant-design/icons';
@@ -27,8 +27,10 @@ const Navigation = () => {
   const history = useHistory()
   const [isModalVisible, setIsModalVisible] = useState(false);
   const listCartUser = useSelector(state => state.book.listCartUser)
+  const listBook = useSelector(state => state.book.listBook)
   useEffect(() => {
     dispatch(getCartUser(isUserLogin))
+    dispatch(getBooks())
   }, [dispatch])
   const showModal = () => {
     setIsModalVisible(true);
@@ -65,13 +67,24 @@ const Navigation = () => {
   );
   const cartContent = (
     isUserLogin ?
-      <div>
-        <CartNotification />
-        <CartNotification />
+      <>
+        {listCartUser.slice(-5).map((item) => {
+          return listBook.map((bookItem) => {
+            if (bookItem.id === item.bookId) {
+              return <CartNotification
+                id={item.id}
+                bookId={item.bookId}
+                images={bookItem.imagesBook}
+                title={bookItem.bookName}
+                price={bookItem.price}
+                quantity={item.quantity} />
+            }
+          })
+        })}
         <div className="btn--more-notification">
           <Button onClick={() => { history.push("/cart") }}>Xem tất cả</Button>
         </div>
-      </div> :
+      </> :
       <div className="bell-user--local">
         <div className="bell-user--local__images">
           <img src='https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/ico_notiflogin.svg' alt="login"></img>
