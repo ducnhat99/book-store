@@ -1,6 +1,7 @@
 import { Rate, Popover } from 'antd';
 import CardHover from './CardHover';
 import { Link } from 'react-router-dom'
+import VNPRICE from '../../../constants/FormatPrice';
 
 const NewCardItem = (props) => {
     const { index, images, title, price, realPrice, rateStar } = props
@@ -18,16 +19,10 @@ const NewCardItem = (props) => {
                         <h3>{title}</h3>
                     </div>
                     <div className="new-card-item-price">
-                        <p>{price.toLocaleString('vi-VN', {
-                            style: 'currency',
-                            currency: 'VND'
-                        })}</p>
+                        <p>{VNPRICE(price)}</p>
                     </div>
                     <div className="new-card-item-real-price">
-                        <p>{realPrice.toLocaleString('vi-VN', {
-                            style: 'currency',
-                            currency: 'VND'
-                        })}</p>
+                        <p>{VNPRICE(realPrice)}</p>
                     </div>
                     <div>
                         <Rate value={rateStar} disabled={true} />

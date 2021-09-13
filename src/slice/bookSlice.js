@@ -111,6 +111,58 @@ export const putCart = createAsyncThunk('book/putCart', async (payload) => {
         .catch((e) => console.log(e));
     return res;
 });
+export const deleteCart = createAsyncThunk('book/deleteCart', async (payload) => {
+    await axios
+        .delete(`${HOST}cart/${payload}`)
+        .then((res) => res.data)
+        .catch((e) => console.log(e));
+    return payload;
+});
+export const addCartApi = createAsyncThunk('book/addCartApi', async (payload) => {
+    const res = await axios
+        .post(`${HOST}cart`, {
+            userId: payload.userId,
+            bookId: payload.bookId,
+            id: payload.id,
+            quantity: payload.quantity,
+            total: payload.total,
+        })
+        .then((res) => res.data)
+        .catch((e) => console.log(e));
+    return res;
+});
+export const getListCart = createAsyncThunk('book/getListCart', async () => {
+    const res = await axios
+        .get(`${HOST}cart`)
+        .then((res) => res.data)
+        .catch((e) => console.log(e));
+    return res;
+});
+export const putBook = createAsyncThunk('book/putBook', async (payload) => {
+    const res = await axios
+        .put(`${HOST}book/${payload.id}`, {
+            categoryId: payload.categoryId,
+            id: payload.id,
+            bookName: payload.bookName,
+            supplier: payload.supplier,
+            publisher: payload.publisher,
+            publishYear: payload.publishYear,
+            author: payload.author,
+            bookLayout: payload.bookLayout,
+            language: payload.language,
+            quantityPage: payload.quantityPage,
+            rateStar: payload.rateStar,
+            description: payload.description,
+            imagesBook: payload.imagesBook,
+            quantityBook: payload.quantityBook,
+            price: payload.price,
+            realPrice: payload.realPrice,
+
+        })
+        .then((res) => res.data)
+        .catch((e) => console.log(e));
+    return res;
+});
 export const bookSlice = createSlice({
     name: 'book',
     initialState: {
@@ -123,6 +175,7 @@ export const bookSlice = createSlice({
         listUsers: [],
         listComments: [],
         listCartUser: [],
+        listCartAll: []
     },
     reducers: {
         isLogged: (state, action) => {
@@ -281,6 +334,67 @@ export const bookSlice = createSlice({
                 state.listCartUser.splice(indexOfObject, 1, action.payload)
             })
             .addCase(putCart.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+            //deleteCart
+            .addCase(deleteCart.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(deleteCart.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                const indexOfObject = state.listCartUser.findIndex((obj) => {
+                    if (obj.id === action.payload) {
+                        return true;
+                    }
+                    return false;
+                });
+                state.listCartUser.splice(indexOfObject, 1)
+            })
+            .addCase(deleteCart.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+            //addCart
+            .addCase(addCartApi.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(addCartApi.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                state.listCartUser.push(action.payload)
+            })
+            .addCase(addCartApi.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+            //listCart
+            .addCase(getListCart.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(getListCart.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                state.listCartAll = action.payload
+            })
+            .addCase(getListCart.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+            //putBook
+            .addCase(putBook.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(putBook.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                const indexOfObject = state.listBook.findIndex((obj) => {
+                    if (obj.id === action.payload.id) {
+                        return true;
+                    }
+                    return false;
+                });
+                state.listBook.splice(indexOfObject, 1, action.payload)
+                state.bookDetail = action.payload
+            })
+            .addCase(putBook.rejected, (state, action) => {
                 state.status = 'failed'
                 state.error = action.error.message
             })

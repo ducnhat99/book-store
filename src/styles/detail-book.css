@@ -42,6 +42,26 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+}
+.text__content__input__count{
+  height: 32px;
+  width: 120px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #c1c1c1;
+  margin-left: 20px;
+  }
+  .detail__count--icon{
+    width: 70%;
+  }
+.detail__count--input{
+  border: none;
+  margin: 0;
+} 
+
+.text__content__input .ant-input-number-handler-wrap{
+  display: none;
 }
 .text__content__1{
   width: 100%;
@@ -101,31 +121,9 @@
 }
 .text__content__input input{
   width: 100%;
-  height: 100%;
-  margin-left: 20px;
   font-size: 20px;
 }
-.text__content__input .ant-input-number-input-wrap{
-  height: 100%;
-  border: none;
-}
-.text__content__input .ant-input-number{
-  border: none;
-  border-right: 1px solid #d9d9d9;
-}
-.text__content__input .ant-input-number:hover{
-  border: none;
-  border-right: 1px solid #d9d9d9;
-}
-.text__content__input .ant-input-number-handler-wrap{
-  opacity: 1;
-}
-.text__content__input .ant-input-number-handler-up{
-  border-top: 1px solid #d9d9d9;
-}
-.text__content__input .ant-input-number-handler-down{
-  border-bottom: 1px solid #d9d9d9;
-}
+
 /* DETAIL LOW */
 .container__low{
   width: 100%;
@@ -190,6 +188,7 @@
   .text__content input{
     width: 20%;
   }
+  
   h1{
     margin-left: 10px;
   }

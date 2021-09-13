@@ -19,7 +19,22 @@ const Detail = () => {
   return (
     <div className="container__detail">
       <div className="container">
-        <DetailBook {...bookDetail} />
+        <DetailBook id={bookId}
+          categoryId={bookDetail.categoryId}
+          publishYear={bookDetail.publishYear}
+          language={bookDetail.language}
+          quantityPage={bookDetail.quantityPage}
+          bookName={bookDetail.bookName}
+          imagesBook={bookDetail.imagesBook}
+          description={bookDetail.description}
+          supplier={bookDetail.supplier}
+          author={bookDetail.author}
+          publisher={bookDetail.publisher}
+          rateStar={bookDetail.rateStar}
+          bookLayout={bookDetail.bookLayout}
+          quantityBook={bookDetail.quantityBook}
+          price={bookDetail.price}
+          realPrice={bookDetail.realPrice} />
         <InforDetail {...bookDetail} />
         <BoughtTogether id={bookId} categoryId={bookDetail.categoryId} />
         <CommentUser id={bookId} />
