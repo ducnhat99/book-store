@@ -26,26 +26,49 @@ const Cart = () => {
         return data.slice(pageSlice, pageLimit + pageSlice).map((item, index) => {
             return listBook.map((bookItem) => {
                 if (bookItem.id === item.bookId) {
-                    console.log("🚀 ~ file: Cart.js ~ line 42 ~ returnlistBook.map ~ bookItem.quantityBook", bookItem.quantityBook)
-                    return <CartItem id={item.id}
-                        categoryId={bookItem.categoryId}
-                        bookId={item.bookId}
-                        supplier={bookItem.supplier}
-                        publisher={bookItem.publisher}
-                        publishYear={bookItem.publishYear}
-                        author={bookItem.author}
-                        bookLayout={bookItem.bookLayout}
-                        language={bookItem.language}
-                        quantityPage={bookItem.quantityPage}
-                        rateStar={bookItem.rateStar}
-                        description={bookItem.description}
-                        quantityBook={bookItem.quantityBook}
-                        images={bookItem.imagesBook}
-                        title={bookItem.bookName}
-                        price={bookItem.price}
-                        realPrice={bookItem.realPrice}
-                        quantity={item.quantity}
-                        total={item.total} />
+                    if (item.quantity > bookItem.quantityBook) {
+                        return <CartItem id={item.id}
+                            categoryId={bookItem.categoryId}
+                            bookId={item.bookId}
+                            supplier={bookItem.supplier}
+                            publisher={bookItem.publisher}
+                            publishYear={bookItem.publishYear}
+                            author={bookItem.author}
+                            bookLayout={bookItem.bookLayout}
+                            language={bookItem.language}
+                            quantityPage={bookItem.quantityPage}
+                            rateStar={bookItem.rateStar}
+                            description={bookItem.description}
+                            quantityBook={bookItem.quantityBook}
+                            images={bookItem.imagesBook}
+                            title={bookItem.bookName}
+                            price={bookItem.price}
+                            realPrice={bookItem.realPrice}
+                            quantity={bookItem.quantityBook}
+                            total={bookItem.quantityBook * bookItem.price} />
+                    }
+                    else {
+                        return <CartItem id={item.id}
+                            categoryId={bookItem.categoryId}
+                            bookId={item.bookId}
+                            supplier={bookItem.supplier}
+                            publisher={bookItem.publisher}
+                            publishYear={bookItem.publishYear}
+                            author={bookItem.author}
+                            bookLayout={bookItem.bookLayout}
+                            language={bookItem.language}
+                            quantityPage={bookItem.quantityPage}
+                            rateStar={bookItem.rateStar}
+                            description={bookItem.description}
+                            quantityBook={bookItem.quantityBook}
+                            images={bookItem.imagesBook}
+                            title={bookItem.bookName}
+                            price={bookItem.price}
+                            realPrice={bookItem.realPrice}
+                            quantity={item.quantity}
+                            total={item.total} />
+                    }
+
                 }
             })
         })

@@ -1,8 +1,152 @@
-import React from 'react';
-import { Button, Input, Radio } from 'antd';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { useHistory } from "react-router-dom";
+import { Button, Input, Radio, notification } from 'antd';
+import moment from 'moment';
 import 'antd/dist/antd.css';
+import { USERLOGIN } from '../../../../constants/UserLogin';
+import { getUser, getListOrder, getListDetailOrder, getBooks, addOrder, addDetailOrder, putBook, getCartUser } from '../../../../slice/bookSlice'
+import { isEmpty } from 'validator';
+import isEmail from 'validator/lib/isEmail';
+import VNPRICE from '../../../../constants/FormatPrice';
 
-const Checkout = () => {
+const Checkout = (props) => {
+    const isUserLogin = JSON.parse(localStorage.getItem(USERLOGIN))
+    const user = useSelector(state => state.book.user)
+    const listOrder = useSelector(state => state.book.listOrder)
+    const listDetailOrder = useSelector(state => state.book.listDetailOrder)
+    const listBook = useSelector(state => state.book.listBook)
+    const listCartUser = useSelector(state => state.book.listCartUser)
+    const [fullName, setFullName] = React.useState('')
+    const [phoneNumber, setPhoneNumber] = React.useState('')
+    const [email, setEmail] = React.useState('')
+    const [address, setAddress] = React.useState('')
+    const [validationMsg, setValidationMsg] = React.useState({});
+    const [pay, setPay] = React.useState('Thanh toán khi nhận hàng')
+    const orderId = Math.max(...listOrder.map(item => item.id))
+    const detailOrderId = Math.max(...listDetailOrder.map(item => item.id))
+    console.log(orderId)
+    console.log(detailOrderId)
+    const dispatch = useDispatch()
+    const history = useHistory()
+    useEffect(() => {
+        dispatch(getUser(isUserLogin))
+        dispatch(getCartUser(isUserLogin))
+        dispatch(getListOrder())
+        dispatch(getBooks())
+        dispatch(getListDetailOrder())
+    }, [dispatch])
+    useEffect(() => {
+        setFullName(user.fullName)
+        setPhoneNumber(user.phoneNumber)
+        setEmail(user.email)
+        setAddress(user.address)
+    }, [user])
+    const totalMoney = listCartUser.reduce((a, b) => a + b.total, 0
+    )
+    const openNotificationWithIcon = type => {
+        notification[type]({
+            message: 'Đặt hàng thành công !',
+            description: 'Vui lòng kiểm tra lại đơn hàng',
+        });
+    };
+    const validateAll = () => {
+        const msg = {};
+        if (isEmpty(email)) {
+            msg.emailInput = 'Xin vui lòng nhập Email';
+        } else if (!isEmail(email)) {
+            msg.emailInput = 'Email của bạn không chính xác';
+        }
+        if (isEmpty(phoneNumber)) {
+            msg.phone = 'Xin vui lòng nhập số điện thoại';
+        } else if (isNaN(phoneNumber)) {
+            msg.phone = 'Xin vui lòng nhập lại số điện thoại';
+        } else if (!phoneNumber.match(/^\d{10}$/)) {
+            msg.phone = 'Số điện thoại gồm 10 chữ số'
+        }
+        if (isEmpty(fullName)) {
+            msg.userName = 'Xin vui lòng nhập họ và tên ';
+        } else if (!isNaN(fullName)) {
+            msg.userName = 'Xin vui lòng nhập đúng họ và tên';
+        }
+        if (isEmpty(address)) {
+            msg.address = 'Xin vui lòng nhập địa chỉ';
+        }
+        setValidationMsg(msg);
+        if (Object.keys(msg).length > 0) return false;
+        return true;
+    };
+    const handleCheckout = async() => {
+        const isValid = validateAll();
+        if (!isValid) return;
+        if (!!props.location.state) {
+            if (pay === 'Thanh toán khi nhận hàng') {
+                //order
+                   await dispatch(addOrder({
+                    userId: isUserLogin,
+                    id: orderId + 1,
+                    fullName: fullName,
+                    email: email,
+                    phoneNumber: phoneNumber,
+                    address: address,
+                    bookingDate: moment().format('DD/MM/YYYY'),
+                    bill: props.location.state.total + 30000,
+                    payments: 'Trực tiếp',
+                    status: 'Đang xử lý',
+                }))
+                    await dispatch(addDetailOrder({
+                    orderId: orderId + 1,
+                    bookId: props.location.state.bookId,
+                    id: detailOrderId + 1,
+                    quantityOrder: props.location.state.quantity,
+                    total: props.location.state.total
+                }))
+               await listBook.map((book)=>{
+                if(book.id === props.location.state.bookId){
+                   dispatch(putBook({
+                        categoryId: book.categoryId,
+                        id: book.id,
+                        bookName: book.bookName,
+                        supplier: book.supplier,
+                        publisher: book.publisher,
+                        publishYear: book.publishYear,
+                        author: book.author,
+                        bookLayout: book.bookLayout,
+                        language: book.language,
+                        quantityPage: book.quantityPage,
+                        rateStar: book.rateStar,
+                        description: book.description,
+                        imagesBook: book.imagesBook,
+                        quantityBook: book.quantityBook - props.location.state.quantity,
+                        price: book.price,
+                        realPrice: book.realPrice,
+                        }))
+                }
+            })
+                openNotificationWithIcon('success')
+                history.push("/home")
+            }
+            else {
+                console.log('chua co momo')
+            }
+        }
+        else {
+            if (pay === 'Thanh toán khi nhận hàng') {
+                // dispatch(addOrder({
+                //         userId: isUserLogin,
+                //         id: orderId + 1,
+                //         fullName: fullName,
+                //         email: email,
+                //         phoneNumber: phoneNumber,
+                //         address: address,
+                //         bookingDate: moment().format('DD/MM/YYYY'),
+                //         bill: totalMoney + 30000,
+                //         payments: 'Trực tiếp',
+                //         status: 'Đang xử lý',
+                //     },setTimeout(function(){ handleAddOrderDetailCart() }, 1000)))
+            }
+        }
+    }
     return (
         <div className="checkout--container">
             <div className="container">
@@ -19,30 +163,38 @@ const Checkout = () => {
                                 <label>
                                     Họ và tên người nhận
                                 </label>
-                                <Input placeholder="Nhập họ và tên người nhận" />
+                                <Input placeholder="Nhập họ và tên người nhận" value={fullName} onChange={(e) => setFullName(e.target.value)} />
                             </div>
-                            <p></p>
+                            <div className="checkout__error">
+                                <p className="msg--error_register">{validationMsg.userName}</p>
+                            </div>
                             <div className="checkout--main--box">
                                 <label>
                                     Số điện thoại
                                 </label>
-                                <Input type="number" placeholder="Nhập số điện thoại người nhận" />
+                                <Input type="number" placeholder="Nhập số điện thoại người nhận" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
                             </div>
-                            <p></p>
+                            <div className="checkout__error">
+                                <p className="msg--error_register">{validationMsg.phone}</p>
+                            </div>
                             <div className="checkout--main--box">
                                 <label>
                                     Địa chỉ email
                                 </label>
-                                <Input placeholder="Nhập địa chỉ email" />
+                                <Input placeholder="Nhập địa chỉ email" value={email} onChange={(e) => setEmail(e.target.value)} />
                             </div>
-                            <p></p>
+                            <div className="checkout__error">
+                                <p className="msg--error_register">{validationMsg.emailInput}</p>
+                            </div>
                             <div className="checkout--main--box">
                                 <label>
                                     Địa chỉ nhận hàng
                                 </label>
-                                <Input placeholder="Nhập địa chỉ nhận hàng" />
+                                <Input placeholder="Nhập địa chỉ nhận hàng" value={address} onChange={(e) => setAddress(e.target.value)} />
                             </div>
-                            <p></p>
+                            <div className="checkout__error">
+                                <p className="msg--error_register">{validationMsg.address}</p>
+                            </div>
                         </form>
                     </div>
                     <div className="checkout--main--pay">
@@ -50,18 +202,19 @@ const Checkout = () => {
                             <h4>PHƯƠNG THỨC THANH TOÁN</h4>
                         </div>
                         <div className="checkout--main--pay__radio">
-                            <Radio.Group className="checkout--main--pay__radio--box">
+                            <Radio.Group className="checkout--main--pay__radio--box" value={pay} onChange={(e) => setPay(e.target.value)}>
                                 <Radio value="Ví Momo" className="checkout--main__radio--item">Ví Momo</Radio>
                                 <Radio value="Thanh toán khi nhận hàng" className="checkout--main__radio--item">Thanh toán khi nhận hàng</Radio>
                             </Radio.Group>
                         </div>
                         <div className="checkout--main--pay__price">
                             <p>Tổng số tiền</p>
-                            <p>150000d</p>
+
+                            {!!props.location.state ? <p>{VNPRICE(props.location.state.total + 30000)}</p> : <p>{VNPRICE(totalMoney + 30000)}</p>}
                         </div>
                         <div className="checkout--main--pay__btn--box">
                             <div className="checkout--main--pay__btn">
-                                <Button type="primary">Xác nhận thanh toán</Button>
+                                <Button type="primary" onClick={handleCheckout}>Xác nhận thanh toán</Button>
                             </div>
                         </div>
                     </div>
