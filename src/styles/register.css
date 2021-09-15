@@ -35,14 +35,17 @@
   margin: 5px 0 0 20px;
 }
 .register__btn__main{
-  width: 45%;
+  width: 44%;
+  margin: 25px 0 0 20px;
+}
+.register__btn__main--2{
+  width: 44%;
   margin: 25px 0 0 20px;
 }
 .register__btn__all{
   width: 98%;
   margin: 10px 0 0 0 ;
   display: flex;
-  justify-content: space-between;
 }
 .ant-picker{
   width: 100%;

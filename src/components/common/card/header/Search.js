@@ -1,18 +1,24 @@
-import { Input, Space } from 'antd';
+import { Input, Space, notification } from 'antd';
 import React from 'react';
 import { useHistory } from "react-router-dom";
 import 'antd/dist/antd.css';
 const { Search } = Input;
+const openNotificationWithIcon = type => {
+    notification[type]({
+        description:
+            'Vui lòng nhập từ khóa tìm kiếm',
+    });
+};
 const SearchItem = () => {
     const history = useHistory()
     const [valueSearch, setValueSearch] = React.useState('')
     const handleSearch = (value) => {
-        valueSearch ?
+        valueSearch.trim() ?
             history.push({
                 pathname: `/search`,
                 state: { valueSearch: valueSearch }
             })
-            : history.push('/home')
+            : openNotificationWithIcon('warning')
     }
     return (
         <>

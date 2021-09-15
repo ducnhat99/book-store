@@ -28,6 +28,34 @@ const Login = (props) => {
       icon: <SmileOutlined style={{ color: '#108ee9' }} />,
     });
   };
+  const styleTabLogin = () => {
+    if (isLogin) {
+      return {
+        background: '#ff4d4f',
+        color: '#fff'
+      }
+    }
+    else {
+      return {
+        background: '#fff',
+        color: '#ff4d4f'
+      }
+    }
+  }
+  const styleLoginRegister = () => {
+    if (isLogin) {
+      return {
+        background: '#fff',
+        color: '#ff4d4f'
+      }
+    }
+    else {
+      return {
+        background: '#ff4d4f',
+        color: '#fff'
+      }
+    }
+  }
   const backgroundLogin = () => {
     if (isLogin) return 'login__btn';
     else {
@@ -97,10 +125,11 @@ const Login = (props) => {
   return (
     <form className="box--login__container">
       <span className="login__btn__head">
-        <Button value="login" className={backgroundLogin()} danger onClick={() => setIsLogin(true)}>
+        <Button value="login" style={styleTabLogin()} className={backgroundLogin()} danger onClick={() => setIsLogin(true)}>
           Trang đăng nhập
         </Button>
         <Button
+          style={styleLoginRegister()}
           value="register"
           className={backgroundRegister()}
           danger

@@ -224,7 +224,7 @@ const Register = (props) => {
           Xác nhận
         </Button>
         <br />
-        <Button danger className="register__btn__main" onClick={props.handleCancel}>
+        <Button danger className="register__btn__main--2" onClick={props.handleCancel}>
           Bỏ qua
         </Button>
       </div>

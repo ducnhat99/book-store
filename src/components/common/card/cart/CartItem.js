@@ -1,8 +1,9 @@
-import React from 'react';
-import { InputNumber, Popconfirm, message } from 'antd';
-import { useDispatch } from 'react-redux'
+import React, { useEffect } from 'react';
+import { InputNumber, Popconfirm, message, notification } from 'antd';
+import { ShoppingCartOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
+import { useDispatch, useSelector } from 'react-redux'
 import { USERLOGIN } from '../../../../constants/UserLogin';
-import { putCart, deleteCart, putBook } from '../../../../slice/bookSlice'
+import { putCart, deleteCart, putBook, getBookDetail } from '../../../../slice/bookSlice'
 import { Link } from 'react-router-dom'
 import VNPRICE from '../../../../constants/FormatPrice';
 
@@ -12,83 +13,120 @@ import {
 const CartItem = (props) => {
     const { id, bookId, categoryId, supplier, publisher, publishYear, author, bookLayout, language, quantityPage, rateStar, description, quantityBook, images, title, price, realPrice, quantity, total } = props
     const isUserLogin = JSON.parse(localStorage.getItem(USERLOGIN))
-    const [bookNumber, setBookNumber] = React.useState(quantity)
     const dispatch = useDispatch()
-    const handleChangeQuantity = (e) => {
+    useEffect(() => {
+        dispatch(getBookDetail(id))
+    }, [dispatch])
+    // useEffect(() => {
+    //     if (quantity > quantityBook)
+    //         console.log(quantityBook)
+    //     dispatch(putCart({
+    //         userId: isUserLogin,
+    //         bookId: bookId,
+    //         id: id,
+    //         quantity: quantityBook,
+    //         total: quantityBook * price
+    //     }))
+    // }, [quantityBook])
+    const openNotificationWithIcon = type => {
+        notification[type]({
+            message: 'Thông báo',
+            description:
+                'Số lượng sách không đủ',
+        });
+    };
+    const handleMinusCart = () => {
         dispatch(putCart({
             userId: isUserLogin,
             bookId: bookId,
             id: id,
-            quantity: e,
-            total: e * price
+            quantity: quantity - 1,
+            total: (quantity - 1) * price
         }))
-        setBookNumber(e)
-
-        // if (e > bookNumber) {
-        //     dispatch(putBook({
-        //         categoryId: categoryId,
-        //         id: bookId,
-        //         bookName: title,
-        //         supplier: supplier,
-        //         publisher: publisher,
-        //         publishYear: publishYear,
-        //         author: author,
-        //         bookLayout: bookLayout,
-        //         language: language,
-        //         quantityPage: quantityPage,
-        //         rateStar: rateStar,
-        //         description: description,
-        //         imagesBook: images,
-        //         quantityBook: quantityBook - (e - bookNumber),
-        //         price: price,
-        //         realPrice: realPrice,
-        //     }))
-        //     setBookNumber(e)
-        //     return
-        // }
-        // if (e < bookNumber) {
-        //     dispatch(putBook({
-        //         categoryId: categoryId,
-        //         id: bookId,
-        //         bookName: title,
-        //         supplier: supplier,
-        //         publisher: publisher,
-        //         publishYear: publishYear,
-        //         author: author,
-        //         bookLayout: bookLayout,
-        //         language: language,
-        //         quantityPage: quantityPage,
-        //         rateStar: rateStar,
-        //         description: description,
-        //         imagesBook: images,
-        //         quantityBook: quantityBook + (bookNumber - e),
-        //         price: price,
-        //         realPrice: realPrice,
-        //     }))
-        //     setBookNumber(e)
-        //     return
-        // }
-
+        return
     }
+    const handlePlusCart = () => {
+        if ((quantity + 1) <= quantityBook) {
+            dispatch(putCart({
+                userId: isUserLogin,
+                bookId: bookId,
+                id: id,
+                quantity: quantity + 1,
+                total: (quantity + 1) * price
+            }))
+        }
+        else {
+            openNotificationWithIcon('warning')
+        }
+        return
+    }
+    const handleChangeNumber = (e) => {
+        if (e.target.value == 0 || e.target.value === '') {
+            return
+        }
+        else {
+            if ((e.target.value) <= quantityBook) {
+                dispatch(putCart({
+                    userId: isUserLogin,
+                    bookId: bookId,
+                    id: id,
+                    quantity: parseInt(e.target.value),
+                    total: parseInt(e.target.value) * price
+                }))
+            }
+            else {
+                openNotificationWithIcon('warning')
+            }
+        }
+    }
+    // const handleChangeQuantity = (e) => {
+    //     if (e > bookNumber) {
+    //         dispatch(putBook({
+    //             categoryId: categoryId,
+    //             id: bookId,
+    //             bookName: title,
+    //             supplier: supplier,
+    //             publisher: publisher,
+    //             publishYear: publishYear,
+    //             author: author,
+    //             bookLayout: bookLayout,
+    //             language: language,
+    //             quantityPage: quantityPage,
+    //             rateStar: rateStar,
+    //             description: description,
+    //             imagesBook: images,
+    //             quantityBook: quantityBook - (e - bookNumber),
+    //             price: price,
+    //             realPrice: realPrice,
+    //         }))
+    //         setBookNumber(e)
+    //         return
+    //     }
+    //     // if (e < bookNumber) {
+    //     //     dispatch(putBook({
+    //     //         categoryId: categoryId,
+    //     //         id: bookId,
+    //     //         bookName: title,
+    //     //         supplier: supplier,
+    //     //         publisher: publisher,
+    //     //         publishYear: publishYear,
+    //     //         author: author,
+    //     //         bookLayout: bookLayout,
+    //     //         language: language,
+    //     //         quantityPage: quantityPage,
+    //     //         rateStar: rateStar,
+    //     //         description: description,
+    //     //         imagesBook: images,
+    //     //         quantityBook: quantityBook + (bookNumber - e),
+    //     //         price: price,
+    //     //         realPrice: realPrice,
+    //     //     }))
+    //     //     setBookNumber(e)
+    //     //     return
+    //     // }
+
+    // }
     function confirm(e) {
-        dispatch(putBook({
-            categoryId: categoryId,
-            id: bookId,
-            bookName: title,
-            supplier: supplier,
-            publisher: publisher,
-            publishYear: publishYear,
-            author: author,
-            bookLayout: bookLayout,
-            language: language,
-            quantityPage: quantityPage,
-            rateStar: rateStar,
-            description: description,
-            imagesBook: images,
-            quantityBook: quantityBook + bookNumber,
-            price: price,
-            realPrice: realPrice,
-        }))
         dispatch(deleteCart(id))
         message.success('Xóa thành công');
     }
@@ -128,7 +166,15 @@ const CartItem = (props) => {
             </div>
             <div className="cart--item--price">
                 <div className="cart--item--price__number">
-                    <InputNumber type="number" size="small" min={1} max={100000} value={bookNumber} onChange={(e) => handleChangeQuantity(e)} />
+                    <div className="text__content__input">
+
+                        <div className="text__content__input__count">
+                            <MinusOutlined style={{ borderRight: '1px solid #c1c1c1' }} onClick={() => { if (quantity > 1) handleMinusCart() }} className="detail__count--icon" />
+                            <InputNumber type="number" min={1} max={100000} value={quantity} onBlur={(value) => handleChangeNumber(value)} className="detail__count--input" />
+                            <PlusOutlined style={{ borderLeft: '1px solid #c1c1c1' }} className="detail__count--icon" onClick={() => handlePlusCart()} />
+                        </div>
+                    </div>
+                    {/* <InputNumber type="number" size="small" min={1} max={100000} value={bookNumber} onChange={(e) => handleChangeQuantity(e)} /> */}
                 </div>
                 <div className="cart--item__total">
                     <p className="cart-item__total--header">Thành tiền</p>

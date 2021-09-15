@@ -97,6 +97,12 @@
     display: flex;
     justify-content: center;
 }
+.cart--item--price__number input{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align:center;
+}
 
 .cart--item--price__number .ant-input-number-handler-wrap{
     opacity: 1;

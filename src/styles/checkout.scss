@@ -60,6 +60,11 @@
                         border-radius: 10px;
                     }
                 }
+                .checkout__error{
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-end;
+                }
             }
         }
 

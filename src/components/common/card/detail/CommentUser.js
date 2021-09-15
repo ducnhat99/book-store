@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Rate } from 'antd';
-import { Comment, Avatar, Form, Button, List, Input, Modal, Pagination } from 'antd';
+import { Button, Input, Modal, Pagination, notification } from 'antd';
 import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment';
 import Login from '../form/Login';
@@ -36,7 +36,7 @@ const CommentUser = (props) => {
     }, [listComments])
     const commentId = Math.max(...listCommentsAll.map(item => item.id))
     const handleClickComment = () => {
-        if (!!content && !!rateStar) {
+        if (!!content.trim() && !!rateStar) {
             dispatch(addCommentApi({
                 userId: isUserLogin,
                 bookId: parseInt(id),
@@ -49,9 +49,17 @@ const CommentUser = (props) => {
             return
         }
         else {
-            return alert("Vui lòng đánh giá sao và nhập nhận xét !")
+            return openNotificationWithIcon('warning')
+
         }
     }
+    const openNotificationWithIcon = type => {
+        notification[type]({
+            message: 'Đánh giá thất bại !',
+            description: 'Vui lòng đánh giá sao và nhập nội dung đánh giá',
+        }
+        );
+    };
     const [isModalVisible, setIsModalVisible] = React.useState(false);
     const showModal = () => {
         setIsModalVisible(true);
