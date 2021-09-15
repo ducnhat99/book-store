@@ -1,6 +1,5 @@
 .admin-list-book{
-    width: 100%;
-    height: auto;
+     
     margin-top: 20px;
     padding: 0 10px;
 
@@ -10,6 +9,23 @@
         display: flex;
         justify-content: center;
     }
+//     .admin-form-edit--container--form{
+//         width: 100%;
+//         height: auto;
+//         display: flex;
+//         flex-wrap: wrap;
+//         align-items: center;
+//         justify-content: space-between;
+//         padding: 0 20px;
+    
+//     .admin-form-edit--container{
+//         width: 45%;
+//         display: flex;
+//         flex-wrap: wrap;
+//         margin-top: 15px;
+//     }
+// }
+
     .admin-list-book--header{
         width: 100%;
         height: 50px;
@@ -19,6 +35,11 @@
             font-weight: bold;
         }
     }
+    
+    .admin-form-edit__select{
+        width: 100%;
+    }
+    
     .admin-list-book-content{
         margin-top: 10px;
         width: 100%;
@@ -55,4 +76,22 @@
             }
         }
     }
+}
+
+@media screen and (max-width: 375px){
+   
+//     .admin-form-edit--container--form{
+//         display: flex;
+//         flex-direction: column;
+//         .admin-form-edit--container{
+//             width: 100%; 
+//             margin-top: 15px;
+        
+//         .msg--error_list-book{
+//             font-size: small;
+//             margin-top: 10px;
+//         }
+//     }
+// }
+    
 }
