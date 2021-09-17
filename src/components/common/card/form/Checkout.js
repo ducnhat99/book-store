@@ -160,7 +160,7 @@ const Checkout = (props) => {
                     }
                 })
                 openNotificationWithIcon('success')
-                // history.push("/home")
+                history.push("/home")
             }
             else {
             }
