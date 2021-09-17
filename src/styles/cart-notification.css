@@ -3,11 +3,8 @@
     height: 80px;
     display: flex;
     border-bottom:1px solid #e8e8e8 ;
-    padding-bottom:10px; 
-
-
+    padding:10px 0; 
 }
-
 .cart--notification__images{
     width: 20%;
 }

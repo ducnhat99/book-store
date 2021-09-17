@@ -1,6 +1,11 @@
-.featured-item{
+.featured-item__link{
     width: 49.5%;
     height: 49%;
+}
+
+.featured-item{
+    width: 100%;
+    height: 100%;
     border: 1px solid #F2F4F5;
     display: flex;
     justify-content: flex-start;
@@ -84,8 +89,9 @@
 }
 
 @media screen and (max-width: 375px){
-    .featured-item{
-        width: 100%;
-        height: 196px;
-    }
+.featured-item__link{
+    width: 100%;
+    height: 196px;
+    margin-bottom: 10px;
+}
 }

@@ -1,26 +1,24 @@
-
 .footer__left{
   width: 30%;
   height: auto;
   margin-left: 15px;
-  border-right: 0.1px solid grey ;
-
 }
 .footer__left__main{
   width: 100%;
   width: 100%;
   height: auto;
 }
-/* .left__text p{
-  width: 100%;
-  height: auto;
-} */
 .left__text p{
 margin: 10px 0 10px 0;
 }
 .icon__left{
   width: 100%;
   display: flex;
+  margin-top: 20px;
+}
+.icon_info{
+  width: 17%;
+  font-size: 24px;
 }
 .icon__top{
   display: flex;
@@ -84,4 +82,4 @@ margin: 10px 0 10px 0;
    margin-right: 5px;
   }
 
-} 
+}

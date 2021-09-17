@@ -2,16 +2,17 @@
   font-family: Roboto;
   src: url(../font/Roboto-Regular.ttf);
 }
-
+.ant-drawer-body{
+        padding-top: 0;
+    }
 .header{
-    width: 100%;
     height: 70px;
     background: #fff;
     margin-bottom: 15px;
     // position: fixed;
     // z-index: 2;
     // top: 0;
-
+    
     .container{
     display: flex;
     font-family: 'Roboto';

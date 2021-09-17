@@ -1,0 +1,21 @@
+.container__detail{
+  height: auto;
+}
+.text__detail__header{
+  width: 100%;
+  background-color: burlywood;
+  border-bottom: 1px solid grey;
+}
+
+@media screen and (max-width: 1024px) {
+  .container__detail{
+    width: 100%;
+  }
+
+}
+@media screen and (max-width: 375px) {
+  .container__detail{
+    width: 100%;
+  }
+
+}

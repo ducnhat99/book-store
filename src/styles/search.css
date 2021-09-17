@@ -19,7 +19,9 @@
     border-color: #F7941E;
     background: #F7941E;
 }
-
+.ant-btn-lg{
+    font-size: 24px;
+}
 .ant-btn-primary:hover{
     border-color: #FFA54F;
     background: #FFA54F;
@@ -34,13 +36,16 @@
     border:solid 2px #F7941E;
 }
 
-@media screen and (max-width: 376px){
+@media screen and (max-width: 375px){
     .ant-input-group .ant-input{
         width: 100%;
         height: 30px;
     }
     .ant-input-search-large .ant-input-search-button{
     height: 30px;
+    }
+    .ant-btn-lg{
+        font-size: 20px;
     }
 
 }

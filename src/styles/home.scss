@@ -1,0 +1,69 @@
+@import './header.css';
+@import './logo.css';
+@import './card-container.css';
+@import './navigation.css';
+@import './new-card-item.css';
+@import './sale-card-container.css';
+@import './search.css';
+@import './sidebar.css';
+@import './slideshow.css';
+@import './featured-card-container.css';
+@import './featured-card-item.css';
+@import './card-hover.css';
+@import './footer.css';
+@import './about-footer.css';
+@import './contact-footer.css';
+@import './infor-footer.css';
+@import './slide-footer.css';
+@import './shipping.css';
+@import './cart-notification.css';
+@import './new-book-more.css';
+@import './cart.css';
+@import './cart-item.css';
+@import './checkout.scss';
+@import './notification-hover.css';
+@import './notification.scss';
+@import './order.scss';
+@import './bought-together.scss';
+@import './comment.scss';
+@import './card-comment.scss';
+@import './login.css';
+@import './register.css';
+@import './edit-password.css';
+@import './detail.css';
+@import './detail-book.css';
+@import './infor-detail.css';
+@import './save-edit-infor.css';
+
+@font-face {
+  font-family: Roboto;
+  src: url(../font/Roboto-Regular.ttf);
+}
+
+.container{
+    width: 1260px;
+    margin: 0 auto;
+}
+
+.home{
+    background: #F0F0F0;
+    font-family: 'Roboto';
+}
+
+p, h1, h2, h3, h4, h5, h6, a{
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto";
+}
+
+@media screen and (max-width: 1024px) {
+  .container{
+    width: 1023px;
+    margin: 0 auto;
+  }
+}
+@media screen and (max-width: 375px) {
+  .container{
+    width: 374px;
+  }
+}

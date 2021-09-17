@@ -3,8 +3,11 @@
   src: url(../font/Roboto-Regular.ttf);
 }
 
+.ant-drawer-body {
+  padding-top: 0;
+}
+
 .header {
-  width: 100%;
   height: 70px;
   background: #fff;
   margin-bottom: 15px;

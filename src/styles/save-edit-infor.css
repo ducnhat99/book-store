@@ -1,0 +1,104 @@
+.box--edit__container{
+  width: 100%;
+  height: auto;
+  min-height: 600px;
+}
+.edit--infor{
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  padding-top: 10px;
+  font-family: "Roboto";
+}
+.edit--infor__input{
+  width: 100%;
+  margin: 20px 0 0 0px;
+  display: flex;
+}
+.edit--infor__input label {
+  width: 15%;
+  margin: 0px 0 0 20px;
+}
+
+.edit--infor__input__main{
+  width: 70%;
+  margin: 5px 0 0 20px;
+}
+.edit--infor__btn__main{
+  width: 100%;
+  margin: 15px 0 0 0px ;
+  text-align: center;
+ 
+}
+.edit--infor__btn__all{
+  width: 100%;
+  margin: 0px 0 20px 0px ;
+  display: flex;
+  flex-wrap: wrap;
+}
+#edit--infor__text__head{
+  font-size: 25px;
+  font-weight: bolder;
+  width: 100%;
+}
+
+#edit--infor__save{
+  width: 20%;
+  height: 40px;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 375px) {
+  .box--edit__container{
+    width: 100%;
+  }
+  .edit--infor{
+    width: 100%;
+    padding-top: 10px;
+  }
+  
+  .edit--infor__input__main{
+    width: 100%;
+  }
+  .edit--infor{
+    width: 95%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .edit--infor__input{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .edit--infor__input label {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .edit--infor__btn__all{
+    display: flex;
+    flex-direction: column;
+}
+  .edit--infor__btn__main{
+    margin: 10px 0 0 5px;
+    width: 100%;
+  }
+  #edit--infor__save{
+    margin: 10px 0 0 0;
+    width: 50%;
+  }
+  #edit--infor__text__head{
+    
+    margin-left: 20px;
+  }
+
+  .edit--infor__btn__main:first-child{
+    margin-top: 15px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .box--edit__container{
+    min-height: 900px;
+  }
+}

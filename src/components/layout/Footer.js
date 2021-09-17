@@ -1,9 +1,9 @@
 import React from 'react';
-import About from '../common/card/AboutFooter';
-import Contact from '../common/card/ContactFooter';
-import Infor from '../common/card/InforFooter';
-import Shipping from '../common/card/ship';
-import Slide from '../common/card/SlideFooter';
+import About from '../common/card/footer/AboutFooter';
+import Contact from '../common/card/footer/ContactFooter';
+import Infor from '../common/card/footer/InforFooter';
+import Shipping from '../common/card/footer/ship';
+import Slide from '../common/card/footer/SlideFooter';
 import 'antd/dist/antd.css';
 
 function Footer() {

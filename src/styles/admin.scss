@@ -1,0 +1,19 @@
+@import './info-admin.scss';
+@import './body-admin.scss';
+@import './list-book.scss';
+@import './list-category.scss';
+@import './list-user.scss';
+@import './list-cart.scss';
+@import './form-edit.scss';
+@import './admin-home.scss';
+@import './nav-bar-admin.css';
+
+.admin{
+    background: #F0F0F0;
+    font-family: 'Roboto';
+}
+@media screen and (max-width: 375px){
+    .admin{
+        width: 100%;
+    }
+}

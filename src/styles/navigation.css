@@ -7,6 +7,7 @@
 
 .navigation-item{
     text-align: center;
+    position: relative;
 }
 
 .navigation-item p{
@@ -14,15 +15,66 @@
     color: #F9AF56;
 }
 
+.navigation--unseen{
+    width: 20px;
+    height: 20px;
+    background: red;
+    border-radius: 10px;
+    position: absolute;
+    top: -5px;
+    right: 10px;
+    color: #fff;
+}
+
+.navigation--unseen--cart{
+    width: 20px;
+    height: 20px;
+    background: red;
+    border-radius: 10px;
+    position: absolute;
+    top: -5px;
+    right: 0px;
+    color: #fff;
+}
+
 .navigation-img{
     width: 20px;
     height: 20px;
 }
 
-.modal__login{
+/* .modal__login{
     display: flex;
     justify-content: center;
     align-items: center;
+    top: 50px;
+} */
+.bellPhone{
+    display: none;
+}
+
+.bell-user--local{
+    width: 250px;
+}
+.bell-user--local__images{
+    text-align: center;
+}
+.bell-user--local__images p{
+    margin: 20px 0;
+}
+
+.bell-user--local__images button{
+    width: 70%;
+    height: 40px;
+    border: none;
+    background: #C92127;
+    border-radius: 5px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+.bell-user--local__images button:hover{
+    background: fff;
+    border: 1px solid #C92127;
+    color: #C92127;
 }
 
 .btn--more-notification{
@@ -30,8 +82,64 @@
     text-align: center;
 }
 
+.navigation--user{
+    width: 250px;
+}
+.navigation--user--info{
+    width: 100%;
+    height: 40px;
+    border-bottom: 1px solid #e4e4e4 ;
+}
+.navigation--user--info:last-child{
+    border: none;
+}
+.navigation--user--info:hover{
+    background: #e4e4e4;
+}
+
+.navigation--user--info a{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    justify-content: flex-start;
+    color: #000;
+}
+.navigation--user--info a img{
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
 @media screen and (max-width: 375px){
     .navigation-item p{
+        display: none;
+    }
+    .navigation--unseen{
+        width: 15px;
+        height: 15px;
+        right: -5px;
+        font-size: 12px;
+    }
+    .navigation--unseen--cart{
+        width: 15px;
+        height: 15px;
+        right: -5px;
+        font-size: 12px;
+    }
+    .bellPhone{
+        display: block;
+    }
+    .bellDesktop{
+        display: none;
+    }
+}   
+@media screen and (max-width: 1024px){
+    .bellPhone{
+        display: block;
+    }
+    .bellDesktop{
         display: none;
     }
 }

@@ -1,0 +1,16 @@
+.mobileHidden{
+  display: block;
+}
+.mobileVisible{
+  display:none;
+}
+
+@media screen and (max-width: 375px) {
+  .mobileHidden{
+    display: none;
+  }
+  .mobileVisible{
+    display:block;
+  }
+
+}

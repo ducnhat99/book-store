@@ -1,13 +1,3 @@
-.new-card{
-    width: 19%;
-    height: 100%;
-    border: 1px solid #F2F4F5;
-}
-
-.new-card:hover{
-    box-shadow:1px 1px 5px #B2B2B2;
-}
-
 .new-card-content{
     width: 100%;
     height: 100%;

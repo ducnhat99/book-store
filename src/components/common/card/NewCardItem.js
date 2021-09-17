@@ -1,33 +1,35 @@
 import { Rate, Popover } from 'antd';
 import CardHover from './CardHover';
+import { Link } from 'react-router-dom'
+import VNPRICE from '../../../constants/FormatPrice';
 
 const NewCardItem = (props) => {
-    const { images, title, price, realPrice, rateStar } = props
+    const { index, images, title, price, realPrice, rateStar } = props
     const content = (
         <CardHover {...props} />
     );
     return (
-        <Popover content={content} placement="rightTop">
-            <div className="new-card">
+        <Link to={`/detail/${index}`}>
+            <Popover content={content} placement="rightTop" >
                 <div className="new-card-content">
                     <div className="new-card-images">
-                        <img src={images}></img>
+                        <img src={`data:image/jpg;base64,${images}`} />
                     </div>
                     <div className="new-card-title">
                         <h3>{title}</h3>
                     </div>
                     <div className="new-card-item-price">
-                        <p>{price}</p>
+                        <p>{VNPRICE(price)}</p>
                     </div>
                     <div className="new-card-item-real-price">
-                        <p>{realPrice}</p>
+                        <p>{VNPRICE(realPrice)}</p>
                     </div>
                     <div>
-                        <Rate defaultValue={rateStar} disabled={true} />
+                        <Rate value={rateStar} disabled={true} />
                     </div>
                 </div>
-            </div>
-        </Popover>
+            </Popover >
+        </Link>
     )
 }
 
