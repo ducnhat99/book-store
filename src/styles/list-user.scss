@@ -23,24 +23,60 @@
     .admin-list-user_select{
         margin-left: 10px;
     }
-    table{
+    }
+    .table{
         width: 100%;
-        border: 1px solid #000;
+        border-collapse: collapse;
+        margin-top: 15px;
+
+    }
+    .table td, .table th{
+        padding: 12px 15px;
+        border: 0.1px solid black;
         text-align: center;
-        th{
-            border: 1px solid #000;
+    }
+    .table th{
+        background-color: #f7941e;
+    }
+    
+  
+    .table  tr:nth-child(even){
+        background-color: rgb(255, 225, 104);
+    }
+
+
+@media screen and (max-width: 375px){
+    .table thead{
+        display: none;
+    }
+    .table, .table tr, .table td {
+        display: block;
+        width: 100%;
+        font-size: 14px;
+    }
+    .table tr {
+        margin-bottom: 15px;
+        margin-top: 20px;
+        .admin-list-book-name{        
+        text-align: right;    
+        font-size: 11px;
+        height: auto;
         }
-        td{
-            border: 1px solid #000;
-        }
-        .admin-list-user-name{
-            width: 15%;
-        }
-        .admin-list-user-id{
-            width: 5%;
-        }
-        .admin-list-user-number{
-            width: 10%;
-        }
+        
+    }
+    .table  td:last-child {
+        position: relative;
+    }
+    .table td::before{
+        content: attr(data-label);
+        position: absolute;
+        left: 5px;
+        width: 40%;
+        padding-left: 15px;
+        text-align: left;
+        font-size: 13px;
+        font-weight: bolder;
+        color: rgb(58, 114, 236);
+        
     }
 }

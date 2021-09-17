@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { List, Avatar } from 'antd';
 import {
   ShoppingCartOutlined,
   UsergroupAddOutlined,
@@ -42,45 +43,57 @@ const AdminHome = () => {
     { quarter: 3, earnings: 15000 },
     { quarter: 4, earnings: 12000 },
   ];
+
+  const data = [
+    {
+      title: 'Comment 1',
+    },
+    {
+      title: 'Comment 2',
+    },
+    {
+      title: 'Comment 3',
+    },
+  ];
   return (
     <div className="admin-home-container">
       <div className="admin-home-box">
         <div className="admin-box-1">
-          <div className="admin-box-1_left" style={{ backgroundColor: '#A6341B' }}>
+          <div className="admin-box-1_left" style={{ backgroundColor: '#f7941e' }}>
             <EyeOutlined style={{ color: 'white', fontSize: '40px' }} />
           </div>
           <div className="admin-box-1_right" style={{ backgroundColor: '#D9D9D9' }}>
             <p>VISITOR</p>
-            <h2>90%</h2>
+            <h3>1525</h3>
           </div>
         </div>
         <div className="admin-box-1">
-          <div className="admin-box-1_left" style={{ backgroundColor: '#F04E3A' }}>
+          <div className="admin-box-1_left" style={{ backgroundColor: '#f7941e' }}>
             <CommentOutlined style={{ color: 'white', fontSize: '40px' }} />
           </div>
           <div className="admin-box-1_right" style={{ backgroundColor: '#D9D9D9' }}>
             <p>COMMENT</p>
-            <h2>90%</h2>
+            <h3>565</h3>
           </div>
         </div>
         <div className="admin-box-1">
-          <div className="admin-box-1_left" style={{ backgroundColor: '#FF6F00' }}>
+          <div className="admin-box-1_left" style={{ backgroundColor: '#f7941e' }}>
             <ShoppingCartOutlined style={{ color: 'white', fontSize: '40px' }} />
           </div>
           <div className="admin-box-1_right" style={{ backgroundColor: '#D9D9D9' }}>
             {' '}
             <p>OLDER</p>
-            <h2>90%</h2>
+            <h3>350</h3>
           </div>
         </div>
         <div className="admin-box-1">
-          <div className="admin-box-1_left" style={{ backgroundColor: '#F2E205' }}>
+          <div className="admin-box-1_left" style={{ backgroundColor: '#f7941e' }}>
             <UsergroupAddOutlined style={{ color: 'white', fontSize: '40px' }} />
           </div>
           <div className="admin-box-1_right" style={{ backgroundColor: '#D9D9D9' }}>
             {' '}
             <p>USER</p>
-            <h2>90%</h2>
+            <h3>1000</h3>
           </div>
         </div>
       </div>
@@ -110,8 +123,50 @@ const AdminHome = () => {
         />
       </div>
       <div className="admin-home-2">
-        <div className="admin-home-comment"></div>
-        <div className="admin-home-older"></div>
+        <div className="admin-home-older">
+          <div className="admin-home-htext">
+            <h2>OLDER</h2>
+          </div>
+          <div>
+            <List
+              itemLayout="horizontal"
+              dataSource={data}
+              renderItem={(item) => (
+                <List.Item>
+                  <List.Item.Meta
+                    avatar={
+                      <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                    }
+                    title={<a href="https://ant.design">{item.title}</a>}
+                    description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                  />
+                </List.Item>
+              )}
+            />
+          </div>
+        </div>
+        <div className="admin-home-comment">
+          <div className="admin-home-htext">
+            <h2>COMMENT</h2>
+          </div>
+          <div>
+            <List
+              itemLayout="horizontal"
+              dataSource={data}
+              renderItem={(item) => (
+                <List.Item>
+                  <List.Item.Meta
+                    avatar={
+                      <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                    }
+                    title={<a href="https://ant.design">{item.title}</a>}
+                    description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                  />
+                </List.Item>
+              )}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -36,7 +36,7 @@ const NavBarAdmin = () => {
           defaultSelectedKeys={['1']}
           defaultOpenKeys={['sub1']}
           mode="inline"
-          theme="dark"
+          theme="light"
           style={{ width: '100%', height: '100%' }}
         >
           <Menu.Item
