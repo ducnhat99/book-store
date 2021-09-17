@@ -1,56 +1,104 @@
 import React from 'react';
-import { Select, Input, Space, Button, DatePicker } from 'antd';
+import { Select, Input, Space, Button, DatePicker, notification } from 'antd';
+import { SmileOutlined } from '@ant-design/icons';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { isEmpty } from 'validator';
 import isEmail from 'validator/lib/isEmail';
+import moment from 'moment';
+import { getListUser, addUsersApi } from '../../../../slice/bookSlice'
 
 const AddUser = () => {
+  const dispatch = useDispatch();
   const { Option } = Select;
   const [emailAdmin, setEmailAdmin] = React.useState('');
   const [passAdmin, setPassAdmin] = React.useState('');
-
   const [phoneAdmin, setPhoneAdmin] = React.useState('');
   const [userAdmin, setUserAdmin] = React.useState('');
   const [addressAdmin, setAddressAdmin] = React.useState('');
+  const [birthday, setBirthday] = React.useState('')
+  const [sex, setSex] = React.useState('Nam')
+  const [role, setRole] = React.useState('user')
   const [validationMsg, setValidationMsg] = React.useState({});
-
+  const listUsers = useSelector(state => state.book.listUsers)
+  useEffect(() => {
+    dispatch(getListUser())
+  }, [dispatch])
+  const userIdMax = Math.max(...listUsers.map(item => item.id))
   const validateAll = () => {
     const msg = {};
-    if (isEmpty(emailAdmin)) {
-      msg.emailAdmin = 'Xin vui lòng nhập Email';
-    } else if (!isEmail(emailAdmin)) {
-      msg.emailAdmin = 'Email của bạn không chính xác';
-    }
+    listUsers.map((item) => {
+      if (isEmpty(emailAdmin)) {
+        msg.emailAdmin = 'Xin vui lòng nhập Email';
+      } else if (!isEmail(emailAdmin)) {
+        msg.emailAdmin = 'Email của bạn không chính xác';
+      }
 
-    if (isEmpty(passAdmin)) {
-      msg.passAdmin = 'Xin vui lòng nhập mật khẩu';
-    } else if (passAdmin.length < 8) {
-      msg.passAdmin = 'Mật khẩu phải trên 8 kí tự';
-    }
+      if (isEmpty(passAdmin)) {
+        msg.passAdmin = 'Xin vui lòng nhập mật khẩu';
+      } else if (passAdmin.length < 6) {
+        msg.passAdmin = 'Mật khẩu phải trên 6 kí tự';
+      }
 
-    if (isEmpty(phoneAdmin)) {
-      msg.phoneAdmin = 'Xin vui lòng nhập số điện thoại';
-    } else if (isNaN(phoneAdmin)) {
-      msg.phoneAdmin = 'Xin vui lòng nhập lại số điện thoại';
-    }
+      if (isEmpty(phoneAdmin)) {
+        msg.phoneAdmin = 'Xin vui lòng nhập số điện thoại';
+      } else if (isNaN(phoneAdmin)) {
+        msg.phoneAdmin = 'Xin vui lòng nhập lại số điện thoại';
+      } else if (!phoneAdmin.match(/^\d{10}$/)) {
+        msg.phoneAdmin = 'Số điện thoại gồm 10 chữ số'
+      }
 
-    if (isEmpty(userAdmin)) {
-      msg.userAdmin = 'Xin vui lòng nhập họ và tên ';
-    } else if (!isNaN(userAdmin)) {
-      msg.userAdmin = 'Xin vui lòng nhập lại họ và tên';
-    }
+      if (isEmpty(userAdmin)) {
+        msg.userAdmin = 'Xin vui lòng nhập họ và tên ';
+      } else if (!isNaN(userAdmin)) {
+        msg.userAdmin = 'Xin vui lòng nhập lại họ và tên';
+      }
 
-    if (isEmpty(addressAdmin)) {
-      msg.addressAdmin = 'Xin vui lòng nhập địa chỉ';
-    }
+      if (isEmpty(addressAdmin)) {
+        msg.addressAdmin = 'Xin vui lòng nhập địa chỉ';
+      }
+      if (emailAdmin === item.email) {
+        msg.emailAdmin = 'Email này đã tồn tại'
+      }
+    })
 
     setValidationMsg(msg);
     if (Object.keys(msg).length > 0) return false;
     return true;
   };
-
+  const setStateNull = () => {
+    setEmailAdmin('')
+    setPassAdmin('')
+    setPhoneAdmin('')
+    setUserAdmin('')
+    setBirthday('')
+    setAddressAdmin('')
+  }
+  const openNotification = () => {
+    notification.open({
+      description:
+        'Đăng ký tài khoản thành công',
+      icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+    });
+  };
   const handleAddUser = () => {
     const isValid = validateAll();
     if (!isValid) return;
+    console.log('a')
+    dispatch(addUsersApi({
+      id: userIdMax + 1,
+      fullName: userAdmin,
+      email: emailAdmin,
+      password: passAdmin,
+      phoneNumber: phoneAdmin,
+      address: addressAdmin,
+      birthDay: birthday,
+      sex: sex,
+      registerDay: moment().format('DD/MM/YYYY'),
+      role: role,
+    }))
+    setStateNull()
+    openNotification()
   };
 
   return (
@@ -88,7 +136,7 @@ const AddUser = () => {
           <label>Số điện thoại</label>
           <Input
             name="phoneAdmin"
-            type="text"
+            type="number"
             id="phoneAdmin"
             value={phoneAdmin}
             onChange={(e) => setPhoneAdmin(e.target.value)}
@@ -110,7 +158,7 @@ const AddUser = () => {
         </div>
         <div className="admin-form-edit--container">
           <label>Giới tính</label>
-          <Select defaultValue="Nam" className="admin-form-edit__select">
+          <Select defaultValue={sex} className="admin-form-edit__select" onChange={(e) => setSex(e)}>
             <Option value="Nam">Nam</Option>
             <Option value="Nữ">Nữ</Option>
             <Option value="Khác">Khác</Option>
@@ -118,8 +166,8 @@ const AddUser = () => {
         </div>
         <div className="admin-form-edit--container">
           <label>Sinh nhật</label>
-          <Space direction="vertical" className="admin-form-edit__select">
-            <DatePicker />
+          <Space direction="vertical" className="admin-form-edit__select" >
+            <DatePicker onChange={(date, dateString) => setBirthday(dateString)} />
           </Space>
         </div>
         <div className="admin-form-edit--container">
@@ -136,9 +184,9 @@ const AddUser = () => {
         </div>
         <div className="admin-form-edit--container">
           <label>Chức vụ</label>
-          <Select defaultValue="Khách hàng" className="admin-form-edit__select">
-            <Option>Khách hàng</Option>
-            <Option>Admin</Option>
+          <Select defaultValue={role} className="admin-form-edit__select" onChange={(e) => setRole(e)}>
+            <Option value="user">Khách hàng</Option>
+            <Option value="admin">Admin</Option>
           </Select>
         </div>
       </form>

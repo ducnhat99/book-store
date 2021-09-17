@@ -138,27 +138,33 @@ export const getListCart = createAsyncThunk('book/getListCart', async () => {
     return res;
 });
 export const putBook = createAsyncThunk('book/putBook', async (payload) => {
-    await axios
-        .put(`${HOST}book/${payload.id}`, {
-            categoryId: payload.categoryId,
-            id: payload.id,
-            bookName: payload.bookName,
-            supplier: payload.supplier,
-            publisher: payload.publisher,
-            publishYear: payload.publishYear,
-            author: payload.author,
-            bookLayout: payload.bookLayout,
-            language: payload.language,
-            quantityPage: payload.quantityPage,
-            rateStar: payload.rateStar,
-            description: payload.description,
-            imagesBook: payload.imagesBook,
-            quantityBook: payload.quantityBook,
-            price: payload.price,
-            realPrice: payload.realPrice,
-        })
-        .then((res) => res.data)
-        .catch((e) => console.log(e));
+    // require('events').EventEmitter.defaultMaxListeners = 15;
+    try {
+        await axios
+            .put(`${HOST}book/${payload.id}`, {
+                categoryId: payload.categoryId,
+                id: payload.id,
+                bookName: payload.bookName,
+                supplier: payload.supplier,
+                publisher: payload.publisher,
+                publishYear: payload.publishYear,
+                author: payload.author,
+                bookLayout: payload.bookLayout,
+                language: payload.language,
+                quantityPage: payload.quantityPage,
+                rateStar: payload.rateStar,
+                description: payload.description,
+                imagesBook: payload.imagesBook,
+                quantityBook: payload.quantityBook,
+                price: payload.price,
+                realPrice: payload.realPrice,
+            })
+    } catch (error) {
+        console.log(error)
+    }
+
+    // .then((res) => res.data)
+    // .catch((e) => console.log(e));
 });
 export const putBookAll = createAsyncThunk('book/putBookAll', async (payload) => {
     console.log("🚀 ~ file: bookSlice.js ~ line 141 ~ putBookAll ~ payload", payload)
@@ -220,6 +226,31 @@ export const putUser = createAsyncThunk('book/putUser', async (payload) => {
             sex: payload.sex,
             registerDay: payload.registerDay,
             role: payload.role,
+        })
+        .then((res) => res.data)
+        .catch((e) => console.log(e));
+});
+export const addCategory = createAsyncThunk('book/addCategory', async (payload) => {
+    await axios
+        .post(`${HOST}category`, {
+            id: payload.id,
+            categoryName: payload.categoryName
+        })
+        .then((res) => res.data)
+        .catch((e) => console.log(e));
+});
+export const deleteCategory = createAsyncThunk('book/deleteCategory', async (payload) => {
+    await axios
+        .delete(`${HOST}category/${payload}`)
+        .then((res) => res.data)
+        .catch((e) => console.log(e));
+    return payload;
+});
+export const putCategory = createAsyncThunk('book/putCategory', async (payload) => {
+    await axios
+        .put(`${HOST}category/${payload.id}`, {
+            id: payload.id,
+            categoryName: payload.categoryName
         })
         .then((res) => res.data)
         .catch((e) => console.log(e));
@@ -542,6 +573,55 @@ export const bookSlice = createSlice({
                 state.listUsers = action.meta.arg
             })
             .addCase(putUser.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+            //addCategory
+            .addCase(addCategory.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(addCategory.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                state.listCategory.push(action.meta.arg)
+            })
+            .addCase(addCategory.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+            //deleteCategory
+            .addCase(deleteCategory.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(deleteCategory.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                // state.listCategory.push(action.meta.arg)
+                const indexOfObject = state.listCategory.findIndex((obj) => {
+                    if (obj.id === action.payload) {
+                        return true;
+                    }
+                    return false;
+                });
+                state.listCategory.splice(indexOfObject, 1)
+            })
+            .addCase(deleteCategory.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+            //putCategory
+            .addCase(putCategory.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(putCategory.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                const indexOfObject = state.listCategory.findIndex((obj) => {
+                    if (obj.id === action.meta.arg.id) {
+                        return true;
+                    }
+                    return false;
+                });
+                state.listCategory.splice(indexOfObject, 1, action.meta.arg)
+            })
+            .addCase(putCategory.rejected, (state, action) => {
                 state.status = 'failed'
                 state.error = action.error.message
             })
