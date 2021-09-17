@@ -1,14 +1,20 @@
-.admin-list-book{
-form{
+ .admin-list-book{
+
+    form {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+   
+    }
     .admin-form-edit--container{
         width: 47%;
         margin-top: 10px;
-        .admin-form-edit__select{
+    }
+    .admin-form-edit__select{
             width: 100%;
+            
             .ant-upload .ant-upload-select .ant-upload-select-text{
                 width: 100%;
             }
@@ -20,7 +26,11 @@ form{
             }
         }
     }
-}
+
+.msg--error_list-book{
+    color: red;
+    font-size: 14px;
+  
 }
 .admin-form-edit--btn{
     width: 100%;
@@ -34,6 +44,23 @@ form{
     }
 }
 @media screen and (max-width: 375px){
+   
+    .admin-list-book{
+    form{
+        
+    }
+    .admin-form-edit--container{
+        width: 100%;
+        margin-top: 20px;
+        padding: 0 10px;
+    }
+    }
+    .msg--error_list-book{
+        font-size: 14px;
+        margin-top: 10px;
+    
+    }
+
     .admin-form-edit--btn{
         button{
             width: 40%;

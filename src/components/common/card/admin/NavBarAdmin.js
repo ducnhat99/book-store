@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { Menu, Drawer, Button } from 'antd';
 import {
@@ -27,31 +27,61 @@ const NavBarAdmin = () => {
   const onClose = () => {
     setVisible(false);
   };
-  const history = useHistory()
+  const history = useHistory();
 
   return (
     <div style={{ width: '100%', height: '100%' }}>
-      <div style={{ width: "100%", height: '100%' }} className="mobileHidden">
-        <Menu defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']} mode="inline" theme="dark" style={{ width: '100%', height: '100%' }}>
-          <Menu.Item key="1" icon={<PieChartOutlined />} onClick={() => history.push("/admin/home")}>
+      <div style={{ width: '100%', height: '100%' }} className="mobileHidden">
+        <Menu
+          defaultSelectedKeys={['1']}
+          defaultOpenKeys={['sub1']}
+          mode="inline"
+          theme="light"
+          style={{ width: '100%', height: '100%' }}
+        >
+          <Menu.Item
+            key="1"
+            icon={<PieChartOutlined />}
+            onClick={() => history.push('/admin/home')}
+          >
             Trang chủ
           </Menu.Item>
-          <Menu.Item key="2" icon={<DesktopOutlined />} onClick={() => history.push("/admin/listbook")}>
+          <Menu.Item
+            key="2"
+            icon={<DesktopOutlined />}
+            onClick={() => history.push('/admin/listbook')}
+          >
             Quản lý sách
           </Menu.Item>
-          <Menu.Item key="3" icon={<BulbOutlined />} onClick={() => history.push("/admin/listcart")}>
+          <Menu.Item
+            key="3"
+            icon={<BulbOutlined />}
+            onClick={() => history.push('/admin/listcart')}
+          >
             Quản lý đơn hàng
           </Menu.Item>
-          <Menu.Item key="4" icon={<TeamOutlined />} onClick={() => history.push("/admin/listuser")}>
+          <Menu.Item
+            key="4"
+            icon={<TeamOutlined />}
+            onClick={() => history.push('/admin/listuser')}
+          >
             Quản lý người dùng
           </Menu.Item>
-          <Menu.Item key="5" icon={<UserOutlined />} onClick={() => history.push("/admin/adduser")}>
+          <Menu.Item key="5" icon={<UserOutlined />} onClick={() => history.push('/admin/adduser')}>
             Thêm người dùng
           </Menu.Item>
-          <Menu.Item key="6" icon={<ContainerOutlined />} onClick={() => history.push("/admin/addbook")}>
+          <Menu.Item
+            key="6"
+            icon={<ContainerOutlined />}
+            onClick={() => history.push('/admin/addbook')}
+          >
             Thêm sách
           </Menu.Item>
-          <Menu.Item key="7" icon={<SettingFilled />} onClick={() => history.push("/admin/listcategory")}>
+          <Menu.Item
+            key="7"
+            icon={<SettingFilled />}
+            onClick={() => history.push('/admin/listcategory')}
+          >
             Quản lý danh mục
           </Menu.Item>
           {/* <Menu.Item key="8" icon={<UserOutlined />}>
