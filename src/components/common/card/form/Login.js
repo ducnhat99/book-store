@@ -6,6 +6,7 @@ import { SmileOutlined } from '@ant-design/icons';
 import { Button, Input, notification } from 'antd';
 import 'antd/dist/antd.css';
 import Register from './Register';
+import { USERLOGIN } from '../../../../constants/UserLogin';
 import { isEmpty } from 'validator';
 import isEmail from 'validator/lib/isEmail';
 import { isLogged, getListUser } from '../../../../slice/bookSlice'
@@ -103,18 +104,19 @@ const Login = (props) => {
       if (userValue !== item.email && passValue !== item.password) {
         msg.exact = 'Tài khoản hoặc mật khẩu không chính xác'
       }
-      if (userValue === item.email && passValue === item.password && item.roll === "user") {
+      if (userValue === item.email && passValue === item.password && item.role === "user") {
         msg.exact = ''
         dispatch(isLogged(item.id))
+        history.push('./');
         window.location.reload(false);
         props.handleCancel();
         openNotification()
       }
-      if (userValue === item.email && passValue === item.password && item.roll === "admin") {
+      if (userValue === item.email && passValue === item.password && item.role === "admin") {
         msg.exact = ''
-        history.push('/admin');
         props.handleCancel();
         openNotification()
+        history.push('/admin');
       }
       setValidationMsg(msg);
       if (Object.keys(msg).lenght > 0) return false;

@@ -1,4 +1,4 @@
-import { Pagination, Radio, Rate, Select } from 'antd';
+import { Pagination, Radio, Rate, Select, Spin, Space, Skeleton } from 'antd';
 import * as React from 'react'
 import { useEffect } from 'react';
 import NewCardItem from './NewCardItem'
@@ -19,6 +19,7 @@ const SearchBook = (props) => {
     const [isCategory, setIsCategory] = React.useState(false)
     const listCategory = useSelector(state => state.book.listCategory)
     const listBook = useSelector(state => state.book.listBook)
+    const status = useSelector(state => state.book.status)
     useEffect(() => {
         dispatch(getBooks())
         dispatch(getCategory())
@@ -266,14 +267,16 @@ const SearchBook = (props) => {
                                 </Option>
                             </Select>
                         </div>
-                        <div className="book-more--card-container">
+                        {status === 'loading' ? <div className="book-more--card-loading">
+                            <Skeleton active />
+                        </div> : <><div className="book-more--card-container">
                             {renderNewBook(listBookRender)}
                         </div>
-                        <div className="book-more-pagination">
-                            {
-                                listBookRender.length > 12 ? <Pagination defaultCurrent={1} total={listBookRender.length} onChange={handleChange} pageSize={pageLimit} /> : null
-                            }
-                        </div>
+                            <div className="book-more-pagination">
+                                {
+                                    listBookRender.length > 12 ? <Pagination defaultCurrent={1} total={listBookRender.length} onChange={handleChange} pageSize={pageLimit} /> : null
+                                }
+                            </div></>}
                     </div>
                 </div>
             </div>

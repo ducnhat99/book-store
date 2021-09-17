@@ -30,7 +30,12 @@
     margin-top: 10px;
     display: flex;
 }
-
+.cart-loading{
+    width: 69%;
+    margin-right: 1%;
+    height: auto;
+    min-height: 250px;
+}
 .cart-container__item{
     width: 69%;
     margin-right: 1%;

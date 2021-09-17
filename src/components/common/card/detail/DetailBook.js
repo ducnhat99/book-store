@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Button, Rate, Input, InputNumber, Modal, notification } from 'antd';
+import { Button, Rate, Input, InputNumber, Modal, notification, Skeleton } from 'antd';
 import { useHistory, Link } from "react-router-dom";
 import Login from '../form/Login';
 import { ShoppingCartOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
@@ -18,6 +18,7 @@ const DetailBook = (props) => {
   const listCartUser = useSelector(state => state.book.listCartUser)
   const listCartAll = useSelector(state => state.book.listCartAll)
   const bookDetail = useSelector(state => state.book.bookDetail)
+  const status = useSelector(state => state.book.status)
   const cartId = Math.max(...listCartAll.map(item => item.id))
   useEffect(() => {
     dispatch(getCartUser(isUserLogin))
@@ -102,98 +103,100 @@ const DetailBook = (props) => {
   }
   return (
     <>
-      <div className="container__detail__m">
-        <div className="container__left__detail">
-          <div className="img__left">
-            <img src={`data:image/jpg;base64,${imagesBook}`} />
+      {status === 'loading' ? <div className="container__detail__m"><Skeleton active /></div> :
+        <div className="container__detail__m">
+          <div className="container__left__detail">
+            <div className="img__left">
+              <img src={`data:image/jpg;base64,${imagesBook}`} />
+            </div>
           </div>
-        </div>
-        <div className="container__right__detail">
-          <div className="text__content__1">
-            <h1>{bookName}</h1>
-          </div>
-
-          <div className="text__content">
+          <div className="container__right__detail">
             <div className="text__content__1">
-              <div className="text">
-                <span> Nhà cung cấp: </span>
-                <span>{supplier}
-                </span>
-              </div>
-              <div className="text">
-                <span>Tác giả: </span>
-                <span>{author}
-                </span>
-              </div>
-              <div className="text">
-                <span>Nhà xuất bản: </span>
-                <span>{publisher}
-                </span>
-              </div>
-              <div className="text">
-                <span>Hình thức bìa: </span>
-                <span>{bookLayout}
-                </span>
-              </div>
+              <h1>{bookName}</h1>
             </div>
-          </div>
-          <div className="rate">
-            <Rate value={rateStar} disabled={true} />
-          </div>
-          {price ? <div className="text__content">
-            <span className="price">{VNPRICE(price)}</span>
-            {realPrice ? <span className="old_price">{VNPRICE(realPrice)}</span> : null}
-          </div> :
+
             <div className="text__content">
-              <span className="price">{price}đ</span>
-              {realPrice ? <span className="old_price">{realPrice}đ</span> : null}
-            </div>}
-
-          <div className="text__content">
-            <div className="text__content__2">
-              <div >
-                <span>Chính sách đổi trả: </span>
-                <span className="text__margin">Đổi trả sản phẩm trong 30 ngày </span>
+              <div className="text__content__1">
+                <div className="text">
+                  <span> Nhà cung cấp: </span>
+                  <span>{supplier}
+                  </span>
+                </div>
+                <div className="text">
+                  <span>Tác giả: </span>
+                  <span>{author}
+                  </span>
+                </div>
+                <div className="text">
+                  <span>Nhà xuất bản: </span>
+                  <span>{publisher}
+                  </span>
+                </div>
+                <div className="text">
+                  <span>Hình thức bìa: </span>
+                  <span>{bookLayout}
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
+            <div className="rate">
+              <Rate value={rateStar} disabled={true} />
+            </div>
+            {price ? <div className="text__content">
+              <span className="price">{VNPRICE(price)}</span>
+              {realPrice ? <span className="old_price">{VNPRICE(realPrice)}</span> : null}
+            </div> :
+              <div className="text__content">
+                <span className="price">{price}đ</span>
+                {realPrice ? <span className="old_price">{realPrice}đ</span> : null}
+              </div>}
 
-          <div className="text__content__input">
-            {quantityBook ? <>
-              <h3>Số lượng: </h3>
-              <div className="text__content__input__count">
-                <MinusOutlined style={{ borderRight: '1px solid #c1c1c1' }} onClick={() => { if (bookNumber > 1) setBookNumber(bookNumber - 1) }} className="detail__count--icon" />
-                <InputNumber type="number" min={1} max={100000} value={bookNumber} onBlur={(value) => handleChangeNumber(value)} className="detail__count--input" />
-                <PlusOutlined style={{ borderLeft: '1px solid #c1c1c1' }} className="detail__count--icon" onClick={handlePlusNumber} />
-              </div></> : <p style={{ color: 'red', fontSize: '20px' }}>Hết hàng</p>}
+            <div className="text__content">
+              <div className="text__content__2">
+                <div >
+                  <span>Chính sách đổi trả: </span>
+                  <span className="text__margin">Đổi trả sản phẩm trong 30 ngày </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="text__content__input">
+              {quantityBook ? <>
+                <h3>Số lượng: </h3>
+                <div className="text__content__input__count">
+                  <MinusOutlined style={{ borderRight: '1px solid #c1c1c1' }} onClick={() => { if (bookNumber > 1) setBookNumber(bookNumber - 1) }} className="detail__count--icon" />
+                  <InputNumber type="number" min={1} max={100000} value={bookNumber} onBlur={(value) => handleChangeNumber(value)} className="detail__count--input" />
+                  <PlusOutlined style={{ borderLeft: '1px solid #c1c1c1' }} className="detail__count--icon" onClick={handlePlusNumber} />
+                </div></> : <p style={{ color: 'red', fontSize: '20px' }}>Hết hàng</p>}
+            </div>
           </div>
-        </div>
-        {quantityBook ?
-          <div className="container__low">
-            {isUserLogin ?
-              <div className="container__low__detail">
-                <Button size="large" type="primary" danger onClick={handleAddCart} >
-                  <ShoppingCartOutlined style={{ fontSize: "24px" }} />
-                  Thêm vào giỏ hàng
-                </Button>
-                <Link to={{
-                  pathname: `/checkout`,
-                  state: {
-                    bookId: parseInt(id),
-                    quantity: bookNumber,
-                    total: bookNumber * price
-                  }
-                }}><Button size="large" danger >
-                    Mua ngay
+          {quantityBook ?
+            <div className="container__low">
+              {isUserLogin ?
+                <div className="container__low__detail">
+                  <Button size="large" type="primary" danger onClick={handleAddCart} >
+                    <ShoppingCartOutlined style={{ fontSize: "24px" }} />
+                    Thêm vào giỏ hàng
                   </Button>
-                </Link>
-              </div>
-              : <div className="container__low__detail--login">
-                <Button onClick={showModal} size="large" type="primary" danger style={{ background: "#1890ff", border: 'none' }}>Đăng nhập để mua hàng</Button>
-              </div>
-            }
-          </div> : null}
-      </div>
+                  <Link to={{
+                    pathname: `/checkout`,
+                    state: {
+                      bookId: parseInt(id),
+                      quantity: bookNumber,
+                      total: bookNumber * price
+                    }
+                  }}><Button size="large" danger >
+                      Mua ngay
+                    </Button>
+                  </Link>
+                </div>
+                : <div className="container__low__detail--login">
+                  <Button onClick={showModal} size="large" type="primary" danger style={{ background: "#1890ff", border: 'none' }}>Đăng nhập để mua hàng</Button>
+                </div>
+              }
+            </div> : null}
+        </div>
+      }
       <Modal
         footer={null}
         visible={isModalVisible}

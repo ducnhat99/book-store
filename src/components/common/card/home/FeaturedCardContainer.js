@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, Skeleton } from 'antd';
 import { Link } from 'react-router-dom';
 import { animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 import 'antd/dist/antd.css';
@@ -13,6 +13,7 @@ const FeaturedCardContainer = () => {
     const dispatch = useDispatch()
     let listBook = useSelector(state => state.book.listBook)
     const listCategory = useSelector(state => state.book.listCategory)
+    const status = useSelector(state => state.book.status)
     const listBookSale = []
     useEffect(() => {
         dispatch(getBooks())
@@ -51,7 +52,9 @@ const FeaturedCardContainer = () => {
             <div className="featured-header">
                 <h2>SÁCH NỖI BẬT</h2>
             </div>
-            <div className="featured-main" >
+            {status === 'loading' ? <div className="featured-main" >
+                <Skeleton active />
+            </div> : <div className="featured-main" >
                 <div className="top-featured">
                     <div className="top-featured-images">
                         <img src={top} alt="top 1 featured" />
@@ -60,7 +63,6 @@ const FeaturedCardContainer = () => {
                 <div className="featured-main-item">
                     <div className="featured-main-list-item" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={() => {
                         handleMouseLeave()
-                        scroll.scrollToTop();
                     }}>
                         {renderNewBook(listBook)}
                     </div>
@@ -70,7 +72,8 @@ const FeaturedCardContainer = () => {
                         </Link>
                     </div>
                 </div>
-            </div>
+            </div>}
+
         </div >
     )
 }

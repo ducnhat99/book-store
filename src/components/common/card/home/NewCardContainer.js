@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Button } from 'antd';
+import { Button, Skeleton } from 'antd';
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
@@ -11,6 +11,7 @@ const NewCardContainer = () => {
     const dispatch = useDispatch()
     const listBook = useSelector(state => state.book.listBook)
     const listCategory = useSelector(state => state.book.listCategory)
+    const status = useSelector(state => state.book.status)
     useEffect(() => {
         dispatch(getBooks())
         dispatch(getCategory())
@@ -22,7 +23,6 @@ const NewCardContainer = () => {
                 if (categoryItem.id === item.categoryId) {
                     return <div className="new-card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={() => {
                         handleMouseLeave()
-                        scroll.scrollToTop();
                     }}>
                         <NewCardItem key={index} index={item.id} images={item.imagesBook} title={item.bookName} author={item.author} product={categoryItem.categoryName} page={item.quantityPage} price={item.price} realPrice={item.realPrice} rateStar={item.rateStar} description={item.description} />
                     </div>
@@ -46,17 +46,19 @@ const NewCardContainer = () => {
             <div className="card-header">
                 <h2>SÁCH MỚI</h2>
             </div>
-            <div className="card-main">
-                {/* onMouseEnter={() => scroll.scrollTo(580, scrollType)} */}
+            {status === 'loading' ? <div className="card-main">
+                <Skeleton active />
+            </div> : <div className="card-main">
                 <div className="card-item">
                     {renderNewBook(listBook)}
                 </div>
                 <div className="card-load-more">
                     <Link to="/newbook">
-                        <Button className="btn-card-load-more" onClick={() => scroll.scrollToTop()}>Xem thêm</Button>
+                        <Button className="btn-card-load-more" >Xem thêm</Button>
                     </Link>
                 </div>
-            </div>
+            </div>}
+
         </div>
     )
 }

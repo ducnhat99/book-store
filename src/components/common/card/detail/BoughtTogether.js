@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { useEffect } from 'react';
+import { Skeleton, Spin, Space } from 'antd';
 import { useSelector, useDispatch } from 'react-redux'
 import { getBookCategory, getCategory } from '../../../../slice/bookSlice'
 import NewCardItem from '../NewCardItem'
@@ -11,6 +12,7 @@ const BoughtTogether = (props) => {
     const dispatch = useDispatch()
     const listBookCategory = useSelector(state => state.book.listBookCategory)
     const listCategory = useSelector(state => state.book.listCategory)
+    const status = useSelector(state => state.book.status)
     useEffect(() => {
         dispatch(getBookCategory(idCate))
         dispatch(getCategory())
@@ -42,9 +44,10 @@ const BoughtTogether = (props) => {
             <div className="card-header">
                 <h2>GỢI Ý CHO BẠN</h2>
             </div>
-            <div className="card-item">
-                {renderNewBook(listBookRender)}
-            </div>
+            {status === 'loading' ? <div className="card-item"><Skeleton active /></div> :
+                <div className="card-item">
+                    {renderNewBook(listBookRender)}
+                </div>}
         </div>
     )
 }

@@ -79,53 +79,6 @@ const CartItem = (props) => {
             }
         }
     }
-    // const handleChangeQuantity = (e) => {
-    //     if (e > bookNumber) {
-    //         dispatch(putBook({
-    //             categoryId: categoryId,
-    //             id: bookId,
-    //             bookName: title,
-    //             supplier: supplier,
-    //             publisher: publisher,
-    //             publishYear: publishYear,
-    //             author: author,
-    //             bookLayout: bookLayout,
-    //             language: language,
-    //             quantityPage: quantityPage,
-    //             rateStar: rateStar,
-    //             description: description,
-    //             imagesBook: images,
-    //             quantityBook: quantityBook - (e - bookNumber),
-    //             price: price,
-    //             realPrice: realPrice,
-    //         }))
-    //         setBookNumber(e)
-    //         return
-    //     }
-    //     // if (e < bookNumber) {
-    //     //     dispatch(putBook({
-    //     //         categoryId: categoryId,
-    //     //         id: bookId,
-    //     //         bookName: title,
-    //     //         supplier: supplier,
-    //     //         publisher: publisher,
-    //     //         publishYear: publishYear,
-    //     //         author: author,
-    //     //         bookLayout: bookLayout,
-    //     //         language: language,
-    //     //         quantityPage: quantityPage,
-    //     //         rateStar: rateStar,
-    //     //         description: description,
-    //     //         imagesBook: images,
-    //     //         quantityBook: quantityBook + (bookNumber - e),
-    //     //         price: price,
-    //     //         realPrice: realPrice,
-    //     //     }))
-    //     //     setBookNumber(e)
-    //     //     return
-    //     // }
-
-    // }
     function confirm(e) {
         dispatch(deleteCart(id))
         message.success('Xóa thành công');
@@ -158,7 +111,8 @@ const CartItem = (props) => {
                     </Link>
                 </div>
                 <div className="cart--item--info__price">
-                    <p>{VNPRICE(price)}</p>
+                {price ?<p>{VNPRICE(price)}</p> :null}
+                    
                 </div>
                 <div className="cart--item--info__real-price">
                     {realPrice ? <p>{VNPRICE(realPrice)}</p> : null}
@@ -178,7 +132,7 @@ const CartItem = (props) => {
                 </div>
                 <div className="cart--item__total">
                     <p className="cart-item__total--header">Thành tiền</p>
-                    <p className="cart-item__total--price">{VNPRICE(total)}</p>
+                    {price ?<p className="cart-item__total--price">{VNPRICE(total)}</p> :null}
                 </div>
             </div>
         </div>
