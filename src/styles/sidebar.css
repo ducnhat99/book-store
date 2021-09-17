@@ -3,6 +3,13 @@
     background: #fff;
     width: 25%;
 }
+.sidebar--loading{
+    background: #fff;
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .sidebar-table{
     width: 100%;

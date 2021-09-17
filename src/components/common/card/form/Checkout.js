@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
+import { batch } from 'react-redux'
 import { useHistory } from "react-router-dom";
 import { Button, Input, Radio, notification } from 'antd';
 import moment from 'moment';
 import 'antd/dist/antd.css';
 import { USERLOGIN } from '../../../../constants/UserLogin';
-import { getUser, getListOrder, getListDetailOrder, getBooks, addOrder, addDetailOrder, putBook, getCartUser } from '../../../../slice/bookSlice'
+import { getUser, getListOrder, getBooks, addOrder, putBook, getCartUser, putBookAll } from '../../../../slice/bookSlice'
 import { isEmpty } from 'validator';
 import isEmail from 'validator/lib/isEmail';
 import VNPRICE from '../../../../constants/FormatPrice';
@@ -14,19 +15,17 @@ const Checkout = (props) => {
     const isUserLogin = JSON.parse(localStorage.getItem(USERLOGIN))
     const user = useSelector(state => state.book.user)
     const listOrder = useSelector(state => state.book.listOrder)
-    const listDetailOrder = useSelector(state => state.book.listDetailOrder)
     const listBook = useSelector(state => state.book.listBook)
     const listCartUser = useSelector(state => state.book.listCartUser)
     const [fullName, setFullName] = React.useState('')
     const [phoneNumber, setPhoneNumber] = React.useState('')
     const [email, setEmail] = React.useState('')
     const [address, setAddress] = React.useState('')
+    const [arrOrder, setArrOrder] = React.useState([])
+    const [listBookPut, setListBookPut] = React.useState([])
     const [validationMsg, setValidationMsg] = React.useState({});
     const [pay, setPay] = React.useState('Thanh toán khi nhận hàng')
     const orderId = Math.max(...listOrder.map(item => item.id))
-    const detailOrderId = Math.max(...listDetailOrder.map(item => item.id))
-    console.log(orderId)
-    console.log(detailOrderId)
     const dispatch = useDispatch()
     const history = useHistory()
     useEffect(() => {
@@ -34,7 +33,6 @@ const Checkout = (props) => {
         dispatch(getCartUser(isUserLogin))
         dispatch(getListOrder())
         dispatch(getBooks())
-        dispatch(getListDetailOrder())
     }, [dispatch])
     useEffect(() => {
         setFullName(user.fullName)
@@ -42,6 +40,46 @@ const Checkout = (props) => {
         setEmail(user.email)
         setAddress(user.address)
     }, [user])
+    useEffect(() => {
+        let list = [...listBook]
+        list.map((item, index) => {
+            return listCartUser.map((e) => {
+                if (e.bookId === item.id) {
+                    return list.splice(index, 1, {
+                        categoryId: item.categoryId,
+                        id: item.id,
+                        bookName: item.bookName,
+                        supplier: item.supplier,
+                        publisher: item.publisher,
+                        publishYear: item.publishYear,
+                        author: item.author,
+                        bookLayout: item.bookLayout,
+                        language: item.language,
+                        quantityPage: item.quantityPage,
+                        rateStar: item.rateStar,
+                        description: item.description,
+                        imagesBook: item.imagesBook,
+                        quantityBook: item.quantityBook - e.quantity,
+                        price: item.price,
+                        realPrice: item.realPrice,
+                    })
+                }
+            })
+        })
+        setListBookPut([...list])
+    }, [listBook])
+    useEffect(() => {
+        const list = []
+        listCartUser.map((element, index) => {
+            list.push({
+                bookId: element.bookId,
+                quantityOrder: element.quantity,
+                total: element.total
+            })
+            return
+        });
+        setArrOrder(list)
+    }, [listCartUser])
     const totalMoney = listCartUser.reduce((a, b) => a + b.total, 0
     )
     const openNotificationWithIcon = type => {
@@ -76,13 +114,13 @@ const Checkout = (props) => {
         if (Object.keys(msg).length > 0) return false;
         return true;
     };
-    const handleCheckout = async() => {
+    const handleCheckout = async () => {
         const isValid = validateAll();
         if (!isValid) return;
         if (!!props.location.state) {
             if (pay === 'Thanh toán khi nhận hàng') {
-                //order
-                   await dispatch(addOrder({
+                console.log('a')
+                await dispatch(addOrder({
                     userId: isUserLogin,
                     id: orderId + 1,
                     fullName: fullName,
@@ -91,48 +129,45 @@ const Checkout = (props) => {
                     address: address,
                     bookingDate: moment().format('DD/MM/YYYY'),
                     bill: props.location.state.total + 30000,
+                    detailOrder: [{
+                        bookId: props.location.state.bookId,
+                        quantityOrder: props.location.state.quantity,
+                        total: props.location.state.total
+                    }],
                     payments: 'Trực tiếp',
                     status: 'Đang xử lý',
                 }))
-                    await dispatch(addDetailOrder({
-                    orderId: orderId + 1,
-                    bookId: props.location.state.bookId,
-                    id: detailOrderId + 1,
-                    quantityOrder: props.location.state.quantity,
-                    total: props.location.state.total
-                }))
-               await listBook.map((book)=>{
-                if(book.id === props.location.state.bookId){
-                   dispatch(putBook({
-                        categoryId: book.categoryId,
-                        id: book.id,
-                        bookName: book.bookName,
-                        supplier: book.supplier,
-                        publisher: book.publisher,
-                        publishYear: book.publishYear,
-                        author: book.author,
-                        bookLayout: book.bookLayout,
-                        language: book.language,
-                        quantityPage: book.quantityPage,
-                        rateStar: book.rateStar,
-                        description: book.description,
-                        imagesBook: book.imagesBook,
-                        quantityBook: book.quantityBook - props.location.state.quantity,
-                        price: book.price,
-                        realPrice: book.realPrice,
+                await listBook.map((book) => {
+                    if (book.id === props.location.state.bookId) {
+                        dispatch(putBook({
+                            categoryId: book.categoryId,
+                            id: book.id,
+                            bookName: book.bookName,
+                            supplier: book.supplier,
+                            publisher: book.publisher,
+                            publishYear: book.publishYear,
+                            author: book.author,
+                            bookLayout: book.bookLayout,
+                            language: book.language,
+                            quantityPage: book.quantityPage,
+                            rateStar: book.rateStar,
+                            description: book.description,
+                            imagesBook: book.imagesBook,
+                            quantityBook: book.quantityBook - props.location.state.quantity,
+                            price: book.price,
+                            realPrice: book.realPrice,
                         }))
-                }
-            })
+                    }
+                })
                 openNotificationWithIcon('success')
-                history.push("/home")
+                // history.push("/home")
             }
             else {
-                console.log('chua co momo')
             }
         }
         else {
             if (pay === 'Thanh toán khi nhận hàng') {
-                // dispatch(addOrder({
+                //    await dispatch(addOrder({
                 //         userId: isUserLogin,
                 //         id: orderId + 1,
                 //         fullName: fullName,
@@ -141,9 +176,34 @@ const Checkout = (props) => {
                 //         address: address,
                 //         bookingDate: moment().format('DD/MM/YYYY'),
                 //         bill: totalMoney + 30000,
+                //         detailOrder: arrOrder,
                 //         payments: 'Trực tiếp',
-                //         status: 'Đang xử lý',
-                //     },setTimeout(function(){ handleAddOrderDetailCart() }, 1000)))
+                //         status: 'Đang xử lý'
+                //     }))
+                listBook.map((item) => {
+                    return (listCartUser.map((e) => {
+                        if (e.bookId === item.id) {
+                            dispatch(putBook({
+                                categoryId: item.categoryId,
+                                id: item.id,
+                                bookName: item.bookName,
+                                supplier: item.supplier,
+                                publisher: item.publisher,
+                                publishYear: item.publishYear,
+                                author: item.author,
+                                bookLayout: item.bookLayout,
+                                language: item.language,
+                                quantityPage: item.quantityPage,
+                                rateStar: item.rateStar,
+                                description: item.description,
+                                imagesBook: item.imagesBook,
+                                quantityBook: item.quantityBook - e.quantity,
+                                price: item.price,
+                                realPrice: item.realPrice,
+                            }))
+                        }
+                    }))
+                })
             }
         }
     }
@@ -209,7 +269,6 @@ const Checkout = (props) => {
                         </div>
                         <div className="checkout--main--pay__price">
                             <p>Tổng số tiền</p>
-
                             {!!props.location.state ? <p>{VNPRICE(props.location.state.total + 30000)}</p> : <p>{VNPRICE(totalMoney + 30000)}</p>}
                         </div>
                         <div className="checkout--main--pay__btn--box">

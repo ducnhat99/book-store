@@ -138,7 +138,6 @@ export const getListCart = createAsyncThunk('book/getListCart', async () => {
     return res;
 });
 export const putBook = createAsyncThunk('book/putBook', async (payload) => {
-    console.log(payload)
     await axios
         .put(`${HOST}book/${payload.id}`, {
             categoryId: payload.categoryId,
@@ -161,20 +160,21 @@ export const putBook = createAsyncThunk('book/putBook', async (payload) => {
         .then((res) => res.data)
         .catch((e) => console.log(e));
 });
-export const getListOrder = createAsyncThunk('book/getListOrder', async () => {
-    const res = await axios
-        .get(`${HOST}detailOrder`)
+export const putBookAll = createAsyncThunk('book/putBookAll', async (payload) => {
+    console.log("🚀 ~ file: bookSlice.js ~ line 141 ~ putBookAll ~ payload", payload)
+    await axios
+        .put(`${HOST}book`, payload)
         .then((res) => res.data)
         .catch((e) => console.log(e));
-    return res;
 });
-export const getListDetailOrder = createAsyncThunk('book/getListDetailOrder', async () => {
+export const getListOrder = createAsyncThunk('book/getListOrder', async () => {
     const res = await axios
         .get(`${HOST}order`)
         .then((res) => res.data)
         .catch((e) => console.log(e));
     return res;
 });
+
 export const addOrder = createAsyncThunk('book/addOrder', async (payload) => {
     await axios
         .post(`${HOST}order`, {
@@ -186,19 +186,40 @@ export const addOrder = createAsyncThunk('book/addOrder', async (payload) => {
             address: payload.address,
             bookingDate: payload.bookingDate,
             bill: payload.bill,
+            detailOrder: payload.detailOrder,
             payments: payload.payments,
-    })
+            status: payload.status
+        })
         .then((res) => res.data)
         .catch((e) => console.log(e));
 });
-export const addDetailOrder = createAsyncThunk('book/addDetailOrder', async (payload) => {
+
+export const getListOrderUser = createAsyncThunk('book/getListOrderUser', async (id) => {
+    const res = await axios
+        .get(`${HOST}users/${id}/order`)
+        .then((res) => res.data)
+        .catch((e) => console.log(e));
+    return res;
+});
+export const deleteCartUser = createAsyncThunk('book/deleteCartUser', async (id) => {
     await axios
-        .post(`${HOST}detailOrder`, {
-            orderId: payload.orderId,
-            bookId: payload.bookId,
+        .delete(`${HOST}users/${id}/cart`)
+        .then((res) => res.data)
+        .catch((e) => console.log(e));
+});
+export const putUser = createAsyncThunk('book/putUser', async (payload) => {
+    await axios
+        .put(`${HOST}users/${payload.id}`, {
             id: payload.id,
-            quantityOrder: payload.quantityOrder,
-            total: payload.total,
+            fullName: payload.fullName,
+            email: payload.email,
+            password: payload.password,
+            phoneNumber: payload.phoneNumber,
+            address: payload.address,
+            birthDay: payload.birthDay,
+            sex: payload.sex,
+            registerDay: payload.registerDay,
+            role: payload.role,
         })
         .then((res) => res.data)
         .catch((e) => console.log(e));
@@ -217,7 +238,7 @@ export const bookSlice = createSlice({
         listCartUser: [],
         listCartAll: [],
         listOrder: [],
-        listDetailOrder: []
+        listOrderUser: []
     },
     reducers: {
         isLogged: (state, action) => {
@@ -332,6 +353,7 @@ export const bookSlice = createSlice({
             .addCase(addCommentApi.fulfilled, (state, action) => {
                 state.status = 'succeeded'
                 state.commentsBook.push(action.payload)
+                state.listComments.push(action.payload)
             })
             .addCase(addCommentApi.rejected, (state, action) => {
                 state.status = 'failed'
@@ -404,6 +426,7 @@ export const bookSlice = createSlice({
             .addCase(addCartApi.fulfilled, (state, action) => {
                 state.status = 'succeeded'
                 state.listCartUser.push(action.meta.arg)
+                state.listCartAll.push(action.meta.arg)
             })
             .addCase(addCartApi.rejected, (state, action) => {
                 state.status = 'failed'
@@ -453,18 +476,6 @@ export const bookSlice = createSlice({
                 state.status = 'failed'
                 state.error = action.error.message
             })
-            //listDetailOrder
-            .addCase(getListDetailOrder.pending, (state, action) => {
-                state.status = 'loading'
-            })
-            .addCase(getListDetailOrder.fulfilled, (state, action) => {
-                state.status = 'succeeded'
-                state.listDetailOrder = action.payload
-            })
-            .addCase(getListDetailOrder.rejected, (state, action) => {
-                state.status = 'failed'
-                state.error = action.error.message
-            })
             //addOrder
             .addCase(addOrder.pending, (state, action) => {
                 state.status = 'loading'
@@ -472,20 +483,65 @@ export const bookSlice = createSlice({
             .addCase(addOrder.fulfilled, (state, action) => {
                 state.status = 'succeeded'
                 state.listOrder.push(action.meta.arg)
+                state.listOrderUser.push(action.meta.arg)
             })
             .addCase(addOrder.rejected, (state, action) => {
                 state.status = 'failed'
                 state.error = action.error.message
             })
-            //addDetailOrder
-            .addCase(addDetailOrder.pending, (state, action) => {
+
+            //getListOrderUser
+            .addCase(getListOrderUser.pending, (state, action) => {
                 state.status = 'loading'
             })
-            .addCase(addDetailOrder.fulfilled, (state, action) => {
+            .addCase(getListOrderUser.fulfilled, (state, action) => {
                 state.status = 'succeeded'
-                state.listDetailOrder.push(action.meta.arg)
+                state.listOrderUser = action.payload
             })
-            .addCase(addDetailOrder.rejected, (state, action) => {
+            .addCase(getListOrderUser.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+            //putBookAll
+            .addCase(putBookAll.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(putBookAll.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                state.listBook = action.meta.arg
+                // state.bookDetail = action.meta.arg
+            })
+            .addCase(putBookAll.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+            //deleteCartUser
+            .addCase(deleteCartUser.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(deleteCartUser.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                // const indexOfObject = state.listCartUser.findIndex((obj) => {
+                //     if (obj.id === action.payload) {
+                //         return true;
+                //     }
+                //     return false;
+                // });
+                state.listCartUser.splice(0)
+            })
+            .addCase(deleteCartUser.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+            //putUser
+            .addCase(putUser.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(putUser.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                state.listUsers = action.meta.arg
+            })
+            .addCase(putUser.rejected, (state, action) => {
                 state.status = 'failed'
                 state.error = action.error.message
             })

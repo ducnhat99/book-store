@@ -106,7 +106,7 @@ const Register = (props) => {
       birthDay: birthday,
       sex: sex,
       registerDay: moment().format('DD/MM/YYYY'),
-      roll: 'user',
+      role: 'user',
     }))
     openNotification()
     props.handleLogin()

@@ -1,5 +1,5 @@
-import { Button } from 'antd';
 import { Link } from 'react-router-dom'
+import { Button, Skeleton } from 'antd';
 import { DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 import 'antd/dist/antd.css';
 import images from '../../../../images/book-orange.jpg'
@@ -12,6 +12,7 @@ const SaleCardContainer = () => {
     const dispatch = useDispatch()
     let listBook = useSelector(state => state.book.listBook)
     const listCategory = useSelector(state => state.book.listCategory)
+    const status = useSelector(state => state.book.status)
     const listBookSale = []
     useEffect(() => {
         dispatch(getBooks())
@@ -29,7 +30,6 @@ const SaleCardContainer = () => {
                 if (categoryItem.id === item.categoryId) {
                     return <div className="new-card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={() => {
                         handleMouseLeave()
-                        scroll.scrollToTop();
                     }}>
                         <NewCardItem key={index} index={item.id} images={item.imagesBook} title={item.bookName} author={item.author} product={categoryItem.categoryName} page={item.quantityPage} price={item.price} realPrice={item.realPrice} rateStar={item.rateStar} description={item.description} />
                     </div>
@@ -53,7 +53,9 @@ const SaleCardContainer = () => {
             <div className="sale-card-header">
                 <h2>SÁCH GIẢM GIÁ</h2>
             </div>
-            <div className="card-main">
+            {status === 'loading' ? <div className="card-main">
+                <Skeleton active />
+            </div> : <div className="card-main">
                 <div className="card-item">
                     {renderNewBook(listBookSale)}
                 </div>
@@ -62,7 +64,7 @@ const SaleCardContainer = () => {
                         <Button className="btn-card-load-more" onClick={() => scroll.scrollToTop()}>Xem thêm</Button>
                     </Link>
                 </div>
-            </div>
+            </div>}
         </div>
     )
 }
