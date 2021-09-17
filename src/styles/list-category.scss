@@ -1,3 +1,4 @@
+.admin-list-book{ 
 .admin-list-category-id{
     width: 100px;
 }
@@ -9,4 +10,75 @@
     height: 50px;
     margin-bottom: 10px;
     
+}
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+
+}
+.table td, table th{
+    padding: 12px 15px;
+    border: 0.1px solid black;
+    text-align: center;
+}
+.table th{
+    background-color: #f7941e;
+}
+
+
+.table  tr:nth-child(even){
+    background-color: rgb(255, 225, 104);
+}
+
+}
+
+@media screen and (max-width: 375px){
+.admin-list-book{
+.admin-list-search{
+    .admin-list-book_select{
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    .input_search_text{
+        width: 100%;
+    }
+  }
+}
+
+.table thead{
+    display: none;
+}
+.table, .table tr, .table td {
+    display: block;
+    width: 100%;
+    font-size: 14px;
+}
+.table tr {
+    margin-bottom: 15px;
+    margin-top: 20px;
+    .admin-list-book-name{        
+    text-align: right;    
+    font-size: 11px;
+    height: auto;
+    }
+    
+}
+.table  td:last-child {
+    position: relative;
+}
+.table td::before{
+    content: attr(data-label);
+    position: absolute;
+    left: 5px;
+    width: 40%;
+    padding-left: 15px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: bolder;
+    // border: 0.1px solid red;
+    color: rgb(58, 114, 236);
+    
+}
+
 }
