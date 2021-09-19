@@ -16,6 +16,7 @@ const ROUTE = {
     LISTBOOK: "/admin/listbook",
     LISTCART: "/admin/listcart",
     LISTUSER: "/admin/listuser",
+    ADDORDER: "/admin/addorder",
     ADDUSER: "/admin/adduser",
     ADDBOOK: "/admin/addbook",
     LISTCATEGORY: "/admin/listcategory",
@@ -23,7 +24,8 @@ const ROUTE = {
     EDITDETAILCART: "/admin/editdetailcart",
     EDITCART: "/admin/editcart",
     DETAILCART: "/admin/detailcart",
-    EDITUSER: "/admin/edituser"
+    EDITUSER: "/admin/edituser",
+    DETAILORDER: "/admin/detailorder"
 }
 
 export default ROUTE

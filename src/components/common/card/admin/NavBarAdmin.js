@@ -67,16 +67,6 @@ const NavBarAdmin = () => {
           >
             Quản lý người dùng
           </Menu.Item>
-          <Menu.Item key="5" icon={<UserOutlined />} onClick={() => history.push('/admin/adduser')}>
-            Thêm người dùng
-          </Menu.Item>
-          <Menu.Item
-            key="6"
-            icon={<ContainerOutlined />}
-            onClick={() => history.push('/admin/addbook')}
-          >
-            Thêm sách
-          </Menu.Item>
           <Menu.Item
             key="7"
             icon={<SettingFilled />}

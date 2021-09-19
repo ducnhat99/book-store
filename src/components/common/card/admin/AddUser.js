@@ -3,6 +3,7 @@ import { Select, Input, Space, Button, DatePicker, notification } from 'antd';
 import { SmileOutlined } from '@ant-design/icons';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { isEmpty } from 'validator';
 import isEmail from 'validator/lib/isEmail';
 import moment from 'moment';
@@ -10,6 +11,7 @@ import { getListUser, addUsersApi } from '../../../../slice/bookSlice'
 
 const AddUser = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { Option } = Select;
   const [emailAdmin, setEmailAdmin] = React.useState('');
   const [passAdmin, setPassAdmin] = React.useState('');
@@ -84,7 +86,6 @@ const AddUser = () => {
   const handleAddUser = () => {
     const isValid = validateAll();
     if (!isValid) return;
-    console.log('a')
     dispatch(addUsersApi({
       id: userIdMax + 1,
       fullName: userAdmin,
@@ -98,6 +99,7 @@ const AddUser = () => {
       role: role,
     }))
     setStateNull()
+    history.push("/admin/listuser")
     openNotification()
   };
 
@@ -146,7 +148,7 @@ const AddUser = () => {
         </div>
         <div className="admin-form-edit--container">
           <label>Mật khẩu</label>
-          <Input
+          <Input.Password
             name="passAdmin"
             type="text"
             id="passAdmin"

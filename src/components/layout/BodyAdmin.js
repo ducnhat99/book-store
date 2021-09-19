@@ -13,6 +13,8 @@ import ListUser from "../common/card/admin/ListUser"
 import NavBarAdmin from "../common/card/admin/NavBarAdmin"
 import AdminHome from "../common/card/admin/AdminHome";
 import ROUTE from "../../constants/Router"
+import AddOrder from "../common/card/admin/AddOrder";
+import DetailOrder from "../common/card/admin/DetailOrder";
 const BodyAdmin = () => {
     return (
         <div className="body-admin">
@@ -33,6 +35,8 @@ const BodyAdmin = () => {
                         <Route path={ROUTE.EDITDETAILCART} component={EditDetailCart} />
                         <Route path={ROUTE.EDITCART} component={EditCart} />
                         <Route path={ROUTE.DETAILCART} component={DetailCart} />
+                        <Route path={ROUTE.ADDORDER} component={AddOrder} />
+                        <Route path={ROUTE.DETAILORDER} component={DetailOrder} />
                         <Route path={ROUTE.EDITUSER} component={EditUser} />
                         <Redirect to={ROUTE.HOMEADMIN} />
                     </Switch>
