@@ -1,65 +1,60 @@
+import * as React from 'react';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import images from '../../../../images/humble.jpg';
 import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { Pagination, Select, Input, Space, Button } from 'antd';
 import { getInputClassName } from 'antd/lib/input/Input';
+import { getBooks, getCategory } from '../../../../slice/bookSlice';
+import { useEffect } from 'react';
+import CartListBook from './CartListBook';
+const { Search } = Input;
 
 const ListBook = () => {
   const history = useHistory();
   const { Option } = Select;
-  const { Search } = Input;
-  const listBookAdmin = [
-    {
-      bookId: 1,
-      categoryId: 1,
-      title: 'Sài Gòn - Những Mảnh Ghép Rời Ký Ức Sài Gòn Sài Gòn',
-      anthor: 'Jeffrey Archer',
-      price: '50.500d',
-      numberBook: 32,
-      yearXB: 2017,
-      images: images,
-    },
-    {
-      bookId: 1,
-      categoryId: 1,
-      title: 'Sài Gòn - Những Mảnh Ghép Rời Ký Ức Sài Gòn Sài Gòn',
-      anthor: 'Jeffrey Archer',
-      price: '50.500d',
-      numberBook: 32,
-      yearXB: 2017,
-      images: images,
-    },
-    {
-      bookId: 1,
-      categoryId: 1,
-      title: 'Sài Gòn - Những Mảnh Ghép Rời Ký Ức Sài Gòn Sài Gòn',
-      anthor: 'Jeffrey Archer',
-      price: '50.500d',
-      numberBook: 32,
-      yearXB: 2017,
-      images: images,
-    },
-    {
-      bookId: 1,
-      categoryId: 1,
-      title: 'Sài Gòn - Những Mảnh Ghép Rời Ký Ức Sài Gòn Sài Gòn',
-      anthor: 'Jeffrey Archer',
-      price: '50.500d',
-      numberBook: 32,
-      yearXB: 2017,
-      images: images,
-    },
-    {
-      bookId: 1,
-      categoryId: 1,
-      title: 'Sài Gòn - Những Mảnh Ghép Rời Ký Ức Sài Gòn Sài Gòn',
-      anthor: 'Jeffrey Archer',
-      price: '50.500d',
-      numberBook: 32,
-      yearXB: 2017,
-      images: images,
-    },
-  ];
+  const pageLimit = 12;
+  const [pageSlice, setPageSlice] = React.useState(0);
+  const handleChange = (page, pageSize) => {
+    setPageSlice((page - 1) * pageSize);
+  };
+
+  const dispatch = useDispatch();
+  let listBook = useSelector((state) => state.book.listBook);
+  const listCategory = useSelector((state) => state.book.listCategory);
+  const status = useSelector((state) => state.book.status);
+
+  useEffect(() => {
+    dispatch(getBooks());
+    dispatch(getCategory());
+  }, [dispatch]);
+
+  listBook = [...listBook];
+  const renderlistBookAdmin = (data) => {
+    if (!data || data.length === 0)
+      return (
+        <div class="containerNull">Không có sản phẩm phù hợp với từ khóa tìm kiếm của bạn.</div>
+      );
+
+    return data.slice(pageSlice, pageLimit + pageSlice).map((item, index) => {
+      return listCategory.map((categoryItem) => {
+        if (categoryItem.id === item.categoryId) {
+          return (
+            <CartListBook
+              id1={item.bookId}
+              categoryId1={item.categoryId}
+              bookName1={item.bookName}
+              author1={item.author}
+              publishYear1={item.publishYear}
+              quantityBook1={item.quantityBook}
+              price1={item.price}
+            />
+          );
+        }
+      });
+    });
+  };
+
   return (
     <div className="admin-list-book">
       <div className="admin-list-book--header">
@@ -67,14 +62,17 @@ const ListBook = () => {
       </div>
       <div className="admin-list-search">
         <Search
+          // value={valueSearch}
           placeholder="input search text"
           className="input_search_text"
-          // style={{ width: 350 }}
+          style={{ width: 200 }}
         />
+
         <Select
           defaultValue="Sắp xếp theo"
           className="admin-list-book_select"
           style={{ width: 150 }}
+          // onChange={handleChangeSelect}
         >
           <Option value="a-z">Sắp xếp từ A-Z</Option>
           <Option value="z-a">Sắp xếp từ Z-A</Option>
@@ -85,47 +83,31 @@ const ListBook = () => {
       </div>
       <div className="admin-list-book-content">
         <table className="table">
-          <thead>
-            {/* <tr> */}
-            <th className="admin-list-book-id">Mã sách</th>
-            <th className="admin-list-book-id">Mã danh mục</th>
-            <th className="admin-list-book">Tên sách</th>
-            <th className="admin-list-book-author">Tên tác giả</th>
-            <th className="admin-list-book-price">Năm XB</th>
-            <th className="admin-list-book-number">Số lượng</th>
-            <th className="admin-list-book-price">Giá</th>
-            <th className="admin-list-book-number">Chỉnh sửa</th>
-            <th className="admin-list-book-number">Xóa</th>
-            {/* </tr> */}
-          </thead>
-
-          {listBookAdmin.map((item, index) => {
-            return (
-              // <tbody>
-              <tr>
-                <td data-label="Mã sách :">{item.bookId}</td>
-                <td data-label="Mã danh mục :">{item.categoryId}</td>
-                <td data-label="Tên sách :" className="admin-list-book-name">
-                  {item.title}
-                </td>
-                <td data-label="Tên tác giả :">{item.anthor}</td>
-                <td data-label="Năm XB :">{item.yearXB}</td>
-                <td data-label="Số lượng :">{item.numberBook}</td>
-                <td data-label="Giá :">{item.price}</td>
-                <td onClick={() => history.push('/admin/editbook')} data-label="Chỉnh sửa">
-                  <EditOutlined />
-                </td>
-                <td data-label="Xóa">
-                  <DeleteOutlined />
-                </td>
-              </tr>
-              // </tbody>
-            );
-          })}
+          <tr>
+            <thead>
+              <th className="admin-list-book-id">Mã sách</th>
+              <th className="admin-list-book-id">Mã danh mục</th>
+              <th className="admin-list-book">Tên sách</th>
+              <th className="admin-list-book-author">Tên tác giả</th>
+              <th className="admin-list-book-price">Năm XB</th>
+              <th className="admin-list-book-number">Số lượng</th>
+              <th className="admin-list-book-price">Giá</th>
+              <th className="admin-list-book-number">Chỉnh sửa</th>
+              <th className="admin-list-book-number">Xóa</th>
+            </thead>
+            {renderlistBookAdmin(listBook)}
+          </tr>
         </table>
       </div>
-      <div className="admin-list-book_pagination">
-        <Pagination defaultCurrent={1} total={50} />
+      <div className="admin-list-book_pagination" style={{ marginBottom: '40px' }}>
+        {listBook.length > 12 ? (
+          <Pagination
+            defaultCurrent={1}
+            total={listBook.length}
+            onChange={handleChange}
+            pageSize={pageLimit}
+          />
+        ) : null}
       </div>
     </div>
   );
