@@ -1,106 +1,84 @@
-import { Pagination, Select, Input, Space, Button } from 'antd';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { Pagination, Select, Input, Space, Button, Popconfirm, message } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { getListUser, deleteUser } from '../../../../slice/bookSlice'
 import { useHistory } from 'react-router-dom';
-// import '../../../../styles/list-user.scss';
 
 const ListUser = () => {
   const history = useHistory();
   const { Option } = Select;
   const { Search } = Input;
-  const listUser = [
-    {
-      userId: 1,
-      email: 'nguyenvanducnhat@gmail.com',
-      phoneNumber: '0123456789',
-      name: 'Duc Nhat',
-      password: '123456',
-      address: 'Da Nang',
-      dateAdd: '12/12/2020',
-      roll: 'user',
-    },
-    {
-      userId: 1,
-      email: 'nguyenvanducnhat@gmail.com',
-      phoneNumber: '0123456789',
-      name: 'Duc Nhat',
-      password: '123456',
-      address: 'Da Nang',
-      dateAdd: '12/12/2020',
-      roll: 'user',
-    },
-    {
-      userId: 1,
-      email: 'nguyenvanducnhat@gmail.com',
-      phoneNumber: '0123456789',
-      name: 'Duc Nhat',
-      password: '123456',
-      address: 'Da Nang',
-      dateAdd: '12/12/2020',
-      roll: 'user',
-    },
-    {
-      userId: 1,
-      email: 'nguyenvanducnhat@gmail.com',
-      phoneNumber: '0123456789',
-      name: 'Duc Nhat',
-      password: '123456',
-      address: 'Da Nang',
-      dateAdd: '12/12/2020',
-      roll: 'user',
-    },
-  ];
+  const listUsers = useSelector(state => state.book.listUsers)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getListUser())
+  }, [dispatch])
+  const pageLimit = 10;
+  const [pageSlice, setPageSlice] = React.useState(0)
+  const handleChange = (page, pageSize) => {
+    setPageSlice((page - 1) * pageSize)
+  }
+  function confirm(e) {
+    dispatch(deleteUser(e))
+    message.success('Xóa thành công');
+  }
+
+  function cancel(e) {
+  }
   return (
     <div className="admin-list-book">
       <div className="admin-list-book--header">
         <h2>THÔNG TIN NGƯỜI DÙNG</h2>
       </div>
       <div className="admin-list-search">
-        <Search placeholder="input search text" />
-        <Select
-          defaultValue="Sắp xếp theo"
-          style={{ width: 200 }}
-          className="admin-list-user_select"
-        >
-          <Option value="a-z">Sắp xếp tên từ A-Z</Option>
-          <Option value="z-a">Sắp xếp tên từ Z-A</Option>
-          <Option value="z-a">Admin</Option>
-          <Option value="z-a">Khách hàng</Option>
-        </Select>
-
         <Button type="primary" onClick={() => history.push('/admin/adduser')}>
           Thêm người dùng
         </Button>
       </div>
       <div className="admin-list-book-content">
-        <table className="table">
+        <table className="table" style={{ fontSize: '13px' }}>
           <thead>
-            <th style={{ width: '5%' }}>Mã người dùng</th>
-            <th style={{ width: '20%' }}>Tên người dùng</th>
-            <th style={{ width: '20%' }}>Địa chỉ email</th>
-            <th style={{ width: '15%' }}>Số điện thoại</th>
-            <th style={{ width: '10%' }}>Mật khẩu</th>
-            <th style={{ width: '10%' }}>Địa chỉ</th>
-            <th style={{ width: '5%' }}>Ngày đăng ký</th>
-            <th style={{ width: '5%' }}>Phân quyền</th>
-            <th style={{ width: '5%' }}>Chỉnh sửa</th>
-            <th style={{ width: '5%' }}>Xóa</th>
+            <th >Tên người dùng</th>
+            <th >Địa chỉ email</th>
+            <th >Mật khẩu</th>
+            <th >Số điện thoại</th>
+            <th >Địa chỉ</th>
+            <th >Sinh nhật</th>
+            <th >Giới tính</th>
+            <th >Ngày đăng ký</th>
+            <th >Phân quyền</th>
+            <th >Chỉnh sửa</th>
+            <th >Xóa</th>
           </thead>
-          {listUser.map((item, index) => {
+          {listUsers.slice(pageSlice, pageLimit + pageSlice).map((item, index, arr) => {
             return (
               <tr>
-                <td data-label="Mã người dùng :">{item.userId}</td>
-                <td data-label="Tên người dùng :">{item.name}</td>
+                <td data-label="Tên người dùng :">{item.fullName}</td>
                 <td data-label="Địa chỉ email :">{item.email}</td>
-                <td data-label="Số điện thoại :">{item.phoneNumber}</td>
                 <td data-label="Địa chỉ :">{item.password}</td>
+                <td data-label="Số điện thoại :">{item.phoneNumber}</td>
                 <td data-label="Ngày đăng ký :">{item.address}</td>
-                <td data-label="Phân quyền :">{item.dateAdd}</td>
-                <td data-label="Chỉnh sửa :">{item.roll}</td>
-                <td onClick={() => history.push('/admin/edituser')} data-label="Xóa :">
+                <td data-label="Phân quyền :">{item.birthDay}</td>
+                <td data-label="Phân quyền :">{item.sex}</td>
+                <td data-label="Phân quyền :">{item.registerDay}</td>
+                <td data-label="Chỉnh sửa :">{item.role}</td>
+                <td onClick={() => history.push({
+                  pathname: '/admin/edituser',
+                  state: { info: arr[index] }
+                })} data-label="Xóa :">
                   <EditOutlined />
                 </td>
                 <td data-label="Xóa :">
-                  <DeleteOutlined />
+                  <Popconfirm placement="topRight"
+                    title="Bạn có muốn xóa không ?"
+                    onConfirm={() => confirm(item.id)}
+                    onCancel={cancel}
+                    okText="Có"
+                    cancelText="Không"
+                  >
+                    <DeleteOutlined />
+                  </Popconfirm>
                 </td>
               </tr>
             );
@@ -108,7 +86,9 @@ const ListUser = () => {
         </table>
       </div>
       <div className="admin-list-book_pagination">
-        <Pagination defaultCurrent={1} total={50} />
+        {
+          listUsers.length > 10 ? <Pagination defaultCurrent={1} total={listUsers.length} onChange={handleChange} pageSize={pageLimit} /> : null
+        }
       </div>
     </div>
   );

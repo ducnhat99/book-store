@@ -147,7 +147,7 @@ const Checkout = (props) => {
                         total: props.location.state.total
                     }],
                     payments: 'Trực tiếp',
-                    status: 'Đang xử lý',
+                    status: 'Chờ duyệt',
                 }))
                 await listBook.map((book) => {
                     if (book.id === props.location.state.bookId) {

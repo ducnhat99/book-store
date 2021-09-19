@@ -17,7 +17,17 @@
     width: 100%;
     border-collapse: collapse;
     margin-top: 15px;
-
+    .detailOrder{
+            border: none;
+            border-bottom: 1px solid #000;
+            border-right: 1px solid #000;
+            .detailOrder-item{
+                border-bottom: 0.1px solid #000
+            }
+            .detailOrder-item:last-child{
+                border-bottom: none;
+            }
+      }
 }
 .table td, table th{
     padding: 12px 15px;

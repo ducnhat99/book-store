@@ -86,7 +86,7 @@ export const addUsersApi = createAsyncThunk('book/addUsersApi', async (payload) 
             birthDay: payload.birthDay,
             sex: payload.sex,
             registerDay: payload.registerDay,
-            roll: payload.roll,
+            role: payload.role,
         })
         .then((res) => res.data)
         .catch((e) => console.log(e));
@@ -194,7 +194,7 @@ export const addOrder = createAsyncThunk('book/addOrder', async (payload) => {
             bill: payload.bill,
             detailOrder: payload.detailOrder,
             payments: payload.payments,
-            status: payload.status
+            status: payload.status,
         })
         .then((res) => res.data)
         .catch((e) => console.log(e));
@@ -251,6 +251,68 @@ export const putCategory = createAsyncThunk('book/putCategory', async (payload) 
         .put(`${HOST}category/${payload.id}`, {
             id: payload.id,
             categoryName: payload.categoryName
+        })
+        .then((res) => res.data)
+        .catch((e) => console.log(e));
+});
+export const putOrder = createAsyncThunk('book/putOrder', async (payload) => {
+    await axios
+        .put(`${HOST}order/${payload.id}`, {
+            userId: payload.userId,
+            id: payload.id,
+            fullName: payload.fullName,
+            email: payload.email,
+            phoneNumber: payload.phoneNumber,
+            address: payload.address,
+            bookingDate: payload.bookingDate,
+            bill: payload.bill,
+            detailOrder: payload.detailOrder,
+            payments: payload.payments,
+            status: payload.status,
+        })
+        .then((res) => res.data)
+        .catch((e) => console.log(e));
+});
+export const deleteOrder = createAsyncThunk('book/deleteOrder', async (payload) => {
+    await axios
+        .delete(`${HOST}order/${payload}`)
+        .then((res) => res.data)
+        .catch((e) => console.log(e));
+    return payload;
+});
+export const deleteBook = createAsyncThunk('book/deleteBook', async (payload) => {
+    await axios
+        .delete(`${HOST}book/${payload}`)
+        .then((res) => res.data)
+        .catch((e) => console.log(e));
+    return payload;
+});
+export const deleteUser = createAsyncThunk('book/deleteUser', async (payload) => {
+    await axios
+        .delete(`${HOST}users/${payload}`)
+        .then((res) => res.data)
+        .catch((e) => console.log(e));
+    return payload;
+});
+export const addBook = createAsyncThunk('book/addBook', async (payload) => {
+    await axios
+        .post(`${HOST}book`, {
+            categoryId: payload.categoryId,
+            id: payload.id,
+            bookName: payload.bookName,
+            supplier: payload.supplier,
+            publisher: payload.publisher,
+            publishYear: payload.publishYear,
+            author: payload.author,
+            bookLayout: payload.bookLayout,
+            language: payload.language,
+            quantityPage: payload.quantityPage,
+            rateStar: payload.rateStar,
+            description: payload.description,
+            imagesBook: payload.imagesBook,
+            quantityBook: payload.quantityBook,
+            price: payload.price,
+            realPrice: payload.realPrice,
         })
         .then((res) => res.data)
         .catch((e) => console.log(e));
@@ -514,7 +576,6 @@ export const bookSlice = createSlice({
             .addCase(addOrder.fulfilled, (state, action) => {
                 state.status = 'succeeded'
                 state.listOrder.push(action.meta.arg)
-                state.listOrderUser.push(action.meta.arg)
             })
             .addCase(addOrder.rejected, (state, action) => {
                 state.status = 'failed'
@@ -570,7 +631,13 @@ export const bookSlice = createSlice({
             })
             .addCase(putUser.fulfilled, (state, action) => {
                 state.status = 'succeeded'
-                state.listUsers = action.meta.arg
+                const indexOfObject = state.listUsers.findIndex((obj) => {
+                    if (obj.id === action.meta.arg.id) {
+                        return true;
+                    }
+                    return false;
+                });
+                state.listUsers.splice(indexOfObject, 1, action.meta.arg)
             })
             .addCase(putUser.rejected, (state, action) => {
                 state.status = 'failed'
@@ -622,6 +689,90 @@ export const bookSlice = createSlice({
                 state.listCategory.splice(indexOfObject, 1, action.meta.arg)
             })
             .addCase(putCategory.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+            //addBook
+            .addCase(addBook.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(addBook.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                state.listBook.push(action.meta.arg)
+            })
+            .addCase(addBook.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+            //putOrder
+            .addCase(putOrder.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(putOrder.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                const indexOfObject = state.listOrder.findIndex((obj) => {
+                    if (obj.id === action.meta.arg.id) {
+                        return true;
+                    }
+                    return false;
+                });
+                state.listOrder.splice(indexOfObject, 1, action.meta.arg)
+            })
+            .addCase(putOrder.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+            //deleteOrder
+            .addCase(deleteOrder.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(deleteOrder.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                const indexOfObject = state.listOrder.findIndex((obj) => {
+                    if (obj.id === action.payload) {
+                        return true;
+                    }
+                    return false;
+                });
+                state.listOrder.splice(indexOfObject, 1)
+            })
+            .addCase(deleteOrder.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+            //deleteUser
+            .addCase(deleteUser.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(deleteUser.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                const indexOfObject = state.listUsers.findIndex((obj) => {
+                    if (obj.id === action.payload) {
+                        return true;
+                    }
+                    return false;
+                });
+                state.listUsers.splice(indexOfObject, 1)
+            })
+            .addCase(deleteUser.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+            //deleteBook
+            .addCase(deleteBook.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(deleteBook.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                const indexOfObject = state.listBook.findIndex((obj) => {
+                    if (obj.id === action.payload) {
+                        return true;
+                    }
+                    return false;
+                });
+                state.listBook.splice(indexOfObject, 1)
+            })
+            .addCase(deleteBook.rejected, (state, action) => {
                 state.status = 'failed'
                 state.error = action.error.message
             })

@@ -100,14 +100,13 @@ const Login = (props) => {
         msg.password = 'Xin vui lòng nhập mật khẩu';
       } else if (passValue.length < 6) {
         msg.password = 'Mật khẩu phải trên 6 kí tự';
-      }
-      if (userValue !== item.email && passValue !== item.password) {
-        msg.exact = 'Tài khoản hoặc mật khẩu không chính xác'
-      }
+      } else
+        if (userValue !== item.email || passValue !== item.password) {
+          msg.exact = 'Tài khoản hoặc mật khẩu không chính xác'
+        }
       if (userValue === item.email && passValue === item.password && item.role === "user") {
         msg.exact = ''
         dispatch(isLogged(item.id))
-        history.push('./');
         window.location.reload(false);
         props.handleCancel();
         openNotification()
