@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons';
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Pagination, Select, Input, Space, Button, Popconfirm, message, notification } from 'antd';
+import { Pagination, Select, Input, Space, Button, Popconfirm, message, notification, Modal } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { getListOrder, getBooks, deleteOrder } from '../../../../slice/bookSlice'
 import { SmileOutlined } from '@ant-design/icons';
@@ -141,7 +141,7 @@ const ListCart = () => {
               <td data-label="Số điện thoại:">{item.phoneNumber}</td>
               <td data-label="Ngày đặt:">{item.bookingDate}</td>
               <td data-label="Tình trạng :">{item.status}</td>
-              <td data-label="Tình trạng :" onClick={() => history.push({
+              <td data-label="Chi tiết :" onClick={() => history.push({
                 pathname: `/admin/detailorder`,
                 state: { detailOrder: arr[index] }
               })}><FileTextOutlined /></td>

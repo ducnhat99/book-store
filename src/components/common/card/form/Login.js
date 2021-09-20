@@ -9,7 +9,7 @@ import Register from './Register';
 import { USERLOGIN } from '../../../../constants/UserLogin';
 import { isEmpty } from 'validator';
 import isEmail from 'validator/lib/isEmail';
-import { isLogged, getListUser } from '../../../../slice/bookSlice'
+import { isLogged, getListUser, isAdmin } from '../../../../slice/bookSlice'
 
 const Login = (props) => {
   const history = useHistory();
@@ -113,9 +113,10 @@ const Login = (props) => {
       }
       if (userValue === item.email && passValue === item.password && item.role === "admin") {
         msg.exact = ''
+        dispatch(isAdmin())
+        history.push('/admin');
         props.handleCancel();
         openNotification()
-        history.push('/admin');
       }
       setValidationMsg(msg);
       if (Object.keys(msg).lenght > 0) return false;

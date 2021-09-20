@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
 import slide1 from '../../../../images/slidebar1.png'
@@ -14,12 +15,13 @@ const slideImages = [
 ];
 
 const SlideShow = () => {
+    const history = useHistory()
     return (
-        <div className="slide-show">
+        <div className="slide-show" >
             <Slide easing="ease" className="slide">
                 {slideImages.map((item) => {
                     return <div className="each-slide">
-                        <div style={{ 'backgroundImage': `url(${item})` }}>
+                        <div style={{ 'backgroundImage': `url(${item})` }} onClick={() => history.push("/salebook")}>
                         </div>
                     </div>
                 })}

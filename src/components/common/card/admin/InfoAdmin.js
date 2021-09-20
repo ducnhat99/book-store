@@ -2,7 +2,7 @@ import { Avatar, Image, Popover } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux'
 import signout from '../../../../images/signout.svg'
-import { isLogged, isSignOut } from "../../../../slice/bookSlice"
+import { isAdminLogout, isSignOut } from "../../../../slice/bookSlice"
 import { useHistory } from "react-router-dom";
 
 const InfoAdmin = () => {
@@ -12,7 +12,7 @@ const InfoAdmin = () => {
         <div className="navigation--user">
             <div className="navigation--user--info">
                 <a onClick={() => {
-                    dispatch(isSignOut())
+                    dispatch(isAdminLogout())
                     history.push("/home")
                 }}>
                     <img src={signout} alt="setting logo"></img>

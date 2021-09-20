@@ -331,7 +331,8 @@ export const bookSlice = createSlice({
         listCartUser: [],
         listCartAll: [],
         listOrder: [],
-        listOrderUser: []
+        listOrderUser: [],
+        isAdmin: false
     },
     reducers: {
         isLogged: (state, action) => {
@@ -339,6 +340,12 @@ export const bookSlice = createSlice({
         },
         isSignOut: state => {
             localStorage.setItem(USERLOGIN, JSON.stringify(0))
+        },
+        isAdmin: state => {
+            state.isAdmin = true
+        },
+        isAdminLogout: state => {
+            state.isAdmin = false
         },
     },
     extraReducers(builder) {
@@ -780,6 +787,6 @@ export const bookSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { isLogged, isSignOut } = bookSlice.actions
+export const { isLogged, isSignOut, isAdmin, isAdminLogout } = bookSlice.actions
 
 export default bookSlice.reducer

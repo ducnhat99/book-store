@@ -7,22 +7,27 @@ import './styles/index.css'
 import Admin from './screen/Admin';
 import ROUTE from './constants/Router'
 import ScrollToTop from './components/common/card/ScrollToTop';
-import { USERLOGIN } from './constants/UserLogin'
-
+import { useSelector, useDispatch } from 'react-redux';
 
 function App() {
-  // localStorage.setItem(USERLOGIN, 0)
-
-  const isUserLogin = JSON.parse(localStorage.getItem(USERLOGIN))
+  const isAdmin = useSelector(state => state.book.isAdmin)
   return (
     <>
       <BrowserRouter>
         <ScrollToTop />
-        <Switch>
+        {isAdmin === true ? <Switch>
           <Route path={ROUTE.ADMIN} component={Admin} />
           <Route path={ROUTE.USER} component={Home}>
           </Route>
-        </Switch>
+        </Switch> : <Switch>
+          <Route path={ROUTE.USER} component={Home}>
+          </Route>
+        </Switch>}
+        {/* <Switch>
+          <Route path={ROUTE.ADMIN} component={Admin} />
+          <Route path={ROUTE.USER} component={Home}>
+          </Route>
+        </Switch> */}
         <ScrollToTop />
       </BrowserRouter>
     </>
