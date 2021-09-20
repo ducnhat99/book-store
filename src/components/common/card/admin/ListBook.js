@@ -39,14 +39,14 @@ const ListBook = () => {
     if (e === 'new') {
       let list = [...listRender]
       list.sort((a, b) => {
-        return a.id - b.id
+        return b.id - a.id
       })
       setListRender(list)
     }
     if (e === 'old') {
       let list = [...listRender]
       list.sort((a, b) => {
-        return b.id - a.id
+        return a.id - b.id
       })
       setListRender(list)
     }
@@ -61,26 +61,12 @@ const ListBook = () => {
       setListRender(list)
     }
   }
-  // const handleSearchBook = () => {
-  //   console.log(valueSearch)
-  //   if (valueSearch) {
-  //     console.log("🚀 ~ file: ListBook.js ~ line 68 ~ list ~ listBook", listBook)
-  //     const list = listBook.filter((item) => {
-  //       return (item.bookName.includes(valueSearch.toLowerCase().trim()) ||
-  //         item.author.includes(valueSearch.toLowerCase().trim())
-  //       )
-  //     })
-  //     // setListRender(list)
-  //   }
-  //   else {
-  //     // setListRender(listRender)
-  //   }
-  // }
   const handleSearchBook = () => {
     if (valueSearch) {
       const list = listBook.filter((item) => {
-        return (item.bookName === valueSearch.trim()) ||
-          item.author === valueSearch.trim()
+        return (item.bookName?.toLowerCase().includes(valueSearch?.toLowerCase().trim()) ||
+          item.author?.toLowerCase().includes(valueSearch?.toLowerCase().trim())
+        )
       })
       setListRender(list)
     }
