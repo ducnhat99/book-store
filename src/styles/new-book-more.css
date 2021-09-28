@@ -26,14 +26,17 @@
     background: #fff;
     margin-right: 1%;
 }
-
+.search-product-phone{
+    margin-right: 10px;
+    display: none;
+}
 .book-more--selected{
     width: 100%;
     height: 50px;
     margin-top: 5px;
     display: flex;
     align-items: center;
-    padding-left: 20px;
+    padding-left: 10px;
 }
 
 .book-more--selected p{
@@ -180,5 +183,8 @@
     }
     .book-more--card-container{
         justify-content: space-between;
+    }
+    .search-product-phone{
+        display: block;
     }
 }

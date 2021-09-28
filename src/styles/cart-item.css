@@ -129,6 +129,7 @@
     .cart--item-box{
         display: flex;
         flex-wrap: wrap;
+        height: 180px;
     }
     .cart-item--remove__icon{
         width: 60%;

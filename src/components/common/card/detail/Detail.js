@@ -8,7 +8,7 @@ import InforDetail from './InforDetail';
 import BoughtTogether from './BoughtTogether';
 import CommentUser from './CommentUser';
 
-const Detail = () => {
+const Detail = (props) => {
   const dispatch = useDispatch()
   const { bookId } = useParams()
   const bookDetail = useSelector(state => state.book.bookDetail)
@@ -36,7 +36,7 @@ const Detail = () => {
           price={bookDetail.price}
           realPrice={bookDetail.realPrice} />
         <InforDetail {...bookDetail} />
-        <BoughtTogether id={bookId} categoryId={bookDetail.categoryId} />
+        <BoughtTogether id={bookId} categoryId={props.location.state.categoryId} />
         <CommentUser id={bookId} />
       </div>
     </div>

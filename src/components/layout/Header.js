@@ -6,8 +6,16 @@ import Navigation from "../common/card/header/Navigation"
 import menu from "../../images/menu.svg"
 import { Drawer, Button, Space, Radio } from 'antd';
 import 'antd/dist/antd.css';
+import { useEffect } from 'react';
+import { getBooks, getCategory } from '../../slice/bookSlice'
+import { useSelector, useDispatch } from 'react-redux'
 
 const Header = () => {
+    const dispatch = useDispatch()
+    const listCategory = useSelector(state => state.book.listCategory)
+    useEffect(() => {
+        dispatch(getCategory());
+    }, [dispatch])
     const [visible, setVisible] = useState(false);
 
     const showDrawer = () => {
@@ -17,19 +25,7 @@ const Header = () => {
     const onClose = () => {
         setVisible(false);
     };
-    const category = [
-        'Kỹ năng sống',
-        'Kinh tế',
-        'Lịch sử',
-        'Văn học',
-        'Từ điển',
-        'Tham khảo',
-        'Ngoại ngữ',
-        'Âm nhạc - mỹ thuật',
-        'Tiểu sử - hồi ký',
-        'Địa lý',
-        'Khoa học ky thuật'
-    ]
+
     return (
         <div className="header">
             <div className="container">
@@ -62,11 +58,11 @@ const Header = () => {
                 }
             >
                 <ul className="sidebar-table">
-                    {category.map((item, index) => {
+                    {listCategory.map((item, index) => {
                         return <Link onClick={onClose} style={{ width: '100%', height: '40px' }} to={{
-                            pathname: `/category`,
-                            state: { category: item }
-                        }}><li>{item}</li>
+                            pathname: `/category/${item.id}`,
+                            state: { category: item.categoryName }
+                        }}><li>{item.categoryName}</li>
                         </Link>
                     })}
                 </ul>

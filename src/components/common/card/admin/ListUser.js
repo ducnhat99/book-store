@@ -41,7 +41,6 @@ const ListUser = () => {
           <thead>
             <th >Tên người dùng</th>
             <th >Địa chỉ email</th>
-            <th >Mật khẩu</th>
             <th >Số điện thoại</th>
             <th >Địa chỉ</th>
             <th >Sinh nhật</th>
@@ -56,7 +55,6 @@ const ListUser = () => {
               <tr>
                 <td data-label="Tên người dùng :">{item.fullName}</td>
                 <td data-label="Địa chỉ email :">{item.email}</td>
-                <td data-label="Địa chỉ :">{item.password}</td>
                 <td data-label="Số điện thoại :">{item.phoneNumber}</td>
                 <td data-label="Ngày đăng ký :">{item.address}</td>
                 <td data-label="Phân quyền :">{item.birthDay}</td>

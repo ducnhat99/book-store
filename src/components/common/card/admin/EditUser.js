@@ -6,10 +6,12 @@ import { SmileOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import isEmail from 'validator/lib/isEmail';
 import { useHistory } from 'react-router-dom';
+import { USERLOGIN } from '../../../../constants/UserLogin';
 import { putUser } from '../../../../slice/bookSlice'
 const EditUser = (props) => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const isAdmin = useSelector(state => state.book.isAdmin)
     const { Option } = Select;
     const [pass, setPass] = React.useState(props.location.state.info.password)
     const [name, setName] = React.useState(props.location.state.info.fullName)
@@ -88,11 +90,13 @@ const EditUser = (props) => {
                     <Input type="number" placeholder="Nhập số điện thoại" value={phone} onChange={(e) => setPhone(e.target.value)} />
                     <p className="msg--error_list-book">{validationMsg.phone}</p>
                 </div>
-                <div className="admin-form-edit--container">
-                    <label>Mật khẩu</label>
-                    <Input.Password type="password" placeholder="Nhập mật khẩu" value={pass} onChange={(e) => setPass(e.target.value)} />
-                    <p className="msg--error_list-book">{validationMsg.pass}</p>
-                </div>
+                {props.location.state.info.id === isAdmin ?
+                    <div className="admin-form-edit--container">
+                        <label>Mật khẩu</label>
+                        <Input.Password type="password" placeholder="Nhập mật khẩu" value={pass} onChange={(e) => setPass(e.target.value)} />
+                        <p className="msg--error_list-book">{validationMsg.pass}</p>
+                    </div> : null
+                }
                 <div className="admin-form-edit--container">
                     <label>Giới tính</label>
                     <Select defaultValue={sex} className="admin-form-edit__select" onChange={(e) => setSex(e)}>
@@ -111,13 +115,6 @@ const EditUser = (props) => {
                     <label>Địa chỉ</label>
                     <Input placeholder="Nhập địa chỉ" value={address} onChange={(e) => setAddress(e.target.value)} />
                     <p className="msg--error_list-book">{validationMsg.address}</p>
-                </div>
-                <div className="admin-form-edit--container">
-                    <label>Chức vụ</label>
-                    <Select defaultValue={role} className="admin-form-edit__select" onChange={(e) => setRole(e)}>
-                        <Option value="user">Khách hàng</Option>
-                        <Option value="admin">Admin</Option>
-                    </Select>
                 </div>
             </form>
             <div className="admin-form-edit--btn">

@@ -31,7 +31,7 @@ const FeaturedCardContainer = () => {
         return data.slice(0, 4).map((item, index) => {
             return listCategory.map((categoryItem) => {
                 if (categoryItem.id === item.categoryId) {
-                    return <FeaturedCardItem key={index} index={item.id} images={item.imagesBook} title={item.bookName} author={item.author} product={categoryItem.categoryName} page={item.quantityPage} price={item.price} realPrice={item.realPrice} rateStar={item.rateStar} description={item.description} />
+                    return <FeaturedCardItem key={index} index={item.id} categoryId={item.categoryId} images={item.imagesBook} title={item.bookName} author={item.author} product={categoryItem.categoryName} page={item.quantityPage} price={item.price} realPrice={item.realPrice} rateStar={item.rateStar} description={item.description} />
                 }
             })
 

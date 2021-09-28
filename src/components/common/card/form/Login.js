@@ -113,7 +113,8 @@ const Login = (props) => {
       }
       if (userValue === item.email && passValue === item.password && item.role === "admin") {
         msg.exact = ''
-        dispatch(isAdmin())
+        dispatch(isAdmin(item.id))
+        sessionStorage.setItem('admin', true)
         history.push('/admin');
         props.handleCancel();
         openNotification()
@@ -143,7 +144,7 @@ const Login = (props) => {
 
       <div className="login" style={handleDisplayLogin()}>
         <div className="login__input">
-          <label>Địa chỉ Email</label>
+          <label>Email</label>
           <Input
             name="email"
             type="text"

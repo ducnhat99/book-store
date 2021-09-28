@@ -248,6 +248,7 @@
     display: flex;
     justify-content: center;
   }
+  
   .img__left img{
     width: 50%;
     height: 90%;
@@ -267,8 +268,12 @@
     width: 100%;
     margin: 10px 0 10px 0;
   }
+  .text__margin{
+    margin-left: 10px;
+  }
   .text{
     width: 100%;
+    margin-bottom: 10px;
   }
   .rate{
     margin: 0 0 0 15px;
@@ -277,9 +282,27 @@
     width: 100%;
     height: auto;
   }
-  .container__low__detail{
-    width: 100%;
+  .container__right__detail h1{
+    margin-left: 10px;
   }
+  .container__low__detail{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    justify-content: center;
+  }
+  .container__low__detail a{
+  width: 38%;
+  height: 100%;
+  background: #C92127;
+  margin-left: 20px;
+}
+.container__low__detail a button{
+  width: 100%;
+  height: 40px;
+  margin: 0;
+}
   .container__low__detail--login{
     width: 100%;
   }
