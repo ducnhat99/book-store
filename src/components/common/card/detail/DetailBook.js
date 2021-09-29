@@ -51,6 +51,13 @@ const DetailBook = (props) => {
         'Số lượng sách không đủ',
     });
   };
+  const openNotificationWithIconCart = type => {
+    notification[type]({
+      message: 'Thông báo',
+      description:
+        'Chỉ có thể thêm tối đa 5 sản phẩm vào giỏ hàng',
+    });
+  };
   const handlePlusNumber = () => {
     if ((bookNumber + 1) <= bookDetail.quantityBook) {
       setBookNumber(bookNumber + 1)
@@ -90,14 +97,19 @@ const DetailBook = (props) => {
       return
     }
     else {
-      dispatch(addCartApi({
-        userId: isUserLogin,
-        bookId: parseInt(id),
-        id: cartId + 1,
-        quantity: bookNumber,
-        total: bookNumber * price,
-      }))
-      showModalCart()
+      if (listCartUser.length >= 5) {
+        openNotificationWithIconCart('warning')
+      }
+      else {
+        dispatch(addCartApi({
+          userId: isUserLogin,
+          bookId: parseInt(id),
+          id: cartId + 1,
+          quantity: bookNumber,
+          total: bookNumber * price,
+        }))
+        showModalCart()
+      }
       return
     }
   }

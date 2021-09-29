@@ -13,6 +13,8 @@ const InfoAdmin = () => {
             <div className="navigation--user--info">
                 <a onClick={() => {
                     dispatch(isAdminLogout())
+                    // dispatch(isSignOut())
+                    sessionStorage.setItem('admin', false)
                     history.push("/home")
                 }}>
                     <img src={signout} alt="setting logo"></img>
@@ -22,16 +24,16 @@ const InfoAdmin = () => {
         </div>
     )
     return (
-        <Popover content={userContent} placement="bottomRight" trigger="click">
-            <div className="info-admin">
-                <div className="info-admin-name">
-                    <p>Nguyen Van Duc Nhat</p>
-                </div>
-                <div className="info-admin-avatar">
-                    <Avatar size="large" icon={<UserOutlined />} />
-                </div>
+        <div className="info-admin">
+            <div className="info-admin-name">
+                <p>Nguyen Van Duc Nhat</p>
             </div>
-        </Popover>
+            <div className="info-admin-avatar">
+                <Popover content={userContent} placement="bottomRight" trigger="click">
+                    <Avatar size="large" icon={<UserOutlined />} />
+                </Popover>
+            </div>
+        </div>
     )
 }
 

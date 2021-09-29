@@ -67,13 +67,13 @@ const NavBarAdmin = () => {
           >
             Quản lý người dùng
           </Menu.Item>
-          <Menu.Item
+          {/* <Menu.Item
             key="7"
             icon={<SettingFilled />}
             onClick={() => history.push('/admin/listcategory')}
           >
             Quản lý danh mục
-          </Menu.Item>
+          </Menu.Item> */}
           {/* <Menu.Item key="8" icon={<UserOutlined />}>
             Subscription
           </Menu.Item> */}

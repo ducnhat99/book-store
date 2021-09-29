@@ -6,7 +6,8 @@ import { Button, Input, Radio, notification, Modal } from 'antd';
 import moment from 'moment';
 import 'antd/dist/antd.css';
 import { USERLOGIN } from '../../../../constants/UserLogin';
-import { getUser, getListOrder, getBooks, addOrder, putBook, getCartUser, putBookAll } from '../../../../slice/bookSlice'
+import { getUser, getListOrder, getBooks, addOrder, putBook, getCartUser, putBookAll, deleteCartUser } from '../../../../slice/bookSlice'
+import { process, somePromise } from 'process';
 import { isEmpty } from 'validator';
 import isEmail from 'validator/lib/isEmail';
 import VNPRICE from '../../../../constants/FormatPrice';
@@ -131,7 +132,6 @@ const Checkout = (props) => {
         if (!isValid) return;
         if (!!props.location.state) {
             if (pay === 'Thanh toán khi nhận hàng') {
-                console.log('a')
                 await dispatch(addOrder({
                     userId: isUserLogin,
                     id: orderId + 1,
@@ -172,7 +172,7 @@ const Checkout = (props) => {
                     }
                 })
                 openNotificationWithIcon('success')
-                history.push("/home")
+                await history.push("/home")
             }
             else {
                 showModal()
@@ -180,68 +180,122 @@ const Checkout = (props) => {
         }
         else {
             if (pay === 'Thanh toán khi nhận hàng') {
-                //    await dispatch(addOrder({
-                //         userId: isUserLogin,
-                //         id: orderId + 1,
-                //         fullName: fullName,
-                //         email: email,
-                //         phoneNumber: phoneNumber,
-                //         address: address,
-                //         bookingDate: moment().format('DD/MM/YYYY'),
-                //         bill: totalMoney + 30000,
-                //         detailOrder: arrOrder,
-                //         payments: 'Trực tiếp',
-                //         status: 'Đang xử lý'
+                await dispatch(addOrder({
+                    userId: isUserLogin,
+                    id: orderId + 1,
+                    fullName: fullName,
+                    email: email,
+                    phoneNumber: phoneNumber,
+                    address: address,
+                    bookingDate: moment().format('DD/MM/YYYY'),
+                    bill: totalMoney + 30000,
+                    detailOrder: arrOrder,
+                    payments: 'Trực tiếp',
+                    status: 'Chờ duyệt'
+                }))
+                // for (let i = 0; i < listBook.length; i++) {
+                //     for (let j = 0; j < listCartUser.length; j++) {
+                //         if (listCartUser[j].bookId === listBook[i].id) {
+                //             setTimeout(async () => {
+                //                 dispatch(putBook({
+                //                     categoryId: listBook[i].categoryId,
+                //                     id: listBook[i].id,
+                //                     bookName: listBook[i].bookName,
+                //                     supplier: listBook[i].supplier,
+                //                     publisher: listBook[i].publisher,
+                //                     publishYear: listBook[i].publishYear,
+                //                     author: listBook[i].author,
+                //                     bookLayout: listBook[i].bookLayout,
+                //                     language: listBook[i].language,
+                //                     quantityPage: listBook[i].quantityPage,
+                //                     rateStar: listBook[i].rateStar,
+                //                     description: listBook[i].description,
+                //                     imagesBook: listBook[i].imagesBook,
+                //                     quantityBook: listBook[i].quantityBook - listCartUser[j].quantity,
+                //                     price: listBook[i].price,
+                //                     realPrice: listBook[i].realPrice,
+                //                 }))
+                //             }, 600 * j);
+                //         }
+                //     }
+                // }
+                for (let i = 0; i < listCartUser.length; i++) {
+                    setTimeout(async () => {
+                        dispatch(deleteCartUser(listCartUser[i].id))
+                    }, 600 * i);
+                }
+
+                // (listBook.foreach(async (item) => {
+                //     await (listCartUser.foreach(async (e, index) => {
+                //         // await setTimeout(async () => {
+                //         if (e.bookId === item.id) {
+                //             await dispatch(putBook({
+                //                 categoryId: item.categoryId,
+                //                 id: item.id,
+                //                 bookName: item.bookName,
+                //                 supplier: item.supplier,
+                //                 publisher: item.publisher,
+                //                 publishYear: item.publishYear,
+                //                 author: item.author,
+                //                 bookLayout: item.bookLayout,
+                //                 language: item.language,
+                //                 quantityPage: item.quantityPage,
+                //                 rateStar: item.rateStar,
+                //                 description: item.description,
+                //                 imagesBook: item.imagesBook,
+                //                 quantityBook: item.quantityBook - e.quantity,
+                //                 price: item.price,
+                //                 realPrice: item.realPrice,
+                //             }))
+
+
+                //             // if ((index > 1) && (index % 2 === 0)) {
+                //             //     return setTimeout(async () => {
+                //             //         await dispatch(putBook({
+                //             //             categoryId: item.categoryId,
+                //             //             id: item.id,
+                //             //             bookName: item.bookName,
+                //             //             supplier: item.supplier,
+                //             //             publisher: item.publisher,
+                //             //             publishYear: item.publishYear,
+                //             //             author: item.author,
+                //             //             bookLayout: item.bookLayout,
+                //             //             language: item.language,
+                //             //             quantityPage: item.quantityPage,
+                //             //             rateStar: item.rateStar,
+                //             //             description: item.description,
+                //             //             imagesBook: item.imagesBook,
+                //             //             quantityBook: item.quantityBook - e.quantity,
+                //             //             price: item.price,
+                //             //             realPrice: item.realPrice,
+                //             //         }))
+                //             //         console.log('wait')
+                //             //     }, 1000);
+                //             // }
+                //             // else {
+                //             //     return dispatch(putBook({
+                //             //         categoryId: item.categoryId,
+                //             //         id: item.id,
+                //             //         bookName: item.bookName,
+                //             //         supplier: item.supplier,
+                //             //         publisher: item.publisher,
+                //             //         publishYear: item.publishYear,
+                //             //         author: item.author,
+                //             //         bookLayout: item.bookLayout,
+                //             //         language: item.language,
+                //             //         quantityPage: item.quantityPage,
+                //             //         rateStar: item.rateStar,
+                //             //         description: item.description,
+                //             //         imagesBook: item.imagesBook,
+                //             //         quantityBook: item.quantityBook - e.quantity,
+                //             //         price: item.price,
+                //             //         realPrice: item.realPrice,
+                //             //     }))
+                //             // }
+                //         }
+                //         // }, 4000);
                 //     }))
-                await listBook.map(async (item) => {
-                    return (await listCartUser.map(async (e, index) => {
-                        if (e.bookId === item.id) {
-                            if ((index > 1) && (index % 2 === 0)) {
-                                return setTimeout(async () => {
-                                    await dispatch(putBook({
-                                        categoryId: item.categoryId,
-                                        id: item.id,
-                                        bookName: item.bookName,
-                                        supplier: item.supplier,
-                                        publisher: item.publisher,
-                                        publishYear: item.publishYear,
-                                        author: item.author,
-                                        bookLayout: item.bookLayout,
-                                        language: item.language,
-                                        quantityPage: item.quantityPage,
-                                        rateStar: item.rateStar,
-                                        description: item.description,
-                                        imagesBook: item.imagesBook,
-                                        quantityBook: item.quantityBook - e.quantity,
-                                        price: item.price,
-                                        realPrice: item.realPrice,
-                                    }))
-                                    console.log('wait')
-                                }, 1000);
-                            }
-                            else {
-                                return dispatch(putBook({
-                                    categoryId: item.categoryId,
-                                    id: item.id,
-                                    bookName: item.bookName,
-                                    supplier: item.supplier,
-                                    publisher: item.publisher,
-                                    publishYear: item.publishYear,
-                                    author: item.author,
-                                    bookLayout: item.bookLayout,
-                                    language: item.language,
-                                    quantityPage: item.quantityPage,
-                                    rateStar: item.rateStar,
-                                    description: item.description,
-                                    imagesBook: item.imagesBook,
-                                    quantityBook: item.quantityBook - e.quantity,
-                                    price: item.price,
-                                    realPrice: item.realPrice,
-                                }))
-                            }
-                        }
-                    }))
-                })
+                // }))
             }
             else {
                 showModal()

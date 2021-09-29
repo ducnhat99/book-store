@@ -106,13 +106,16 @@ const CartItem = (props) => {
             </div>
             <div className="cart--item--info">
                 <div className="cart--item--info__title">
-                    <Link to={`/detail/${bookId}`}>
+                    <Link to={{
+                        pathname: `/detail/${bookId}`,
+                        state: { categoryId: categoryId }
+                    }}>
                         <h3>{title}</h3>
                     </Link>
                 </div>
                 <div className="cart--item--info__price">
-                {price ?<p>{VNPRICE(price)}</p> :null}
-                    
+                    {price ? <p>{VNPRICE(price)}</p> : null}
+
                 </div>
                 <div className="cart--item--info__real-price">
                     {realPrice ? <p>{VNPRICE(realPrice)}</p> : null}
@@ -132,7 +135,7 @@ const CartItem = (props) => {
                 </div>
                 <div className="cart--item__total">
                     <p className="cart-item__total--header">Thành tiền</p>
-                    {price ?<p className="cart-item__total--price">{VNPRICE(total)}</p> :null}
+                    {price ? <p className="cart-item__total--price">{VNPRICE(total)}</p> : null}
                 </div>
             </div>
         </div>

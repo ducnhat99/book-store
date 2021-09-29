@@ -77,7 +77,8 @@ const Navigation = () => {
                 images={bookItem.imagesBook}
                 title={bookItem.bookName}
                 price={bookItem.price}
-                quantity={item.quantity} />
+                quantity={item.quantity}
+                categoryId={bookItem.categoryId} />
             }
           })
         })}

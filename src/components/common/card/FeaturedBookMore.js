@@ -1,7 +1,10 @@
 import * as React from 'react'
-import { Pagination, Radio, Rate, Select } from 'antd';
+import { Pagination, Radio, Rate, Select, Drawer, Space, Button } from 'antd';
 import images from '../../../images/humble.jpg';
 import NewCardItem from './NewCardItem';
+import {
+    MenuOutlined
+} from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux'
 import { getBooks, getCategory } from '../../../slice/bookSlice'
 import { useEffect } from 'react';
@@ -18,6 +21,15 @@ const FeaturedBookMore = () => {
     const listBook = useSelector(state => state.book.listBook)
     const listCategory = useSelector(state => state.book.listCategory)
     // const listBookSale = []
+    const [visible, setVisible] = React.useState(false);
+
+    const showDrawer = () => {
+        setVisible(true);
+    };
+
+    const onClose = () => {
+        setVisible(false);
+    };
     const pageLimit = 12;
     const [pageSlice, setPageSlice] = React.useState(0)
     const handleChange = (page, pageSize) => {
@@ -152,6 +164,7 @@ const FeaturedBookMore = () => {
         setListBookSearchPrice([...list])
         setListBookSearchLanguage([...list])
         setIsCategory(true)
+        onClose()
     }
     const renderNewBook = (data) => {
         if (!data || data.length === 0) return <div class="containerNull">Không có sản phẩm phù hợp với từ khóa tìm kiếm của bạn.</div>;;
@@ -159,7 +172,7 @@ const FeaturedBookMore = () => {
             return listCategory.map((categoryItem) => {
                 if (categoryItem.id === item.categoryId) {
                     return <div className="card-more-item">
-                        <NewCardItem key={index} index={item.id} images={item.imagesBook} title={item.bookName} author={item.author} product={categoryItem.categoryName} page={item.quantityPage} price={item.price} realPrice={item.realPrice} rateStar={item.rateStar} description={item.description} />
+                        <NewCardItem key={index} index={item.id} categoryId={item.categoryId} images={item.imagesBook} title={item.bookName} author={item.author} product={categoryItem.categoryName} page={item.quantityPage} price={item.price} realPrice={item.realPrice} rateStar={item.rateStar} description={item.description} />
                     </div>
                 }
             })
@@ -235,6 +248,9 @@ const FeaturedBookMore = () => {
                             <h2>SÁCH NỖI BẬT</h2>
                         </div>
                         <div className="book-more--selected">
+                            <div className="search-product-phone">
+                                <MenuOutlined onClick={showDrawer} />
+                            </div>
                             <p>Sắp xếp theo:</p>
                             <Select defaultValue="Sắp xếp theo" style={{ width: 200 }} onChange={handleChangeSelect}>
                                 <Option value="downToUp">Giá từ thấp lên cao</Option>
@@ -255,6 +271,78 @@ const FeaturedBookMore = () => {
                     </div>
                 </div>
             </div>
+            <Drawer
+                placement="left"
+                width={250}
+                onClose={onClose}
+                visible={visible}
+                extra={
+                    <Space>
+                        <Button onClick={onClose}>Cancel</Button>
+                        <Button type="primary" onClick={onClose}>
+                            OK
+                        </Button>
+                    </Space>
+                }
+            >
+                <div className="new-book-more--search__header">
+                    <h2>MUA THEO</h2>
+                </div>
+                {
+                    isCategory ? <h3 onClick={handleRemoveCategory} style={{ paddingLeft: '10px', color: 'blue', marginTop: '10px' }}>BAN ĐẦU</h3> : null
+                }
+                <div className="new-book-more--search--category">
+                    <div className="new-book-more--search--category__header">
+                        <h3>
+                            NHÓM DANH MỤC
+                        </h3>
+                    </div>
+                    {
+                        <div className="new-book-more--search--category__list">
+                            {listCategory.map((item, index) => {
+                                return <a onClick={() => { handleChangecategory(item.id); onClose() }}>{item.categoryName}</a>
+                            })}
+                        </div>
+                    }
+                </div>
+                <div className="new-book-more--search--price">
+                    <div className="new-book-more--search--price__header">
+                        <h3>
+                            GIÁ
+                        </h3>
+                    </div>
+                    <div className="book-more--search--price__list">
+                        <Radio.Group onChange={handleChangePrice}>
+                            <Radio onClick={onClose} value={'100'} className="book-more-search--price__radio">Dưới 100.000d</Radio>
+                            <Radio onClick={onClose} value={'200'} className="book-more-search--price__radio">100.000d-200.000d</Radio>
+                            <Radio onClick={onClose} value={'500'} className="book-more-search--price__radio">Trên 200.000d</Radio>
+                        </Radio.Group>
+                    </div>
+                </div>
+                <div className="new-book-more--search--price">
+                    <div className="new-book-more--search--price__header">
+                        <h3>
+                            NGÔN NGỮ
+                        </h3>
+                    </div>
+                    <div className="book-more--search--price__list">
+                        <Radio.Group className="book-more--search__group" onChange={handleChangeLanguage}>
+                            <Radio onClick={onClose} value={'vietNam'} className="book-more-search--price__radio">Tiếng Việt</Radio>
+                            <Radio onClick={onClose} value={'english'}>Tiếng Anh</Radio>
+                        </Radio.Group>
+                    </div>
+                </div>
+                <div className="new-book-more--search--price">
+                    <div className="new-book-more--search--price__header">
+                        <h3>
+                            ĐÁNH GIÁ
+                        </h3>
+                    </div>
+                    <div className="book-more--search--price__list">
+                        <Rate style={{ marginBottom: '10px' }} onChange={handleChangeStar} />
+                    </div>
+                </div>
+            </Drawer>
         </div >
     )
 }

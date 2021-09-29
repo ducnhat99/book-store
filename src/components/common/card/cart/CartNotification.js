@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom'
 
 const CartNotification = (props) => {
-    const { id, bookId, images, title, quantity, price } = props
+    const { id, bookId, images, title, quantity, price, categoryId } = props
     return (
-        <Link to={`/detail/${bookId}`}>
+        <Link to={{
+            pathname: `/detail/${bookId}`,
+            state: { categoryId: categoryId }
+        }}>
             <div className="cart--notification">
                 <div className="cart--notification__images">
                     <img src={`data:image/jpg;base64,${images}`} alt="cart" />

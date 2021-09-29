@@ -4,12 +4,15 @@ import { Link } from 'react-router-dom'
 import VNPRICE from '../../../constants/FormatPrice';
 
 const NewCardItem = (props) => {
-    const { index, images, title, price, realPrice, rateStar } = props
+    const { index, images, title, price, realPrice, rateStar, categoryId } = props
     const content = (
         <CardHover {...props} />
     );
     return (
-        <Link to={`/detail/${index}`}>
+        <Link to={{
+            pathname: `/detail/${index}`,
+            state: { categoryId: categoryId }
+        }} >
             <Popover content={content} placement="rightTop" >
                 <div className="new-card-content">
                     <div className="new-card-images">

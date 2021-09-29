@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { USERLOGIN } from '../constants/UserLogin';
 import { HOST } from '../constants/Host'
+import { process, somePromise } from 'process';
 import { useSelector, useDispatch } from 'react-redux'
 
 export const getBooks = createAsyncThunk('book/getBooks', async () => {
@@ -138,33 +139,28 @@ export const getListCart = createAsyncThunk('book/getListCart', async () => {
     return res;
 });
 export const putBook = createAsyncThunk('book/putBook', async (payload) => {
-    // require('events').EventEmitter.defaultMaxListeners = 15;
-    try {
-        await axios
-            .put(`${HOST}book/${payload.id}`, {
-                categoryId: payload.categoryId,
-                id: payload.id,
-                bookName: payload.bookName,
-                supplier: payload.supplier,
-                publisher: payload.publisher,
-                publishYear: payload.publishYear,
-                author: payload.author,
-                bookLayout: payload.bookLayout,
-                language: payload.language,
-                quantityPage: payload.quantityPage,
-                rateStar: payload.rateStar,
-                description: payload.description,
-                imagesBook: payload.imagesBook,
-                quantityBook: payload.quantityBook,
-                price: payload.price,
-                realPrice: payload.realPrice,
-            })
-    } catch (error) {
-        console.log(error)
-    }
-
-    // .then((res) => res.data)
-    // .catch((e) => console.log(e));
+    console.log("🚀 ~ file: bookSlice.js ~ line 142 ~ putBook ~ payload", payload)
+    await axios
+        .put(`${HOST}book/${payload.id}`, {
+            categoryId: payload.categoryId,
+            id: payload.id,
+            bookName: payload.bookName,
+            supplier: payload.supplier,
+            publisher: payload.publisher,
+            publishYear: payload.publishYear,
+            author: payload.author,
+            bookLayout: payload.bookLayout,
+            language: payload.language,
+            quantityPage: payload.quantityPage,
+            rateStar: payload.rateStar,
+            description: payload.description,
+            imagesBook: payload.imagesBook,
+            quantityBook: payload.quantityBook,
+            price: payload.price,
+            realPrice: payload.realPrice,
+        })
+        .then((res) => res.data)
+        .catch((e) => console.log(e));
 });
 export const putBookAll = createAsyncThunk('book/putBookAll', async (payload) => {
     console.log("🚀 ~ file: bookSlice.js ~ line 141 ~ putBookAll ~ payload", payload)
@@ -208,10 +204,15 @@ export const getListOrderUser = createAsyncThunk('book/getListOrderUser', async 
     return res;
 });
 export const deleteCartUser = createAsyncThunk('book/deleteCartUser', async (id) => {
+    console.log("🚀 ~ file: bookSlice.js ~ line 208 ~ deleteCartUser ~ id", id)
     await axios
-        .delete(`${HOST}users/${id}/cart`)
+        .delete(`${HOST}cart/${id}`,)
         .then((res) => res.data)
         .catch((e) => console.log(e));
+    // await axios
+    //     .put(`${HOST}users/${id}/cart`, [])
+    //     .then((res) => res.data)
+    //     .catch((e) => console.log(e));
 });
 export const putUser = createAsyncThunk('book/putUser', async (payload) => {
     await axios
@@ -332,7 +333,8 @@ export const bookSlice = createSlice({
         listCartAll: [],
         listOrder: [],
         listOrderUser: [],
-        isAdmin: false
+        isAdmin: 0,
+        isAdminLogin: JSON.parse(sessionStorage.getItem('admin'))
     },
     reducers: {
         isLogged: (state, action) => {
@@ -341,11 +343,15 @@ export const bookSlice = createSlice({
         isSignOut: state => {
             localStorage.setItem(USERLOGIN, JSON.stringify(0))
         },
-        isAdmin: state => {
-            state.isAdmin = true
+        isAdmin: (state, action) => {
+            state.isAdmin = action.payload
+            state.isAdminLogin = true
+            sessionStorage.setItem('admin', true)
         },
         isAdminLogout: state => {
-            state.isAdmin = false
+            state.isAdmin = 0
+            state.isAdminLogin = false
+            sessionStorage.setItem('admin', false)
         },
     },
     extraReducers(builder) {
