@@ -29,12 +29,11 @@ const Order = () => {
     const handleCancel = () => {
         setIsModalVisible(false);
     };
-    function confirm(e) {
-        dispatch(deleteOrder(e))
-        dispatch(getListOrderUser(isUserLogin))
+    const confirm = async (e) => {
+        await dispatch(deleteOrder(e))
+        await dispatch(getListOrderUser(isUserLogin))
         message.success('Xóa thành công');
     }
-
     function cancel(e) {
     }
     return (

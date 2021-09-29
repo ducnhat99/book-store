@@ -139,7 +139,6 @@ export const getListCart = createAsyncThunk('book/getListCart', async () => {
     return res;
 });
 export const putBook = createAsyncThunk('book/putBook', async (payload) => {
-    console.log("🚀 ~ file: bookSlice.js ~ line 142 ~ putBook ~ payload", payload)
     await axios
         .put(`${HOST}book/${payload.id}`, {
             categoryId: payload.categoryId,
@@ -163,7 +162,6 @@ export const putBook = createAsyncThunk('book/putBook', async (payload) => {
         .catch((e) => console.log(e));
 });
 export const putBookAll = createAsyncThunk('book/putBookAll', async (payload) => {
-    console.log("🚀 ~ file: bookSlice.js ~ line 141 ~ putBookAll ~ payload", payload)
     await axios
         .put(`${HOST}book`, payload)
         .then((res) => res.data)
@@ -204,15 +202,10 @@ export const getListOrderUser = createAsyncThunk('book/getListOrderUser', async 
     return res;
 });
 export const deleteCartUser = createAsyncThunk('book/deleteCartUser', async (id) => {
-    console.log("🚀 ~ file: bookSlice.js ~ line 208 ~ deleteCartUser ~ id", id)
     await axios
-        .delete(`${HOST}cart/${id}`,)
+        .delete(`${HOST}cart/${id}`)
         .then((res) => res.data)
         .catch((e) => console.log(e));
-    // await axios
-    //     .put(`${HOST}users/${id}/cart`, [])
-    //     .then((res) => res.data)
-    //     .catch((e) => console.log(e));
 });
 export const putUser = createAsyncThunk('book/putUser', async (payload) => {
     await axios
@@ -334,7 +327,7 @@ export const bookSlice = createSlice({
         listOrder: [],
         listOrderUser: [],
         isAdmin: 0,
-        isAdminLogin: JSON.parse(sessionStorage.getItem('admin'))
+        isAdminLogin: JSON.parse(sessionStorage.getItem('admin')),
     },
     reducers: {
         isLogged: (state, action) => {
