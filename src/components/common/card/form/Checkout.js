@@ -1,17 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { batch } from 'react-redux'
 import { useHistory } from "react-router-dom";
-import { Button, Input, Radio, notification, Modal } from 'antd';
+import { Button, Input, Radio, notification, Modal, Spin } from 'antd';
 import moment from 'moment';
 import 'antd/dist/antd.css';
 import { USERLOGIN } from '../../../../constants/UserLogin';
 import { getUser, getListOrder, getBooks, addOrder, putBook, getCartUser, putBookAll, deleteCartUser } from '../../../../slice/bookSlice'
-import { process, somePromise } from 'process';
+import emailjs from 'emailjs-com';
 import { isEmpty } from 'validator';
 import isEmail from 'validator/lib/isEmail';
 import VNPRICE from '../../../../constants/FormatPrice';
 import qrcode from '../../../../images/qrcode.jpg'
+import { setTimeout } from 'timers';
 
 const Checkout = (props) => {
     const isUserLogin = JSON.parse(localStorage.getItem(USERLOGIN))
@@ -24,6 +25,7 @@ const Checkout = (props) => {
     const [email, setEmail] = React.useState('')
     const [address, setAddress] = React.useState('')
     const [isModalVisible, setIsModalVisible] = React.useState(false);
+    const [isLoading, setIsLoading] = React.useState(false);
     const [arrOrder, setArrOrder] = React.useState([])
     const [listBookPut, setListBookPut] = React.useState([])
     const [validationMsg, setValidationMsg] = React.useState({});
@@ -53,6 +55,7 @@ const Checkout = (props) => {
     const handleCancel = () => {
         setIsModalVisible(false);
     };
+    const form = useRef();
     useEffect(() => {
         let list = [...listBook]
         list.map((item, index) => {
@@ -127,11 +130,18 @@ const Checkout = (props) => {
         if (Object.keys(msg).length > 0) return false;
         return true;
     };
-    const handleCheckout = async () => {
+    const sendEmail = (e) => {
+        e.preventDefault();
+        emailjs.sendForm('service_04xjr3g', 'template_a20nnkd', form.current, 'user_PyEFvLpNaNDkWn9Idh0EB').then(res => {
+            console.log(res);
+        }).catch(err => { console.log(err) })
+    }
+    const handleCheckout = async (e) => {
         const isValid = validateAll();
         if (!isValid) return;
         if (!!props.location.state) {
             if (pay === 'Thanh toán khi nhận hàng') {
+                sendEmail(e)
                 await dispatch(addOrder({
                     userId: isUserLogin,
                     id: orderId + 1,
@@ -180,6 +190,8 @@ const Checkout = (props) => {
         }
         else {
             if (pay === 'Thanh toán khi nhận hàng') {
+                sendEmail(e)
+                setIsLoading(true)
                 await dispatch(addOrder({
                     userId: isUserLogin,
                     id: orderId + 1,
@@ -193,109 +205,40 @@ const Checkout = (props) => {
                     payments: 'Trực tiếp',
                     status: 'Chờ duyệt'
                 }))
-                // for (let i = 0; i < listBook.length; i++) {
-                //     for (let j = 0; j < listCartUser.length; j++) {
-                //         if (listCartUser[j].bookId === listBook[i].id) {
-                //             setTimeout(async () => {
-                //                 dispatch(putBook({
-                //                     categoryId: listBook[i].categoryId,
-                //                     id: listBook[i].id,
-                //                     bookName: listBook[i].bookName,
-                //                     supplier: listBook[i].supplier,
-                //                     publisher: listBook[i].publisher,
-                //                     publishYear: listBook[i].publishYear,
-                //                     author: listBook[i].author,
-                //                     bookLayout: listBook[i].bookLayout,
-                //                     language: listBook[i].language,
-                //                     quantityPage: listBook[i].quantityPage,
-                //                     rateStar: listBook[i].rateStar,
-                //                     description: listBook[i].description,
-                //                     imagesBook: listBook[i].imagesBook,
-                //                     quantityBook: listBook[i].quantityBook - listCartUser[j].quantity,
-                //                     price: listBook[i].price,
-                //                     realPrice: listBook[i].realPrice,
-                //                 }))
-                //             }, 600 * j);
-                //         }
-                //     }
-                // }
-                for (let i = 0; i < listCartUser.length; i++) {
-                    setTimeout(async () => {
-                        dispatch(deleteCartUser(listCartUser[i].id))
-                    }, 600 * i);
-                }
-
-                // (listBook.foreach(async (item) => {
-                //     await (listCartUser.foreach(async (e, index) => {
-                //         // await setTimeout(async () => {
-                //         if (e.bookId === item.id) {
-                //             await dispatch(putBook({
-                //                 categoryId: item.categoryId,
-                //                 id: item.id,
-                //                 bookName: item.bookName,
-                //                 supplier: item.supplier,
-                //                 publisher: item.publisher,
-                //                 publishYear: item.publishYear,
-                //                 author: item.author,
-                //                 bookLayout: item.bookLayout,
-                //                 language: item.language,
-                //                 quantityPage: item.quantityPage,
-                //                 rateStar: item.rateStar,
-                //                 description: item.description,
-                //                 imagesBook: item.imagesBook,
-                //                 quantityBook: item.quantityBook - e.quantity,
-                //                 price: item.price,
-                //                 realPrice: item.realPrice,
-                //             }))
-
-
-                //             // if ((index > 1) && (index % 2 === 0)) {
-                //             //     return setTimeout(async () => {
-                //             //         await dispatch(putBook({
-                //             //             categoryId: item.categoryId,
-                //             //             id: item.id,
-                //             //             bookName: item.bookName,
-                //             //             supplier: item.supplier,
-                //             //             publisher: item.publisher,
-                //             //             publishYear: item.publishYear,
-                //             //             author: item.author,
-                //             //             bookLayout: item.bookLayout,
-                //             //             language: item.language,
-                //             //             quantityPage: item.quantityPage,
-                //             //             rateStar: item.rateStar,
-                //             //             description: item.description,
-                //             //             imagesBook: item.imagesBook,
-                //             //             quantityBook: item.quantityBook - e.quantity,
-                //             //             price: item.price,
-                //             //             realPrice: item.realPrice,
-                //             //         }))
-                //             //         console.log('wait')
-                //             //     }, 1000);
-                //             // }
-                //             // else {
-                //             //     return dispatch(putBook({
-                //             //         categoryId: item.categoryId,
-                //             //         id: item.id,
-                //             //         bookName: item.bookName,
-                //             //         supplier: item.supplier,
-                //             //         publisher: item.publisher,
-                //             //         publishYear: item.publishYear,
-                //             //         author: item.author,
-                //             //         bookLayout: item.bookLayout,
-                //             //         language: item.language,
-                //             //         quantityPage: item.quantityPage,
-                //             //         rateStar: item.rateStar,
-                //             //         description: item.description,
-                //             //         imagesBook: item.imagesBook,
-                //             //         quantityBook: item.quantityBook - e.quantity,
-                //             //         price: item.price,
-                //             //         realPrice: item.realPrice,
-                //             //     }))
-                //             // }
-                //         }
-                //         // }, 4000);
-                //     }))
-                // }))
+                setTimeout(() => {
+                    listBook.map((item) => {
+                        (listCartUser.map((e, index) => {
+                            if (e.bookId === item.id) {
+                                setTimeout(async () => {
+                                    await dispatch(putBook({
+                                        categoryId: item.categoryId,
+                                        id: item.id,
+                                        bookName: item.bookName,
+                                        supplier: item.supplier,
+                                        publisher: item.publisher,
+                                        publishYear: item.publishYear,
+                                        author: item.author,
+                                        bookLayout: item.bookLayout,
+                                        language: item.language,
+                                        quantityPage: item.quantityPage,
+                                        rateStar: item.rateStar,
+                                        description: item.description,
+                                        imagesBook: item.imagesBook,
+                                        quantityBook: item.quantityBook - e.quantity,
+                                        price: item.price,
+                                        realPrice: item.realPrice,
+                                    }))
+                                    dispatch(deleteCartUser(e.id))
+                                }, 1600 * index);
+                            }
+                        }))
+                    })
+                }, 300);
+                setTimeout(() => {
+                    setIsLoading(false)
+                    openNotificationWithIcon('success')
+                    history.push("/home")
+                }, (listCartUser.length + 1) * 1600);
             }
             else {
                 showModal()
@@ -304,78 +247,80 @@ const Checkout = (props) => {
     }
     return (
         <>
-            <div className="checkout--container">
-                <div className="container">
-                    <div className="checkout--header">
-                        <h2>GIỎ HÀNG</h2>
-                    </div>
-                    <div className="checkout--main">
-                        <div className="checkout--main--form">
-                            <div className="checkout--main__header">
-                                <h4>THÔNG TIN GIAO HÀNG</h4>
-                            </div>
-                            <form>
-                                <div className="checkout--main--box">
-                                    <label>
-                                        Họ và tên người nhận
-                                    </label>
-                                    <Input placeholder="Nhập họ và tên người nhận" value={fullName} onChange={(e) => setFullName(e.target.value)} />
-                                </div>
-                                <div className="checkout__error">
-                                    <p className="msg--error_register">{validationMsg.userName}</p>
-                                </div>
-                                <div className="checkout--main--box">
-                                    <label>
-                                        Số điện thoại
-                                    </label>
-                                    <Input type="number" placeholder="Nhập số điện thoại người nhận" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
-                                </div>
-                                <div className="checkout__error">
-                                    <p className="msg--error_register">{validationMsg.phone}</p>
-                                </div>
-                                <div className="checkout--main--box">
-                                    <label>
-                                        Địa chỉ email
-                                    </label>
-                                    <Input placeholder="Nhập địa chỉ email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                                </div>
-                                <div className="checkout__error">
-                                    <p className="msg--error_register">{validationMsg.emailInput}</p>
-                                </div>
-                                <div className="checkout--main--box">
-                                    <label>
-                                        Địa chỉ nhận hàng
-                                    </label>
-                                    <Input placeholder="Nhập địa chỉ nhận hàng" value={address} onChange={(e) => setAddress(e.target.value)} />
-                                </div>
-                                <div className="checkout__error">
-                                    <p className="msg--error_register">{validationMsg.address}</p>
-                                </div>
-                            </form>
+            <Spin spinning={isLoading} delay={50} size="large">
+                <div className="checkout--container">
+                    <div className="container">
+                        <div className="checkout--header">
+                            <h2>GIỎ HÀNG</h2>
                         </div>
-                        <div className="checkout--main--pay">
-                            <div className="checkout--main--pay__header">
-                                <h4>PHƯƠNG THỨC THANH TOÁN</h4>
+                        <div className="checkout--main">
+                            <div className="checkout--main--form">
+                                <div className="checkout--main__header">
+                                    <h4>THÔNG TIN GIAO HÀNG</h4>
+                                </div>
+                                <form ref={form}>
+                                    <div className="checkout--main--box">
+                                        <label>
+                                            Họ và tên người nhận
+                                        </label>
+                                        <Input name="name" placeholder="Nhập họ và tên người nhận" value={fullName} onChange={(e) => setFullName(e.target.value)} />
+                                    </div>
+                                    <div className="checkout__error">
+                                        <p className="msg--error_register">{validationMsg.userName}</p>
+                                    </div>
+                                    <div className="checkout--main--box">
+                                        <label>
+                                            Số điện thoại
+                                        </label>
+                                        <Input name="phone" type="number" placeholder="Nhập số điện thoại người nhận" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+                                    </div>
+                                    <div className="checkout__error">
+                                        <p className="msg--error_register">{validationMsg.phone}</p>
+                                    </div>
+                                    <div className="checkout--main--box">
+                                        <label>
+                                            Địa chỉ email
+                                        </label>
+                                        <Input name="email" placeholder="Nhập địa chỉ email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                                    </div>
+                                    <div className="checkout__error">
+                                        <p className="msg--error_register">{validationMsg.emailInput}</p>
+                                    </div>
+                                    <div className="checkout--main--box">
+                                        <label>
+                                            Địa chỉ nhận hàng
+                                        </label>
+                                        <Input name="address" placeholder="Nhập địa chỉ nhận hàng" value={address} onChange={(e) => setAddress(e.target.value)} />
+                                    </div>
+                                    <div className="checkout__error">
+                                        <p className="msg--error_register">{validationMsg.address}</p>
+                                    </div>
+                                </form>
                             </div>
-                            <div className="checkout--main--pay__radio">
-                                <Radio.Group className="checkout--main--pay__radio--box" value={pay} onChange={(e) => setPay(e.target.value)}>
-                                    <Radio value="Ví Momo" className="checkout--main__radio--item">Ví Momo</Radio>
-                                    <Radio value="Thanh toán khi nhận hàng" className="checkout--main__radio--item">Thanh toán khi nhận hàng</Radio>
-                                </Radio.Group>
-                            </div>
-                            <div className="checkout--main--pay__price">
-                                <p>Tổng số tiền</p>
-                                {!!props.location.state ? <p>{VNPRICE(props.location.state.total + 30000)}</p> : <p>{VNPRICE(totalMoney + 30000)}</p>}
-                            </div>
-                            <div className="checkout--main--pay__btn--box">
-                                <div className="checkout--main--pay__btn">
-                                    <Button type="primary" onClick={handleCheckout}>Xác nhận thanh toán</Button>
+                            <div className="checkout--main--pay">
+                                <div className="checkout--main--pay__header">
+                                    <h4>PHƯƠNG THỨC THANH TOÁN</h4>
+                                </div>
+                                <div className="checkout--main--pay__radio">
+                                    <Radio.Group name="pay" className="checkout--main--pay__radio--box" value={pay} onChange={(e) => setPay(e.target.value)}>
+                                        <Radio value="Ví Momo" className="checkout--main__radio--item">Ví Momo</Radio>
+                                        <Radio value="Thanh toán khi nhận hàng" className="checkout--main__radio--item">Thanh toán khi nhận hàng</Radio>
+                                    </Radio.Group>
+                                </div>
+                                <div className="checkout--main--pay__price">
+                                    <p>Tổng số tiền</p>
+                                    {!!props.location.state ? <p name="price">{VNPRICE(props.location.state.total + 30000)}</p> : <p name="price">{VNPRICE(totalMoney + 30000)}</p>}
+                                </div>
+                                <div className="checkout--main--pay__btn--box">
+                                    <div className="checkout--main--pay__btn">
+                                        <Button type="primary" onClick={handleCheckout}>Xác nhận thanh toán</Button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </Spin>
             <Modal
                 footer={null}
                 visible={isModalVisible}
