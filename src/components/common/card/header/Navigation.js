@@ -51,8 +51,10 @@ const Navigation = () => {
   const bellContent = (
     isUserLogin ?
       <div>
-        <NotificationHover />
-        <NotificationHover />
+        <NotificationHover title={'Mua trọn bộ sách Nguyên Phong giá tốt nhất'} date={'20/09/2021'} content={'Chương trình FirstNews giảm 50% mừng sinh nhật Fahasa. Click xem mua ngay!'} />
+        <NotificationHover title={'Sách tiếng anh Zenbooks sale up to 50% '} date={'22/08/2021'} content={'Cơ hội chỉ diễn ra duy nhất sinh nhật tháng 8 này. Click xem mua ngay!'} />
+        <NotificationHover title={'Sale sách thả ga, mừng sinh nhật VietBook, Đinh Tị giảm đến 30%'} date={'22/09/2021'} content={'Chương trình từ 13.08 đến 22.08. Click xem mua ngay!'} />
+        <NotificationHover title={'"Binh đoàn" sách tâm lý, văn học AZ giá cực tốt giảm đếm 70%'} date={'16/09/2021'} content={'Cơ hội chỉ diễn ra duy nhất sinh nhật tháng 8 này. Click xem mua ngay!'} />
         <div className="btn--more-notification">
           <Button onClick={() => history.push("/customer")}>Xem tất cả thông báo</Button>
         </div>
