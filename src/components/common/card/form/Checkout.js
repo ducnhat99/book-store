@@ -6,7 +6,7 @@ import { Button, Input, Radio, notification, Modal, Spin } from 'antd';
 import moment from 'moment';
 import 'antd/dist/antd.css';
 import { USERLOGIN } from '../../../../constants/UserLogin';
-import { getUser, getListOrder, getBooks, addOrder, putBook, getCartUser, putBookAll, deleteCartUser } from '../../../../slice/bookSlice'
+import { getUser, getListOrder, getBooks, addOrder, putBook, getCartUser, deleteCartUser } from '../../../../slice/bookSlice'
 import emailjs from 'emailjs-com';
 import { isEmpty } from 'validator';
 import isEmail from 'validator/lib/isEmail';
@@ -27,7 +27,6 @@ const Checkout = (props) => {
     const [isModalVisible, setIsModalVisible] = React.useState(false);
     const [isLoading, setIsLoading] = React.useState(false);
     const [arrOrder, setArrOrder] = React.useState([])
-    const [listBookPut, setListBookPut] = React.useState([])
     const [validationMsg, setValidationMsg] = React.useState({});
     const [pay, setPay] = React.useState('Thanh toán khi nhận hàng')
     const orderId = Math.max(...listOrder.map(item => item.id))
@@ -56,34 +55,6 @@ const Checkout = (props) => {
         setIsModalVisible(false);
     };
     const form = useRef();
-    useEffect(() => {
-        let list = [...listBook]
-        list.map((item, index) => {
-            return listCartUser.map((e) => {
-                if (e.bookId === item.id) {
-                    return list.splice(index, 1, {
-                        categoryId: item.categoryId,
-                        id: item.id,
-                        bookName: item.bookName,
-                        supplier: item.supplier,
-                        publisher: item.publisher,
-                        publishYear: item.publishYear,
-                        author: item.author,
-                        bookLayout: item.bookLayout,
-                        language: item.language,
-                        quantityPage: item.quantityPage,
-                        rateStar: item.rateStar,
-                        description: item.description,
-                        imagesBook: item.imagesBook,
-                        quantityBook: item.quantityBook - e.quantity,
-                        price: item.price,
-                        realPrice: item.realPrice,
-                    })
-                }
-            })
-        })
-        setListBookPut([...list])
-    }, [listBook])
     useEffect(() => {
         const list = []
         listCartUser.map((element, index) => {

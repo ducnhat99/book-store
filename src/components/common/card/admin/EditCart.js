@@ -97,7 +97,7 @@ const EditCart = (props) => {
                 <div className="admin-form-edit--container">
                     <label>Trạng thái</label>
                     <Select defaultValue={status} className="admin-form-edit__select" onChange={(e) => setStatus(e)}>
-                        <Option value="Chờ duyệt">Đang xử lý</Option>
+                        <Option value="Chờ duyệt">Chờ duyệt</Option>
                         <Option value="Đang giao hàng">Đang giao hàng</Option>
                         <Option value="Đã nhận hàng">Đã nhận hàng</Option>
                     </Select>
