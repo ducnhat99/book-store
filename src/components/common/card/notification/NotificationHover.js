@@ -1,14 +1,14 @@
-const NotificationHover = () => {
+const NotificationHover = (props) => {
     return (
         <div className="notification--container">
             <div className="notification--container__title">
-                <h4>Sách tiếng anh Zenbooks sale up to 50% </h4>
+                <h4>{props.title}</h4>
             </div>
             <div className="notification--container__date">
-                <p>22/08/2021</p>
+                <p>{props.date}</p>
             </div>
             <div className="notification--container__item">
-                <p>Cơ hội chỉ diễn ra duy nhất sinh nhật tháng 8 này. Click xem mua ngay!</p>
+                <p>{props.content}</p>
             </div>
         </div>
     )
