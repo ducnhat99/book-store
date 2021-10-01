@@ -101,17 +101,17 @@ const Login = (props) => {
       } else if (passValue.length < 6) {
         msg.password = 'Mật khẩu phải trên 6 kí tự';
       } else
-        if (userValue !== item.email || passValue !== item.password) {
+        if (userValue != item.email || passValue != item.password) {
           msg.exact = 'Tài khoản hoặc mật khẩu không chính xác'
         }
-      if (userValue === item.email && passValue === item.password && item.role === "user") {
+      if (userValue == item.email && passValue == item.password && item.role == "user") {
         msg.exact = ''
         dispatch(isLogged(item.id))
         window.location.reload(false);
         props.handleCancel();
         openNotification()
       }
-      if (userValue === item.email && passValue === item.password && item.role === "admin") {
+      if (userValue == item.email && passValue == item.password && item.role == "admin") {
         msg.exact = ''
         dispatch(isAdmin(item.id))
         sessionStorage.setItem('admin', true)
