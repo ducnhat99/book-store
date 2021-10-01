@@ -200,7 +200,7 @@ const Checkout = (props) => {
                                         realPrice: item.realPrice,
                                     }))
                                     dispatch(deleteCartUser(e.id))
-                                }, 1600 * index);
+                                }, 1700 * index);
                             }
                         }))
                     })
@@ -209,7 +209,7 @@ const Checkout = (props) => {
                     setIsLoading(false)
                     openNotificationWithIcon('success')
                     history.push("/home")
-                }, (listCartUser.length + 1) * 1600);
+                }, (listCartUser.length + 1) * 1700);
             }
             else {
                 showModal()
